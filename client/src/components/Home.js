@@ -1,10 +1,13 @@
-import React from 'react'
+import React, { Fragment } from 'react';
+import Home_Hero from './Home_Hero';
+
 
 const Home = () => {
   return (
-    <div>
-      Home
-    </div>
+    <Fragment>
+      <Home_Hero/>
+
+    </Fragment>
   )
 }
 
