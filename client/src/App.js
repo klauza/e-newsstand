@@ -1,10 +1,10 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import history from './history';
+// import history from './history';
 import './App.css';
 
 
-import Navigation from './layout/Navigation';
+import Navigation from './layout/Navigation/Navigation';
 import Home from './components/Home';
 import Shop from './components/Shop';
 import Item from './components/Item';
