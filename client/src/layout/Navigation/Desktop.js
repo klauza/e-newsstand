@@ -4,23 +4,30 @@ import Navlinks from './Navlinks';
 
 
 const DesktopNavWrapper = styled.div`
-  display: flex; flex-direction: row;
   width: 100%;
   height: 60px;
   background: black;
+
+  @media(max-width: 767px){ display: none; }
+`;
+
+const DesktopNav = styled.div`
+  display: flex; flex-direction: row;
+  width: 70%; 
+  margin: 0 auto;
   .nav-links{
     display: flex;
     flex-direction: row;
     line-height: 60px;
   }
   .nav-links li{
+    margin: 0 10px;
     list-style: none;
   }
   .nav-links a{
     color: white;
     text-decoration: none;
   }
-  @media(max-width: 767px){ display: none; }
 `;
 const NavLogo = styled.div`
   line-height: 60px;
@@ -33,11 +40,11 @@ const NavLogo = styled.div`
 const Desktop = () => {
   return (
     <DesktopNavWrapper>
+      <DesktopNav>
+        <NavLogo><span>LOGO</span></NavLogo>
 
-      <NavLogo><span>LOGO</span></NavLogo>
-
-      <Navlinks/>
-      
+        <Navlinks/>
+      </DesktopNav>
     </DesktopNavWrapper>
   )
 }

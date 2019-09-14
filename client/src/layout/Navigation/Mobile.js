@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Navlinks from './Navlinks';
 
 const MobileNavWrapper = styled.div`
-
+  
   display: flex; flex-direction: row;
   width: 100%;
   height: 60px;
@@ -15,8 +15,10 @@ const MobileBtn = styled.div`
 
 `;
 const MobileLinks = styled.div`
-  position: absolute;
-  top: 0; right: 0;
+  z-index: 99;
+  background: grey;
+  width: 50vw; height: 100vh;
+  position: fixed; top: 0; right: 0;
   transition: transform 650ms;
   transform: translateX( ${ props => props.toggled ? ("0") : ("calc(100% + 15px)")} );
   display: flex; flex-direction: column;

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import PopulateWithData from './PopulateWithData';
 // import history from '../history';
 
@@ -13,12 +13,14 @@ import PopulateWithData from './PopulateWithData';
 
 const Shop = (props) => {
   // const loc = history;
+  const inputRef = useRef();
+
   const { location } = props;
   const params = getParams(location);
 
   const [shopData, setShopData] = useState([]);
   const [allData, setAllData] = useState([]); 
-  const [query, setQuery] = useState(params.query);
+  const [query, setQuery] = useState("");
 
 
 
@@ -26,10 +28,13 @@ const Shop = (props) => {
 
   useEffect(()=> {
     // history.push(`/shop?query=${query}`);
+    setQuery(params.query);
     console.log("query: ", query);
     console.log("params: ", params);
     console.log("url location: ",location); 
     // console.log('loc: ', loc);
+
+    inputRef.current.value = params.query;
 
     const initPage = () => {
       fetch('/api/shop')
@@ -90,6 +95,16 @@ const Shop = (props) => {
     props.history.push(`?${url}`);
   };
 
+  const clearURL = () => {
+    // console.log('props history: ',props.history);
+    props.history.push(`/shop`);
+    // const searchParams = new URLSearchParams();
+    // searchParams.set
+    // const url = 
+    // history.pushState(null, "", query[1]);
+  }
+
+
   const handleChange = (e) => {
     e.preventDefault();
     setQuery(e.target.value.trim());
@@ -103,15 +118,21 @@ const Shop = (props) => {
       })
       setShopData(results);
   }
-
-
-  const handleSearch = (e) => {
-    
+  const handleSubmit = (e) => {
+    setQuery(inputRef.current.value.trim()); // submit
     e.preventDefault();
-    // console.log("search query: ", query);
+    handleSearch();
+  }
 
-    if(query === ''){
+  const handleSearch = () => {
+    // setQuery(inputRef.current.value.trim()); // submit
+    // console.log('queryis: ',query)
+
+    let q = inputRef.current.value.trim();
+
+    if(q === ''){
       setShopData(allData);
+      clearURL();
       // clean url
       // go back to category page
     } else{
@@ -134,11 +155,12 @@ const Shop = (props) => {
       <div>
         
         <PopulateWithData shopData={shopData} />
-        <form onSubmit={handleSearch}>
+        <form onSubmit={handleSubmit}>
           <input
             type="text"
             placeholder="Search for..."
             onChange={handleChange}
+            ref={inputRef}
           />
           <input type="submit" value="Submit" />
         </form>

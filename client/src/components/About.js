@@ -34,7 +34,7 @@ const About = () => {
   return (
     <AboutWrapper>
       <h2>About page</h2>
-      <Link exact to="/about/wireframes"><button>Wireframes</button></Link>
+      <Link to="/about/wireframes"><button>Wireframes</button></Link>
     </AboutWrapper>
   )
 }
