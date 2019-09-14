@@ -7,6 +7,8 @@ import './App.css';
 import Navigation from './layout/Navigation/Navigation';
 import Home from './components/Home';
 import Shop from './components/Shop';
+import About from './components/About';
+import About_Wireframes from './components/About_Wireframes';
 import Item from './components/Item';
 
 function App() {
@@ -18,7 +20,8 @@ function App() {
         <Route exact path="/" component={Home} />
         <Route exact path="/shop" component={Shop} />
         <Route exact path="/shop/item/:item" component={Item} />
-        <Route path="/shop?source=hp" component={Shop} />
+        <Route exact path="/about" component={About} />
+        <Route exact path="/about/wireframes" component={About_Wireframes} />
       </Switch>
     </div>
     </BrowserRouter>
