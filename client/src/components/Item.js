@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React, { Fragment, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Item = (props) => {
 
@@ -18,9 +19,14 @@ const Item = (props) => {
   console.log(theItem);
 
   return (
-    <div>
-      item
-    </div>
+    <Fragment>
+      {theItem && 
+      <div>
+        <div>Slugs: {theItem.slugs.map((slug, id) => <Link to={`/shop?query=${slug}`} key={id}><span>{slug}</span></Link> )}</div>
+        {theItem.name}
+      </div>
+      }
+    </Fragment>
   )
 }
 
