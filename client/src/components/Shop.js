@@ -1,5 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import PopulateWithData from './PopulateWithData';
+import Loader from '../layout/Loader';
+
 // import history from '../history';
 
 // import queryString from 'query-string';
@@ -21,7 +23,7 @@ const Shop = (props) => {
   const [shopData, setShopData] = useState([]);
   const [allData, setAllData] = useState([]); 
   const [query, setQuery] = useState("");
-
+  const [isFetching, setIsFetching] = useState(true);
 
 
 
@@ -34,7 +36,7 @@ const Shop = (props) => {
     console.log("url location: ",location); 
     // console.log('loc: ', loc);
 
-    inputRef.current.value = params.query;
+    
 
     const initPage = () => {
       fetch('/api/shop')
@@ -53,6 +55,8 @@ const Shop = (props) => {
         // make a fetch and set Data based on query
         querySearch(params.query, data);
       }
+      setIsFetching(false);
+      inputRef.current.value = params.query;
     }
  
     // check query 
@@ -119,6 +123,8 @@ const Shop = (props) => {
       setShopData(results);
   }
   const handleSubmit = (e) => {
+    setIsFetching(true);
+
     setQuery(inputRef.current.value.trim()); // submit
     e.preventDefault();
     handleSearch();
@@ -140,21 +146,26 @@ const Shop = (props) => {
       updateURL();
 
       const results = allData.filter((item) => {
-      let found = item.name.includes(query) || item.slugs.find(slug => slug === query);
-      return found;
+        let found = item.name.includes(query) || item.slugs.find(slug => slug === query);
+        return found;
+      })
       
-    })
-    
-    setShopData(results);
+      // Send found itmes
+      setShopData(results);
+      setIsFetching(false);
+      
     }
     
   }
 
- 
+  if(isFetching){
+    return(
+      <Loader />
+    )
+    
+  } else{
     return (
       <div>
-        
-        <PopulateWithData shopData={shopData} />
         <form onSubmit={handleSubmit}>
           <input
             type="text"
@@ -164,9 +175,14 @@ const Shop = (props) => {
           />
           <input type="submit" value="Submit" />
         </form>
+        
+
+        <PopulateWithData shopData={shopData} />
 
       </div>
     )
+  }
+    
   
 }
 
