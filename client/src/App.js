@@ -4,12 +4,13 @@ import { Router, Route, Switch } from 'react-router-dom';
 import './App.css';
 import history from './history';
 
-
+import NotFound from './layout/NotFound';
 import Navigation from './layout/Navigation/Navigation';
 import Home from './components/Home';
 import Shop from './components/Shop';
 import About from './components/About';
 import About_Wireframes from './components/About_Wireframes';
+import About_Author from './components/About_Author';
 import Item from './components/Item';
 import Search from './components/Search';
 
@@ -26,6 +27,9 @@ function App() {
         <Route exact path="/shop/search" component={Search} />
         <Route exact path="/about" component={About} />
         <Route exact path="/about/wireframes" component={About_Wireframes} />
+        <Route exact path="/about/author" component={About_Author} />
+
+        <Route component={NotFound} />
       </Switch>
     </div>
     </Router>
