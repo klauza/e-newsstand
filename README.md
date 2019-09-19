@@ -2,7 +2,10 @@
 
 e-commerce project made for small-medium sized businesses.
 
-The page includes full fronend layout built with React, backend admin dashboard with CRUD ability and an API as backend built with node.js.
+The page includes 
+- frontend layout built with React
+- search data with API node.js logic
+- backend admin dashboard (in future)
 
 
 <br/>
@@ -38,7 +41,7 @@ The page includes full fronend layout built with React, backend admin dashboard 
 <br/>
 
 ## Deployment
--
+--
 
 <br/>
 
