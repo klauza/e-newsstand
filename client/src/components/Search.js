@@ -1,6 +1,8 @@
 import React, {useRef, useEffect, useState} from 'react';
 import PopulateWithData from './PopulateWithData';
 import Loader from '../layout/Loader';
+import {Link} from 'react-router-dom';
+import { Wrapper, Button } from '../layout/StyledComponents';
 
 const Search = (props) => {
 
@@ -16,8 +18,8 @@ const Search = (props) => {
 
   useEffect(()=> {
     setQuery(params.query); // set the query on page load
-    console.log("Location: ",location);
-    console.log("Params: ",params); // query params on page load
+    // console.log("Location: ",location);
+    // console.log("Params: ",params); // query params on page load
 
     
 
@@ -35,13 +37,15 @@ const Search = (props) => {
           setAllData(data.result.items);
         }
         setIsFetching(false);
-        inputRef.current.value = params.query;
-        
+        try{
+          inputRef.current.value = params.query;
+        } catch(err){}
       })
     }
     initPage();
     
   },[location])
+
 
   
   // console.log(query); // query test, in useEffect not seen
@@ -112,9 +116,12 @@ const Search = (props) => {
     
   } else{
   return (
-    <div>
-      <div><p>THIS IS FIRST/SECOND/THIRD CATEGORY - cat title</p></div>
-      <button>Back to categories</button>
+    <Wrapper>
+
+      <Link to="/shop"><Button>Back to all categories</Button></Link>
+      {params.cat !== "" ? ( <div><span>Category: {params.cat.toUpperCase()} </span></div> ) : (<div><span>Category: All</span></div>)}
+      
+      
 
       <form onSubmit={handleSearch}>
         <input
@@ -127,14 +134,13 @@ const Search = (props) => {
       </form>
 
 
-      <div><span>SearchSearchSearch</span></div>
 
       {shopData && shopData.length > 0 ? (
         <PopulateWithData shopData={shopData} />
       ) : (
         <div>No item was found</div>
       ) }
-    </div>
+    </Wrapper>
   )
   }
 }

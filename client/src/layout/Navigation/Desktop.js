@@ -15,6 +15,7 @@ const DesktopNav = styled.div`
   display: flex; flex-direction: row;
   width: 70%; 
   margin: 0 auto;
+  padding: 0 10px;
   .nav-links{
     display: flex;
     flex-direction: row;
