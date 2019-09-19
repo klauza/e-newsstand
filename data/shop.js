@@ -1,7 +1,7 @@
 const shopItems = [
 
   {
-    category: "firstCategory",
+    category: "newspapers",
     items: 
     [
       {
@@ -42,7 +42,7 @@ const shopItems = [
   },
 
   {
-    category: "secondCategory",
+    category: "letters",
     items: [
       {
         id: 7,
@@ -63,8 +63,24 @@ const shopItems = [
   },
 
   {
-    category: "thirdCategory",
-    items: []
+    category: "gadgets",
+    items: [
+      {
+        id: 10,
+        name: "gadget-1",
+        slugs: []
+      },
+      {
+        id: 11,
+        name: "gadget-2",
+        slugs: []
+      },
+      {
+        id: 12,
+        name: "gadget-3",
+        slugs: []
+      }
+    ]
   }
 
 

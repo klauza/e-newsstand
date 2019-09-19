@@ -2,14 +2,32 @@ import React, { useRef, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import history from '../history';
+import { Wrapper } from '../layout/StyledComponents';
 
 
+const Title = styled.h2`
+  margin: 20px auto;
+`;
 const Categories = styled.div`
-  display: flex; flex-direction: row;
+  margin-bottom: 50px;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(auto, 200px)); 
+  grid-gap: 5px;
+  justify-content: center;
+
+  a{ text-decoration: none; }
+
 `;
 const CategoryBox = styled.div`
   border: 2px solid black;
-  width: 200px; height: 200px;
+  width: 200px; height: 100px;
+  background: lightseagreen;
+  color: white;
+  &:hover{
+    background: grey;
+  }
+  @media(max-width: 768px){
+    width: 100%;
+  }
 `;
   
 
@@ -45,16 +63,18 @@ const Shop = () => {
   }
     
   return (
-    <div>
-      <h2>Pick a category</h2>
+
+    <Wrapper>
+      <Title>Pick a category</Title>
 
       <Categories>
-        <Link to='shop/search?cat=firstCategory'><CategoryBox>category1</CategoryBox></Link>
-        <Link to='shop/search?cat=secondCategory'><CategoryBox>category2</CategoryBox></Link>
-        <Link to='shop/search?cat=thirdCategory'><CategoryBox>category3</CategoryBox></Link>
+        <Link to='shop/search?cat=newspapers'><CategoryBox><span>Newspapers</span></CategoryBox></Link>
+        <Link to='shop/search?cat=letters'><CategoryBox>Letters</CategoryBox></Link>
+        <Link to='shop/search?cat=gadgets'><CategoryBox>Gadgets</CategoryBox></Link>
       </Categories>
 
-      <div>Search</div>
+      <Title>Or search whatever you like</Title>
+
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -62,12 +82,11 @@ const Shop = () => {
           onChange={handleChange}
           ref={inputRef}
         />
-        
         <input type="submit" value="Submit" />
-
       </form>
 
-    </div>
+    </Wrapper>
+
   )
   
 }
