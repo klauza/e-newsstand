@@ -1,5 +1,6 @@
 import React, {useRef, useEffect, useState} from 'react';
 import PopulateWithData from './PopulateWithData';
+import Loader from '../layout/Loader';
 
 const Search = (props) => {
 
@@ -9,6 +10,7 @@ const Search = (props) => {
   const [query, setQuery] = useState("");
   const [shopData, setShopData] = useState([]);
   const [allData, setAllData] = useState([]); 
+  const [isFetching, setIsFetching] = useState(true);
 
 
 
@@ -17,22 +19,24 @@ const Search = (props) => {
     console.log("Location: ",location);
     console.log("Params: ",params); // query params on page load
 
+    
+
     const initPage = () => {
       fetch(`/api/shop/search?cat=${params.cat}&query=${params.query}`)
       .then(res => res.json())
       .then(data => {
         if(params.query !== ""){
-          // console.log(data.result);
+          
           setShopData(data.result);
           setAllData(data.result);
         } else{
-          // console.log(data.result.items);
+          
           setShopData(data.result.items);
           setAllData(data.result.items);
         }
+        setIsFetching(false);
+        inputRef.current.value = params.query;
         
-        
-        // populate(data.results);
       })
     }
     initPage();
@@ -71,16 +75,17 @@ const Search = (props) => {
 
 
   const handleChange = (e) => {
-    e.preventDefault();
     setQuery(e.target.value.trim());
   }
 
 
   const handleSearch = (e) => {
+    setIsFetching(true);
     e.preventDefault();
     // console.log(query);
     if(params.cat === "" && inputRef.current.value === ""){
       console.log('ALERT, field cannot be empty!');
+      setIsFetching(false);
     } else{
 
       let q = inputRef.current.value.trim();
@@ -92,10 +97,20 @@ const Search = (props) => {
       } else{
         updateURL();
       }
+      
+      setIsFetching(false);
+ 
     }
+
+    
   }
 
-
+  if(isFetching){
+    return(
+      <Loader />
+    )
+    
+  } else{
   return (
     <div>
       <div><p>THIS IS FIRST/SECOND/THIRD CATEGORY - cat title</p></div>
@@ -114,13 +129,14 @@ const Search = (props) => {
 
       <div><span>SearchSearchSearch</span></div>
 
-      {shopData.length > 0 ? (
+      {shopData && shopData.length > 0 ? (
         <PopulateWithData shopData={shopData} />
       ) : (
         <div>No item was found</div>
       ) }
     </div>
   )
+  }
 }
 
 export default Search
