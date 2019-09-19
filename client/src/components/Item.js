@@ -1,5 +1,7 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Wrapper, BackButton } from '../layout/StyledComponents';
+import Loader from '../layout/Loader';
 
 const Item = (props) => {
 
@@ -16,17 +18,24 @@ const Item = (props) => {
   }, [])
 
   console.log(theItem);
-
-  return (
-    <Fragment>
-      {theItem && 
-      <div>
-        <div>Slugs: {theItem.slugs.map((slug, id) => <Link to={`/shop/search?query=${slug}`} key={id}><span>{slug}</span></Link> )}</div>
-        {theItem.name}
-      </div>
-      }
-    </Fragment>
-  )
+  if(theItem){
+    return (
+      <Wrapper>
+        {theItem && 
+        <div>
+          <BackButton>Back</BackButton>
+          <div>Slugs: {theItem.slugs.map((slug, id) => <Link to={`/shop/search?query=${slug}`} key={id}><span>{slug}</span></Link> )}</div>
+          {theItem.name}
+        </div>
+        }
+      </Wrapper>
+    )
+  } else{
+    return(
+      <Loader/>
+    )
+  }
+ 
 }
 
 export default Item
