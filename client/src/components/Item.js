@@ -8,10 +8,9 @@ const Item = (props) => {
 
   useEffect(()=> {
 
-
     fetch(`/api/shop/item/${props.match.params.item}`)
       .then(res => res.json())
-      .then(data => setTheItem(data.results))
+      .then(data => setTheItem(data.result[0]) )
 
   //eslint-disable-next-line
   }, [])
@@ -22,7 +21,7 @@ const Item = (props) => {
     <Fragment>
       {theItem && 
       <div>
-        <div>Slugs: {theItem.slugs.map((slug, id) => <Link to={`/shop?query=${slug}`} key={id}><span>{slug}</span></Link> )}</div>
+        <div>Slugs: {theItem.slugs.map((slug, id) => <Link to={`/shop/search?query=${slug}`} key={id}><span>{slug}</span></Link> )}</div>
         {theItem.name}
       </div>
       }
