@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import { Router, Route, Switch } from 'react-router-dom';
 // import history from './history';
 import './App.css';
@@ -18,7 +18,7 @@ import Search from './components/Search';
 function App() {
   return (
     <Router history={history}>
-    <div className="App">
+    <Fragment>
       <Navigation/>
       <Switch>
         <Route exact path="/" component={Home} />
@@ -31,7 +31,7 @@ function App() {
 
         <Route component={NotFound} />
       </Switch>
-    </div>
+    </Fragment>
     </Router>
   );
 }
