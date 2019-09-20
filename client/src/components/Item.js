@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import Contact_Delivery from './Contact_Delivery';
 import { Wrapper, BackButton } from '../layout/StyledComponents';
 import Loader from '../layout/Loader';
 
@@ -26,6 +27,7 @@ const Item = (props) => {
           <div>Slugs: {theItem.slugs.map((slug, id) => <Link to={`/shop/search?query=${slug}`} key={id}><span>{slug}</span></Link> )}</div>
           {theItem.name}
         </div>
+        <Contact_Delivery />
       </Wrapper>
     )
   } else{
