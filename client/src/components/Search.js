@@ -24,23 +24,30 @@ const Search = (props) => {
     
 
     const initPage = () => {
+    
       fetch(`/api/shop/search?cat=${params.cat}&query=${params.query}`)
       .then(res => res.json())
       .then(data => {
-        if(params.query !== ""){
-          
-          setShopData(data.result);
-          setAllData(data.result);
-        } else{
-          
-          setShopData(data.result.items);
-          setAllData(data.result.items);
-        }
+        try{
+          if(params.query !== ""){
+            setShopData(data.result);
+            setAllData(data.result);
+
+          } else{
+            setShopData(data.result.items);
+            setAllData(data.result.items);
+            
+          }
+        }catch(err){}
+
         setIsFetching(false);
         try{
           inputRef.current.value = params.query;
         } catch(err){}
       })
+     
+       
+
     }
     initPage();
     
