@@ -1,9 +1,13 @@
 import React, {Fragment} from 'react';
 import { Router, Route, Switch } from 'react-router-dom';
-// import history from './history';
-import './App.css';
 import history from './history';
+import './App.css';
 
+// redux
+import { Provider } from 'react-redux';
+import store from './store';
+
+// pages
 import NotFound from './layout/NotFound';
 import Navigation from './layout/Navigation/Navigation';
 import Home from './components/Home';
@@ -15,24 +19,27 @@ import Item from './components/Item';
 import Search from './components/Search';
 
 
+
 function App() {
   return (
-    <Router history={history}>
-    <Fragment>
-      <Navigation/>
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route exact path="/shop" component={Shop} />
-        <Route exact path="/shop/item/:item" component={Item} />
-        <Route exact path="/shop/search" component={Search} />
-        <Route exact path="/about" component={About} />
-        <Route exact path="/about/wireframes" component={About_Wireframes} />
-        <Route exact path="/about/author" component={About_Author} />
+    <Provider store={store}>
+      <Router history={history}>
+      <Fragment>
+        <Navigation/>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/shop" component={Shop} />
+          <Route exact path="/shop/item/:item" component={Item} />
+          <Route exact path="/shop/search" component={Search} />
+          <Route exact path="/about" component={About} />
+          <Route exact path="/about/wireframes" component={About_Wireframes} />
+          <Route exact path="/about/author" component={About_Author} />
 
-        <Route component={NotFound} />
-      </Switch>
-    </Fragment>
-    </Router>
+          <Route component={NotFound} />
+        </Switch>
+      </Fragment>
+      </Router>
+    </Provider>
   );
 }
 
