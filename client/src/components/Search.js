@@ -3,6 +3,15 @@ import PopulateWithData from './PopulateWithData';
 import Loader from '../layout/Loader';
 import {Link} from 'react-router-dom';
 import { Wrapper, Button } from '../layout/StyledComponents';
+import styled from 'styled-components';
+
+const Category = styled.h3`
+  text-align: center;
+  margin: 20px 0;
+`;
+const Form = styled.form`
+  text-align: center;
+`;
 
 const Search = (props) => {
 
@@ -126,11 +135,12 @@ const Search = (props) => {
     <Wrapper>
 
       <Link to="/shop"><Button>Back to all categories</Button></Link>
-      {params.cat !== "" ? ( <div><span>Category: {params.cat.toUpperCase()} </span></div> ) : (<div><span>Category: All</span></div>)}
+      <Category> Category: {params.cat !== "" ? (params.cat.toUpperCase()) : ("All")} </Category>
+
       
       
 
-      <form onSubmit={handleSearch}>
+      <Form onSubmit={handleSearch}>
         <input
           type="text"
           placeholder="Search for..."
@@ -138,7 +148,7 @@ const Search = (props) => {
           ref={inputRef}
         />
         <input type="submit" value="Submit" />
-      </form>
+      </Form>
 
 
 

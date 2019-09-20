@@ -21,13 +21,11 @@ const Item = (props) => {
   if(theItem){
     return (
       <Wrapper>
-        {theItem && 
         <div>
           <BackButton>Back</BackButton>
           <div>Slugs: {theItem.slugs.map((slug, id) => <Link to={`/shop/search?query=${slug}`} key={id}><span>{slug}</span></Link> )}</div>
           {theItem.name}
         </div>
-        }
       </Wrapper>
     )
   } else{

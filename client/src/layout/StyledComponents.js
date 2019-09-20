@@ -7,19 +7,16 @@ const WrapperStyled = styled.div`
   width: 70%;
   margin: 50px auto 50px;
   padding: 0 10px 50px 10px;
-  background: white;
+  /* background: white; */
   @media(max-width: 998px){ width: 85%; }
   @media(max-width: 768px){ width: 95%; }
 `;
 const ButtonStyled = styled.button`
-  float: left;
   padding: 10px;
   border: 0;
 `;
-const BackButtonStyled = styled.button`
-  float: left;
-  padding: 10px;
-  border: 0;
+const BackButtonStyled = styled(ButtonStyled)`
+
 `;
 
 

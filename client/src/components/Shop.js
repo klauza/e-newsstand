@@ -6,6 +6,7 @@ import { Wrapper } from '../layout/StyledComponents';
 
 
 const Title = styled.h2`
+  text-align: center;
   margin: 20px auto;
 `;
 const Categories = styled.div`
@@ -29,7 +30,10 @@ const CategoryBox = styled.div`
     width: 100%;
   }
 `;
-  
+
+const Form = styled.form`
+  text-align: center;
+`;
 
 
 
@@ -49,7 +53,6 @@ const Shop = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('query is: ',query);
     if(query !== ""){
       history.push(`/shop/search?query=${query}`)
     } else {
@@ -75,7 +78,7 @@ const Shop = () => {
 
       <Title>Or search whatever you like</Title>
 
-      <form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit}>
         <input
           type="text"
           placeholder="Search for..."
@@ -83,7 +86,7 @@ const Shop = () => {
           ref={inputRef}
         />
         <input type="submit" value="Submit" />
-      </form>
+      </Form>
 
     </Wrapper>
 
