@@ -5,6 +5,9 @@ import {Link} from 'react-router-dom';
 import { Wrapper, Button } from '../layout/StyledComponents';
 import styled from 'styled-components';
 
+const SearchHeader = styled.div`
+  border: 1px solid black;
+`;
 const Category = styled.h3`
   text-align: center;
   margin: 20px 0;
@@ -134,22 +137,20 @@ const Search = (props) => {
   return (
     <Wrapper>
 
-      <Link to="/shop"><Button>Back to all categories</Button></Link>
-      <Category> Category: {params.cat !== "" ? (params.cat.toUpperCase()) : ("All")} </Category>
+      <SearchHeader>
+        <Link to="/shop"><Button>Back to all categories</Button></Link>
+        <Category> Category: {params.cat !== "" ? (params.cat.toUpperCase()) : ("All")} </Category>
 
-      
-      
-
-      <Form onSubmit={handleSearch}>
-        <input
-          type="text"
-          placeholder="Search for..."
-          onChange={handleChange}
-          ref={inputRef}
-        />
-        <input type="submit" value="Submit" />
-      </Form>
-
+        <Form onSubmit={handleSearch}>
+          <input
+            type="text"
+            placeholder="Search for..."
+            onChange={handleChange}
+            ref={inputRef}
+          />
+          <input type="submit" value="Submit" />
+        </Form>
+      </SearchHeader>
 
 
       {shopData && shopData.length > 0 ? (
