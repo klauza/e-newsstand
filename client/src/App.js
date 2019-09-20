@@ -16,6 +16,7 @@ import About from './components/About';
 import About_Wireframes from './components/About_Wireframes';
 import About_Author from './components/About_Author';
 import Item from './components/Item';
+import Basket from './components/Basket';
 import Search from './components/Search';
 
 
@@ -34,6 +35,7 @@ function App() {
           <Route exact path="/about" component={About} />
           <Route exact path="/about/wireframes" component={About_Wireframes} />
           <Route exact path="/about/author" component={About_Author} />
+          <Route exact path="/basket" component={Basket} />
 
           <Route component={NotFound} />
         </Switch>

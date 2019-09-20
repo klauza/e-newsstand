@@ -14,6 +14,9 @@ const Navlinks = () => {
       <li>
         <NavLink exact activeClassName="active" to="/about" className="link">About</NavLink>
       </li>
+      <li>
+        <NavLink exact activeClassName="active" to="/basket" className="link">Basket <i className="fa fa-shopping-basket"></i></NavLink>
+      </li>
     </ul>
   )
 }
