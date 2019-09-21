@@ -1,2 +1,4 @@
 export const ADD_TO_BASKET = "ADD_TO_BASKET";
 export const CLEAR_BASKET = "CLEAR_BASKET";
+
+export const PERSIST_SEARCH_VIEW = "PERSIST_SEARCH_VIEW";
