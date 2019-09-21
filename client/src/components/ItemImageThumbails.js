@@ -1,5 +1,5 @@
 import React from 'react';
-import Item_Image_Thumb from './Item_Image_Thumb';
+import ItemImageThumb from './ItemImageThumb';
 import styled from 'styled-components';
 
 const GridContainer = styled.div`
@@ -9,16 +9,16 @@ const GridContainer = styled.div`
   flex-wrap: wrap;
 `;
 
-const ThumbnailGrid = ({imgs, handleClick}) => {
+const ItemImageThumbails = ({imgs, handleClick}) => {
   return (
     <GridContainer>
       
       {imgs.map((img, index) => {
-        return <Item_Image_Thumb key={index} img={img} index={index} handleClick={handleClick} />
+        return <ItemImageThumb key={index} img={img} index={index} handleClick={handleClick} />
       })}
       
     </GridContainer>
   )
 }
 
-export default ThumbnailGrid
+export default ItemImageThumbails

@@ -13,8 +13,8 @@ import Navigation from './layout/Navigation/Navigation';
 import Home from './components/Home';
 import Shop from './components/Shop';
 import About from './components/About';
-import About_Wireframes from './components/About_Wireframes';
-import About_Author from './components/About_Author';
+import AboutWireframes from './components/AboutWireframes';
+import AboutAuthor from './components/AboutAuthor';
 import Item from './components/Item';
 import Basket from './components/Basket';
 import Contact from './components/Contact';
@@ -34,8 +34,8 @@ function App() {
           <Route exact path="/shop/item/:item" component={Item} />
           <Route exact path="/shop/search" component={Search} />
           <Route exact path="/about" component={About} />
-          <Route exact path="/about/wireframes" component={About_Wireframes} />
-          <Route exact path="/about/author" component={About_Author} />
+          <Route exact path="/about/wireframes" component={AboutWireframes} />
+          <Route exact path="/about/author" component={AboutAuthor} />
           <Route exact path="/basket" component={Basket} />
           <Route exact path="/contact" component={Contact} />
 

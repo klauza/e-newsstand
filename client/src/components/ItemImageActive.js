@@ -47,7 +47,7 @@ const RightArrow = styled.button`
   }
 `;
 
-const ActiveThumbnailWindow = ({activeThumbnail, arrowClick}) => {
+const ItemImageActive = ({activeThumbnail, arrowClick}) => {
   return (
     <Container>
       <LeftArrow onClick={()=>arrowClick("left")}><i className="fa fa-chevron-left"></i></LeftArrow>
@@ -60,4 +60,4 @@ const ActiveThumbnailWindow = ({activeThumbnail, arrowClick}) => {
 
 
 
-export default ActiveThumbnailWindow
+export default ItemImageActive

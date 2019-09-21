@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { persistSearchView } from '../actions/miscActions';
 import { Link } from 'react-router-dom';
@@ -147,26 +147,18 @@ const PopulateWithData = ({misc: {searchView}, shopData, addToBasket, persistSea
   const [view, setView] = useState(searchView); // true=inline || false=blocks
   
 
-  // const throwToBasket = (item) => {
-  //   addToBasket(item);
-  // }
-  {/* <button onClick={()=>throwToBasket(item)}>add to basket</button> */}
-  // console.log(searchView);
 
   const setViewToInline = () => {
     if(view !== false){ 
-      setView(false);
-
-      // update redux
-      persistSearchView(false);
+      setView(false);           // local state
+      persistSearchView(false); // redux state
     }
   }
 
   const setViewToBlocks = () => {
     if(view !== true){ 
-      setView(true);
-      // update redux
-      persistSearchView(true);
+      setView(true);            // local state
+      persistSearchView(true);  // redux state
     }
   }
 
@@ -220,8 +212,7 @@ const PopulateWithData = ({misc: {searchView}, shopData, addToBasket, persistSea
 }
 
 
-const mapStateToProps = (state, ownProps) => ({
-  props: ownProps,
+const mapStateToProps = (state) => ({
   basket: state.basket,
   misc: state.misc
 })

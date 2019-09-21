@@ -1,12 +1,11 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { addToBasket } from '../actions/basketActions';
 import { Link } from 'react-router-dom';
-import Contact_Delivery from './Contact_Delivery';
+import ContactDelivery from './ContactDelivery';
 import Loader from '../layout/Loader';
 import { Wrapper, BackButton, Button } from '../layout/StyledComponents';
-import styled from 'styled-components';
-import Item_Image_Gallery from './Item_Image_Gallery';
+import ItemImageGallery from './ItemImageGallery';
 
 
 const Item = ({addToBasket, props}) => {
@@ -36,21 +35,21 @@ const Item = ({addToBasket, props}) => {
           <div>keywords: {theItem.slugs.map((slug, id) => <Link to={`/shop/search?query=${slug}`} key={id}><span>{slug}</span></Link> )}</div>
           <h2>{theItem.longName}</h2>
 
-          <Item_Image_Gallery images={theItem.imgs} />
+          <ItemImageGallery images={theItem.imgs} />
           
           <button onClick={()=>throwToBasket(theItem)}>add to basket</button>
         </div>
 
-        <Contact_Delivery />
+        <ContactDelivery />
       </Wrapper>
     )
 
   } else{
 
-    if(theItem === undefined){ {/* Item is not in database */}
+    if(theItem === undefined){    //Item is not in database 
       return( <Wrapper> <Link to="/shop"><Button>Back to shop</Button></Link> <h3 style={{textAlign: "center"}}>Item not found</h3> </Wrapper> )
 
-    } else{ {/* Item is fetching */}
+    } else{     //Item is fetching 
       return( <Loader/>  )
     }
   }

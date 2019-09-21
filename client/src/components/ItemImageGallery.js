@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components';
-import Item_Image_Active from './Item_Image_Active';
-import Item_Image_Thumbails from './Item_Image_Thumbails';
+import ItemImageActive from './ItemImageActive';
+import ItemImageThumbails from './ItemImageThumbails';
 
 const GalleryContainer = styled.div`
   border: 2px solid black;
@@ -38,8 +38,8 @@ const Item_Image_Gallery = ({images}) => {
 
     <GalleryContainer>
 
-      <Item_Image_Active key={activeIndex} activeThumbnail={images[activeIndex]} arrowClick={arrowClick}/>
-      <Item_Image_Thumbails imgs={images} handleClick={handleClick} />
+      <ItemImageActive key={activeIndex} activeThumbnail={images[activeIndex]} arrowClick={arrowClick}/>
+      <ItemImageThumbails imgs={images} handleClick={handleClick} />
 
     </GalleryContainer>
 

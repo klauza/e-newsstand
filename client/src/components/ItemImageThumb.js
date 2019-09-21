@@ -16,7 +16,7 @@ const ThumbDiv = styled.div`
   }
 `;
 
-const Item_Image_Thumb = ({img, index, handleClick}) => {
+const ItemImageThumb = ({img, index, handleClick}) => {
   return (
     <ThumbDiv>
       <img onClick={handleClick} data-index={index} src={img} alt="" style={{width: "100%", height: "100%", objectFit: "cover"}}/>
@@ -25,4 +25,4 @@ const Item_Image_Thumb = ({img, index, handleClick}) => {
 }
 
 
-export default Item_Image_Thumb
+export default ItemImageThumb

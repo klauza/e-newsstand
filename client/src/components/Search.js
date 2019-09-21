@@ -62,8 +62,9 @@ const Search = (props) => {
 
     }
     initPage();
-    
-  },[location])
+
+  // eslint-disable-next-line
+  }, [location])
 
 
   

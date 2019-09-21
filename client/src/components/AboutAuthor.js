@@ -1,16 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { Wrapper, BackButton } from '../layout/StyledComponents';
 
-const About_Wireframes = () => {
-
-
+const AboutAuthor = () => {
   return (
     <Wrapper>
-      Wireframes page
+      Author: Michal Klauza
       <BackButton>Back</BackButton>
     </Wrapper>
   )
 }
 
-export default About_Wireframes
+export default AboutAuthor

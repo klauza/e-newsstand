@@ -14,7 +14,7 @@ const ReturnPolicy = styled.div`
 
 `;
 
-const Contact_Delivery = () => {
+const ContactDelivery = () => {
   return (
     <DeliveryWrapper>
 
@@ -23,7 +23,7 @@ const Contact_Delivery = () => {
       </Postage>
 
       <Timing>
-        <h3></h3>
+        <h3>Duration</h3>
         <p>We make a delivery within 24 hours from a purchase</p>
       </Timing>
 
@@ -37,4 +37,4 @@ const Contact_Delivery = () => {
   )
 }
 
-export default Contact_Delivery
+export default ContactDelivery
