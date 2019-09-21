@@ -13,7 +13,19 @@ const WrapperStyled = styled.div`
 `;
 const ButtonStyled = styled.button`
   padding: 10px;
-  border: 0;
+  border: 1px solid grey; border-radius: 2px;
+  box-shadow: 0px 4px 4px -3px rgba(0,0,0,0.6); 
+  background: lightgrey;
+  transition: box-shadow 175ms ease, border 175ms ease;
+  &:hover{
+    cursor: pointer;    
+    transition: box-shadow 175ms ease, border 175ms ease;
+    border: 1px solid black;
+    box-shadow: 0px 4px 5px -2px rgba(0,0,0,0.7);
+  }
+  &:active{
+    background: grey;
+  }
 `;
 const BackButtonStyled = styled(ButtonStyled)`
 
