@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { persistSearchView } from '../actions/miscActions';
+import { Link } from 'react-router-dom';
 import { addToBasket } from '../actions/basketActions';
 import styled from 'styled-components';
 
@@ -141,20 +142,23 @@ const ItemShortDesc = styled.div`
   grid-row: ${props => props.Display ? (null) : ("3 / 4")};
 `;
 
-const PopulateWithData = ({shopData, addToBasket}) => {
+const PopulateWithData = ({misc: {searchView}, shopData, addToBasket, persistSearchView}) => {
 
-  const [view, setView] = useState(true); // true=inline || false=blocks
+  const [view, setView] = useState(searchView); // true=inline || false=blocks
   
 
   // const throwToBasket = (item) => {
   //   addToBasket(item);
   // }
   {/* <button onClick={()=>throwToBasket(item)}>add to basket</button> */}
+  // console.log(searchView);
 
   const setViewToInline = () => {
     if(view !== false){ 
       setView(false);
+
       // update redux
+      persistSearchView(false);
     }
   }
 
@@ -162,6 +166,7 @@ const PopulateWithData = ({shopData, addToBasket}) => {
     if(view !== true){ 
       setView(true);
       // update redux
+      persistSearchView(true);
     }
   }
 
@@ -217,6 +222,7 @@ const PopulateWithData = ({shopData, addToBasket}) => {
 
 const mapStateToProps = (state, ownProps) => ({
   props: ownProps,
-  basket: state.basket
+  basket: state.basket,
+  misc: state.misc
 })
-export default connect(mapStateToProps, {addToBasket})(PopulateWithData)
+export default connect(mapStateToProps, {addToBasket, persistSearchView})(PopulateWithData)
