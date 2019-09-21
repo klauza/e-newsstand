@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import HomeHero from './Home_Hero';
+import HomeHero from './HomeHero';
 import HomeFeaturedProducts from './Home_Featured_Products';
 
 
