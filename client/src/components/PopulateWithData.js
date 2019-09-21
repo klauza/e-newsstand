@@ -20,8 +20,9 @@ const DetailedSearch = styled.div`
   }
 `;
 
-const RightGrid = styled.div`
-
+const TopBarViewAndSort = styled.div`
+  display: flex; flex-direction: row; justify-content: space-around;
+  @media(max-width: 768px){ flex-direction: column; }
 `;
 const DisplayView = styled.div`
   height: 50px;
@@ -50,6 +51,21 @@ const DisplayView = styled.div`
         text-shadow: 0px 0px 5px #000000;
       }
     }
+  }
+`;
+const Sortings = styled.div`
+  height: 50px;
+  margin-top: 20px;
+  display: flex; flex-direction: row;
+  align-items: center;
+  
+  span{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 1.5em;
+    margin-top: -10px;
+  }
+  select{
+    margin-top: -5px;
   }
 `;
 
@@ -156,12 +172,25 @@ const PopulateWithData = ({shopData, addToBasket}) => {
       <PageWrap>
         <DetailedSearch><div>detailed search (filter) </div> <br/><hr/><br/> <div>popular items populated vertically- to fill up whitespace (hide on mobile) </div></DetailedSearch>
         
-        <RightGrid>
-          <DisplayView>
-            <span>View:</span> 
-            <button onClick={setViewToBlocks}><i className="fa fa-th"></i></button>
-            <button onClick={setViewToInline}><i className="fa fa-align-justify"></i></button>
-          </DisplayView>
+        <div>
+          <TopBarViewAndSort>
+
+            <DisplayView>
+              <span>View:</span> 
+              <button onClick={setViewToBlocks}><i className="fa fa-th"></i></button>
+              <button onClick={setViewToInline}><i className="fa fa-align-justify"></i></button>
+            </DisplayView>
+
+            <Sortings>
+              <span>Sort by:</span>
+              <select name="" id="">
+                <option value="">Newly added</option>
+                <option value="">Lowest Price</option>
+                <option value="">Highest Price</option>
+              </select>
+            </Sortings>
+
+          </TopBarViewAndSort>
 
           <ItemsWrapper Display={view}>
             {shopData.map(item => 
@@ -177,7 +206,7 @@ const PopulateWithData = ({shopData, addToBasket}) => {
             )}
           </ItemsWrapper>
 
-        </RightGrid>
+        </div>
       </PageWrap>
     )
   } else{
