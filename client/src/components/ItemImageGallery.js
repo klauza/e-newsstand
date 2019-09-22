@@ -4,7 +4,14 @@ import ItemImageActive from './ItemImageActive';
 import ItemImageThumbails from './ItemImageThumbails';
 
 const GalleryContainer = styled.div`
-  border: 2px solid black;
+  /* border: 2px solid black; */
+  display: grid; 
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 500px;
+  @media(max-width: 768px){
+    grid-template-columns: 1fr;
+    grid-template-rows: 300px 200px;
+  }
 `;
 
 const Item_Image_Gallery = ({images}) => {
@@ -39,7 +46,7 @@ const Item_Image_Gallery = ({images}) => {
     <GalleryContainer>
 
       <ItemImageActive key={activeIndex} activeThumbnail={images[activeIndex]} arrowClick={arrowClick}/>
-      <ItemImageThumbails imgs={images} handleClick={handleClick} />
+      <ItemImageThumbails activeIndex={activeIndex} imgs={images} handleClick={handleClick} />
 
     </GalleryContainer>
 

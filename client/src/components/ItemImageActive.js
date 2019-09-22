@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 
 const Container = styled.div`
-  height: 65%;
+  height: 100%;
   width: 100%;
   background: #333;
   position: relative;
@@ -18,15 +18,18 @@ const LeftArrow = styled.button`
   position: absolute; top: 0; left: 0;
   background: rgba(0,0,0,0);
   height: 100%;
-  width: 100px;
-  border: 1px solid yellow;
+  width: 100px; 
+  @media(max-width: 768px){ width: 60px; }
+  /* border: 1px solid yellow; */
+  border: 0;
   outline: 0;
   &:hover{
+    cursor: pointer;
     background: rgba(0,0,0,0.25);
   }
 
   i{
-    position: absolute; top: 50%; left: 50%; transform: translateX(-50%);
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
     font-size: 1.85em;
   }
 `;
@@ -35,14 +38,17 @@ const RightArrow = styled.button`
   background: rgba(0,0,0,0);
   height: 100%;
   width: 100px;
-  border: 1px solid yellow;
+  @media(max-width: 768px){ width: 60px; }
+  /* border: 1px solid yellow; */
+  border: 0;
   outline: 0;
   &:hover{
+    cursor: pointer;
     background: rgba(0,0,0,0.25);
   }
 
   i{
-    position: absolute; top: 50%; right: 50%; transform: translateX(50%);
+    position: absolute; top: 50%; right: 50%; transform: translate(50%, -50%);
     font-size: 1.85em;
   }
 `;
@@ -53,7 +59,7 @@ const ItemImageActive = ({activeThumbnail, arrowClick}) => {
       <LeftArrow onClick={()=>arrowClick("left")}><i className="fa fa-chevron-left"></i></LeftArrow>
       <RightArrow onClick={()=>arrowClick("right")}><i className="fa fa-chevron-right"></i></RightArrow>
 
-      <Image src={activeThumbnail} alt="" style={{width: "100%", height: "100%", objectFit: "cover"}}/>
+      <Image src={activeThumbnail} alt="" />
     </Container>
   )
 }
