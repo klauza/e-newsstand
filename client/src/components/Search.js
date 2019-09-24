@@ -81,7 +81,7 @@ const Search = (props) => {
   function setParams() {
     const searchParams = new URLSearchParams();
     searchParams.set("query", query);
-    return searchParams.toString();
+    return searchParams.toString().toLowerCase();
   }
 
 
