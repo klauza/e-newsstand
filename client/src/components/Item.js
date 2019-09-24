@@ -6,11 +6,13 @@ import ContactDelivery from './ContactDelivery';
 import Loader from '../layout/Loader';
 import { Wrapper, BackButton, Button } from '../layout/StyledComponents';
 import ItemImageGallery from './ItemImageGallery';
+import ItemDescription from './ItemDescription';
+import ItemBuySection from './ItemBuySection';
 
 
 const Item = ({addToBasket, props}) => {
 
-  
+  const [quantity, setQuantity] = useState("1");
   const [theItem, setTheItem] = useState('');
 
   useEffect(()=> {
@@ -22,11 +24,20 @@ const Item = ({addToBasket, props}) => {
   //eslint-disable-next-line
   }, [])
 
-  const throwToBasket = (item) => {
-    addToBasket(item);
+  console.log(theItem);
+
+  const handleQuantity = (qty) => {
+    setQuantity(qty);
   }
 
-  console.log(theItem);
+  const throwToBasket = () => {
+    if(theItem && theItem.inStock > 0){
+      addToBasket(theItem);
+    } else{
+      alert("item not in stock");
+    }
+  }
+
   if(theItem){
     return (
       <Wrapper>
@@ -36,8 +47,11 @@ const Item = ({addToBasket, props}) => {
           <h2>{theItem.longName}</h2>
 
           <ItemImageGallery images={theItem.imgs} />
+
+          <ItemBuySection inStock={theItem.inStock} price={theItem.price} throwToBasket={throwToBasket} handleQuantity={handleQuantity} />
+
+          <ItemDescription longDesc={theItem.longDesc} />
           
-          <button onClick={()=>throwToBasket(theItem)}>add to basket</button>
         </div>
 
         <ContactDelivery />
