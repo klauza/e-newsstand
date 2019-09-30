@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { addToBasket } from '../actions/basketActions';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 import ContactDelivery from './ContactDelivery';
 import Loader from '../layout/Loader';
 import { Wrapper, BackButton, Button } from '../layout/StyledComponents';
@@ -9,6 +10,14 @@ import ItemImageGallery from './ItemImageGallery';
 import ItemDescription from './ItemDescription';
 import ItemBuySection from './ItemBuySection';
 
+const Keywords = styled.div`
+  margin: 10px 0; padding: 10px;
+  background: yellowgreen;
+  height: 100px;
+  a{
+    margin: 0 0 0 3px;
+  }
+`;
 
 const Item = ({addToBasket, props}) => {
 
@@ -43,7 +52,7 @@ const Item = ({addToBasket, props}) => {
       <Wrapper>
         <div>
           <BackButton>Back</BackButton>
-          <div>keywords: {theItem.slugs.map((slug, id) => <Link to={`/shop/search?query=${slug}`} key={id}><span>{slug}</span></Link> )}</div>
+          <Keywords>keywords in All categories: {theItem.slugs.map((slug, id) => <span><Link to={`/shop/search?query=${slug}`} key={id}><span>{slug}</span></Link>,</span> )}</Keywords>
           <h2>{theItem.longName}</h2>
 
           <ItemImageGallery images={theItem.imgs} />

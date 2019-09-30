@@ -8,7 +8,7 @@ const MobileNavWrapper = styled.div`
   width: 100%;
   height: 60px;
   background: black;
-  @media(min-width: 768px){ display: none; }
+  @media(min-width: 769px){ display: none; }
 
 `;
 const MobileBtn = styled.div`

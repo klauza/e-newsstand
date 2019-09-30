@@ -8,7 +8,7 @@ const DesktopNavWrapper = styled.div`
   height: 60px;
   background: black;
 
-  @media(max-width: 767px){ display: none; }
+  @media(max-width: 768px){ display: none; }
 `;
 
 const DesktopNav = styled.div`
