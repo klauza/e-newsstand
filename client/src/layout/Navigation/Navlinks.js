@@ -1,8 +1,21 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { NavLink } from 'react-router-dom';
+import history from '../../history';
 
 
 const Navlinks = () => {
+
+  const [navQuery, setNavQuery] = useState("");
+
+  const submitNavSearch = (e) => {
+    e.preventDefault();
+    console.log('form submit');
+    history.push(`/shop/search?query=${navQuery}`);
+  }
+  const handleNavInputChange = (e) => {
+    setNavQuery(e.target.value.trim());
+  }
+
   return (
     <ul className="nav-links">
       <li>
@@ -19,6 +32,11 @@ const Navlinks = () => {
       </li>
       <li>
         <NavLink exact activeClassName="active" to="/contact" className="link">Contact</NavLink>
+      </li>
+      <li>
+        <form onSubmit={submitNavSearch}>
+          <input type="text" placeholder="search in shop..." onChange={handleNavInputChange} />
+        </form>
       </li>
     </ul>
   )
