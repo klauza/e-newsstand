@@ -1,11 +1,12 @@
 ## About
 
-e-commerce project made for small-medium sized businesses.
+E-newsstand is an e-commerce platform made for small to medium sized businesses.
 
-The page includes 
-- frontend layout built with React
-- search data with API node.js logic
-- backend admin dashboard (in future)
+The project includes
+- frontend layout built with React (with hooks)
+- shop items data search with node.js and query string logic
+- backend CRUD admin dashboard (in future)
+- payment system (in future)
 
 
 <br/>
@@ -23,6 +24,7 @@ The page includes
 | ------------- | ------------- |
 | **history** | 4.10.1  |
 | **styled-components** | 4.3.2  |
+| **Redux** | 4.0.4  |
 
 <br/>
 
