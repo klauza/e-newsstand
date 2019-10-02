@@ -1,7 +1,7 @@
 import React, {Fragment} from 'react';
 import { Router, Route, Switch } from 'react-router-dom';
 import history from './history';
-import './App.css';
+import { GlobalStyles } from './global-styles';
 
 // redux
 import { Provider } from 'react-redux';
@@ -27,6 +27,7 @@ function App() {
     <Provider store={store}>
       <Router history={history}>
       <Fragment>
+        <GlobalStyles />
         <Navigation/>
         <Switch>
           <Route exact path="/" component={Home} />
