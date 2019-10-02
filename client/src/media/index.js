@@ -1,3 +1,5 @@
+// Logo
+export { default as logo } from './logo.png';
 // Home
 export { default as HeroImage } from './Home/pexels-photo-2676587.jpg';
 
