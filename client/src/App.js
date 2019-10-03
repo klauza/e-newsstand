@@ -1,7 +1,8 @@
-import React, {Fragment} from 'react';
+import React, { Fragment } from 'react';
 import { Router, Route, Switch } from 'react-router-dom';
 import history from './history';
 import { GlobalStyles } from './global-styles';
+import { CSSTransition, Transition, TransitionGroup } from 'react-transition-group';
 
 // redux
 import { Provider } from 'react-redux';
@@ -23,6 +24,8 @@ import Search from './components/Search';
 
 
 function App() {
+
+
   return (
     <Provider store={store}>
       <Router history={history}>
@@ -30,18 +33,36 @@ function App() {
         <GlobalStyles />
         <Navigation/>
         <Alert />
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/shop" component={Shop} />
-          <Route exact path="/shop/item/:item" component={Item} />
-          <Route exact path="/shop/search" component={Search} />
-          <Route exact path="/about/wireframes" component={AboutWireframes} />
-          <Route exact path="/about/author" component={AboutAuthor} />
-          <Route exact path="/basket" component={Basket} />
-          <Route exact path="/contact" component={Contact} />
 
-          <Route component={NotFound} />
-        </Switch>
+        <Route render={({ location }) => (
+
+        <TransitionGroup>
+          <CSSTransition
+            key={location.key}
+            timeout={450}
+            classNames="fade" 
+          >
+            <Switch location={location}>
+              <Route exact path="/" component={Home} />
+              <Route exact path="/shop" component={Shop} />
+              <Route exact path="/shop/item/:item" component={Item} />
+              <Route exact path="/shop/search" component={Search} />
+              <Route exact path="/about/wireframes" component={AboutWireframes} />
+              <Route exact path="/about/author" component={AboutAuthor} />
+              <Route exact path="/basket" component={Basket} />
+              <Route exact path="/contact" component={Contact} />
+
+              <Route component={NotFound} />
+            </Switch>
+          </CSSTransition>
+        </TransitionGroup>
+
+
+
+        )} />
+
+        
+
       </Fragment>
       </Router>
     </Provider>

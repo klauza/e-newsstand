@@ -75,7 +75,7 @@ const Item = ({addToBasket, setAlert, props}) => {
       return( <Wrapper> <Link to="/shop"><Button>Back to shop</Button></Link> <h3 style={{textAlign: "center"}}>Item not found</h3> </Wrapper> )
 
     } else{     //Item is fetching 
-      return( <Loader/>  )
+      return( null  )
     }
   }
  

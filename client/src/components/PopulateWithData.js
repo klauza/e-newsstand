@@ -164,7 +164,6 @@ const PopulateWithData = ({misc: {searchView}, shopData, addToBasket, persistSea
 
 
 
- if(shopData.length > 0){
     return ( 
       <PageWrap>
         <DetailedSearch><div>detailed search (filter) </div> <br/><hr/><br/> <div>popular items populated vertically- to fill up whitespace (hide on mobile) </div></DetailedSearch>
@@ -206,9 +205,7 @@ const PopulateWithData = ({misc: {searchView}, shopData, addToBasket, persistSea
         </div>
       </PageWrap>
     )
-  } else{
-    return (  <div>Nothing was found</div> )
-  }
+
 }
 
 

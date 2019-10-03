@@ -129,12 +129,7 @@ const Search = (props) => {
     
   }
 
-  if(isFetching){
-    return(
-      <Loader />
-    )
-    
-  } else{
+
   return (
     <Wrapper>
 
@@ -153,15 +148,19 @@ const Search = (props) => {
         </Form>
       </SearchHeader>
 
-
-      {shopData && shopData.length > 0 ? (
+      {isFetching ? ( <Loader /> ) : 
+      (
+        (shopData && shopData.length > 0) ? (
         <PopulateWithData shopData={shopData} />
-      ) : (
-        <div>No item was found</div>
-      ) }
+        ) : 
+        (
+          <div>No item was found</div>
+        ) 
+      )}
+
     </Wrapper>
   )
-  }
+  
 }
 
 export default Search
