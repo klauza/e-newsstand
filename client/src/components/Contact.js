@@ -1,6 +1,7 @@
 import React from 'react';
 import { Wrapper } from '../layout/StyledComponents';
 import ContactDelivery from './ContactDelivery';
+import About from './About';
 
 const Contact = () => {
   return (
@@ -10,6 +11,7 @@ const Contact = () => {
       -address-
       -helpline-
       <ContactDelivery />
+      <About />
     </Wrapper>
   )
 }

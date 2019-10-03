@@ -1,6 +1,7 @@
-import React, {useState} from 'react';
+import React, {Fragment, useState} from 'react';
 import { NavLink } from 'react-router-dom';
 import history from '../../history';
+import { logo } from '../../media/index';
 
 
 const Navlinks = () => {
@@ -17,28 +18,28 @@ const Navlinks = () => {
   }
 
   return (
-    <ul className="nav-links">
-      <li>
-        <NavLink exact activeClassName="active" to="/" className="link">Home</NavLink>
-      </li>
-      <li>
-        <NavLink exact activeClassName="active" to="/shop" className="link">Shop</NavLink>
-      </li>
-      <li>
-        <NavLink exact activeClassName="active" to="/about" className="link">About</NavLink>
-      </li>
-      <li>
-        <NavLink exact activeClassName="active" to="/basket" className="link">Basket <i className="fa fa-shopping-basket"></i></NavLink>
-      </li>
-      <li>
-        <NavLink exact activeClassName="active" to="/contact" className="link">Contact</NavLink>
-      </li>
-      <li>
-        <form onSubmit={submitNavSearch}>
-          <input type="text" placeholder="search in shop..." onChange={handleNavInputChange} />
-        </form>
-      </li>
-    </ul>
+      <Fragment>
+        <li className="link-logo">
+          <div><img src={logo} alt=""/></div> <span>E-newsStand</span>
+        </li>
+        <li className="link-home">
+          <NavLink exact activeClassName="active" to="/" className="link">Home</NavLink>
+        </li>
+        <li className="link-shop">
+          <NavLink exact activeClassName="active" to="/shop" className="link">Shop</NavLink>
+        </li>
+        <li className="link-basket">
+          <NavLink exact activeClassName="active" to="/basket" className="link">Basket <i className="fa fa-shopping-basket"></i></NavLink>
+        </li>
+        <li className="link-contact">
+          <NavLink exact activeClassName="active" to="/contact" className="link">Contact</NavLink>
+        </li>
+        <li className="link-search">
+          <form onSubmit={submitNavSearch}>
+            <input type="text" placeholder="search in shop..." onChange={handleNavInputChange} />
+          </form>
+        </li>
+      </Fragment>
   )
 }
 
