@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { addToBasket } from '../actions/basketActions';
+import { setAlert } from '../actions/alertActions';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import ContactDelivery from './ContactDelivery';
@@ -19,7 +20,7 @@ const Keywords = styled.div`
   }
 `;
 
-const Item = ({addToBasket, props}) => {
+const Item = ({addToBasket, setAlert, props}) => {
 
   const [quantity, setQuantity] = useState("1");
   const [theItem, setTheItem] = useState('');
@@ -42,6 +43,7 @@ const Item = ({addToBasket, props}) => {
   const throwToBasket = () => {
     if(theItem && theItem.inStock > 0){
       addToBasket(theItem);
+      setAlert("Item added to basket", "green");
     } else{
       alert("item not in stock");
     }
@@ -84,4 +86,4 @@ const mapStateToProps = (state, ownProps) => ({
   props: ownProps,
   basket: state.basket
 })
-export default connect(mapStateToProps, {addToBasket})(Item)
+export default connect(mapStateToProps, {addToBasket, setAlert})(Item)
