@@ -10,6 +10,7 @@ import store from './store';
 // pages
 import NotFound from './layout/NotFound';
 import Navigation from './layout/Navigation/Navigation';
+import Alert from './layout/Alert';
 import Home from './components/Home';
 import Shop from './components/Shop';
 import AboutWireframes from './components/AboutWireframes';
@@ -28,6 +29,7 @@ function App() {
       <Fragment>
         <GlobalStyles />
         <Navigation/>
+        <Alert />
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/shop" component={Shop} />
