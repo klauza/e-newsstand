@@ -2,7 +2,7 @@ import React, {useRef, useEffect, useState} from 'react';
 import PopulateWithData from './PopulateWithData';
 import Loader from '../layout/Loader';
 import {Link} from 'react-router-dom';
-import { Wrapper, Button } from '../layout/StyledComponents';
+import { Wrapper, Button, SearchForm } from '../layout/StyledComponents';
 import styled from 'styled-components';
 
 const SearchHeader = styled.div`
@@ -137,15 +137,21 @@ const Search = (props) => {
         <Link to="/shop"><Button>Back to all categories</Button></Link>
         <Category> Category: {params.cat !== "" ? (params.cat.toUpperCase()) : ("All")} </Category>
 
-        <Form onSubmit={handleSearch}>
+        <SearchForm onSubmit={handleSearch}>
           <input
+            className="main-input"
             type="text"
-            placeholder="Search for..."
             onChange={handleChange}
             ref={inputRef}
+            autoComplete="off" 
           />
+          <i className="fa fa-search"></i>
+          <label htmlFor="name" className="label-name">
+            <span className="content-name"></span>
+          </label>
           <input type="submit" value="Submit" />
-        </Form>
+        </SearchForm>
+
       </SearchHeader>
 
       {isFetching ? ( <Loader /> ) : 

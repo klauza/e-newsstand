@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import history from '../history';
-import { Wrapper } from '../layout/StyledComponents';
+import { Wrapper, SearchForm } from '../layout/StyledComponents';
 import { newspapersImage, lettersImage, gadgetsImage } from '../media/index';
 
 
@@ -41,9 +41,7 @@ const CategoryBox = styled.div`
   }
 `;
 
-const Form = styled.form`
-  text-align: center;
-`;
+
 
 
 
@@ -81,15 +79,21 @@ const Shop = () => {
 
     <Title>Search whatever you like</Title>
 
-    <Form onSubmit={handleSubmit}>
+    <SearchForm onSubmit={handleSubmit}>
       <input
+        className="main-input"
         type="text"
-        placeholder="Search in all categories..."
         onChange={handleChange}
         ref={inputRef}
+        autoComplete="off" 
       />
+      <i className="fa fa-search"></i>
+      <label htmlFor="name" className="label-name">
+        <span className="content-name"></span>
+      </label>
+      
       <input type="submit" value="Submit" />
-    </Form>
+    </SearchForm>
 
 
       <Title>Or pick a category</Title>
