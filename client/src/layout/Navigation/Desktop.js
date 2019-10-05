@@ -6,7 +6,7 @@ import Navlinks from './Navlinks';
 const DesktopNavWrapper = styled.div`
   width: 100%;
   height: 60px;
-  background: black;
+  background: rgba(45,98,110, 0.9);
 
   @media(max-width: 768px){ display: none; }
 `;
@@ -25,6 +25,8 @@ const DesktopNav = styled.div`
     grid-template-areas: "logo home . shop search . contact basket";
     align-items: center;
     li{
+      border-left: 1px solid green;
+      border-right: 1px solid green;
       text-align: center;
       height: 100%;
       list-style: none;

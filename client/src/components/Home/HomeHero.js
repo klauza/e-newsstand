@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { HeroImage } from '../media/index';
+import { HeroImage } from '../../media/index';
 
 const HeroWrapper = styled.div`
   position: relative;

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { addToBasket } from '../actions/basketActions';
-import { setAlert } from '../actions/alertActions';
+import { addToBasket } from '../../actions/basketActions';
+import { setAlert } from '../../actions/alertActions';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import ContactDelivery from './ContactDelivery';
-import Loader from '../layout/Loader';
-import { Wrapper, BackButton, Button } from '../layout/StyledComponents';
+import ContactDelivery from '../Contact/ContactDelivery';
+import Loader from '../../layout/Loader';
+import { Wrapper, BackButton, Button } from '../../layout/StyledComponents';
 import ItemImageGallery from './ItemImageGallery';
 import ItemDescription from './ItemDescription';
 import ItemBuySection from './ItemBuySection';

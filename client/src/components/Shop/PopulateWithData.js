@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { persistSearchView } from '../actions/miscActions';
+import { persistSearchView } from '../../actions/miscActions';
 import { Link } from 'react-router-dom';
-import { addToBasket } from '../actions/basketActions';
+import { addToBasket } from '../../actions/basketActions';
 import styled from 'styled-components';
 
 const PageWrap = styled.div`

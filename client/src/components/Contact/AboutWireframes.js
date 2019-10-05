@@ -1,5 +1,5 @@
 import React from 'react';
-import { Wrapper, BackButton } from '../layout/StyledComponents';
+import { Wrapper, BackButton } from '../../layout/StyledComponents';
 
 const AboutWireframes = () => {
 

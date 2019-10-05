@@ -12,14 +12,14 @@ import store from './store';
 import NotFound from './layout/NotFound';
 import Navigation from './layout/Navigation/Navigation';
 import Alert from './layout/Alert';
-import Home from './components/Home';
-import Shop from './components/Shop';
-import AboutWireframes from './components/AboutWireframes';
-import AboutAuthor from './components/AboutAuthor';
-import Item from './components/Item';
-import Basket from './components/Basket';
-import Contact from './components/Contact';
-import Search from './components/Search';
+import Home from './components/Home/Home';
+import Shop from './components/Shop/Shop';
+import AboutWireframes from './components/Contact/AboutWireframes';
+import AboutAuthor from './components/Contact/AboutAuthor';
+import Item from './components/Item/Item';
+import Basket from './components/Basket/Basket';
+import Contact from './components/Contact/Contact';
+import Search from './components/Shop/Search';
 
 
 
@@ -47,10 +47,10 @@ function App() {
               <Route exact path="/shop" component={Shop} />
               <Route exact path="/shop/item/:item" component={Item} />
               <Route exact path="/shop/search" component={Search} />
-              <Route exact path="/about/wireframes" component={AboutWireframes} />
-              <Route exact path="/about/author" component={AboutAuthor} />
-              <Route exact path="/basket" component={Basket} />
               <Route exact path="/contact" component={Contact} />
+              <Route exact path="/contact/author" component={AboutAuthor} />
+              <Route exact path="/contact/wireframes" component={AboutWireframes} />
+              <Route exact path="/basket" component={Basket} />
 
               <Route component={NotFound} />
             </Switch>

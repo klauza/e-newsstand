@@ -34,8 +34,8 @@ const About = () => {
   return (
     <AboutWrapper>
       <h2>About page</h2>
-      <Link to="/about/wireframes"><button>Wireframes</button></Link>
-      <Link to="/about/author"><button>Author</button></Link>
+      <Link to="/contact/wireframes"><button>Wireframes</button></Link>
+      <Link to="/contact/author"><button>Author</button></Link>
     </AboutWrapper>
   )
 }

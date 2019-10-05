@@ -1,9 +1,9 @@
 import React, { useRef, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import history from '../history';
-import { Wrapper, SearchForm } from '../layout/StyledComponents';
-import { newspapersImage, lettersImage, gadgetsImage } from '../media/index';
+import history from '../../history';
+import { Wrapper, SearchForm } from '../../layout/StyledComponents';
+import { newspapersImage, lettersImage, gadgetsImage } from '../../media/index';
 
 
 const Title = styled.h2`

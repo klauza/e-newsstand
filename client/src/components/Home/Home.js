@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import HomeHero from './HomeHero';
-import HomeFeaturedProducts from './Home_Featured_Products';
+import HomeFeaturedProducts from './HomeFeaturedProducts';
 
 
 const Home = () => {

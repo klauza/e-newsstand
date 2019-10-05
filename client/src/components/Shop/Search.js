@@ -1,8 +1,8 @@
 import React, {useRef, useEffect, useState} from 'react';
 import PopulateWithData from './PopulateWithData';
-import Loader from '../layout/Loader';
+import Loader from '../../layout/Loader';
 import {Link} from 'react-router-dom';
-import { Wrapper, Button, SearchForm } from '../layout/StyledComponents';
+import { Wrapper, Button, SearchForm } from '../../layout/StyledComponents';
 import styled from 'styled-components';
 
 const SearchHeader = styled.div`
@@ -144,6 +144,7 @@ const Search = (props) => {
             onChange={handleChange}
             ref={inputRef}
             autoComplete="off" 
+            required={`${params.cat}` === "" ? (true) : (false)}
           />
           <i className="fa fa-search"></i>
           <label htmlFor="name" className="label-name">

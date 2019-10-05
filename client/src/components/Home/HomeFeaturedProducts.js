@@ -34,7 +34,7 @@ const FeaturedProducts = styled.div`
   }
 `;
 
-const Home_Featured_Products = () => {
+const HomeFeaturedProducts = () => {
   return (
     <FeaturedWrapper>
       <FeaturedTitle><h3>Featured products</h3></FeaturedTitle>
@@ -58,4 +58,4 @@ const Home_Featured_Products = () => {
   )
 }
 
-export default Home_Featured_Products
+export default HomeFeaturedProducts
