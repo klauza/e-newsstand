@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ItemImageThumb from './ItemImageThumb';
 import styled from 'styled-components';
 
@@ -21,6 +22,13 @@ const ItemImageThumbails = ({imgs, handleClick, activeIndex}) => {
       
     </GridContainer>
   )
+}
+
+ItemImageThumb.propTypes = {
+  img: PropTypes.string,
+  activeIndex: PropTypes.number,
+  index: PropTypes.number,
+  handleClick: PropTypes.func
 }
 
 export default ItemImageThumbails

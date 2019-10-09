@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -28,7 +28,6 @@ const ItemBuySection = ({inStock, price, throwToBasket, handleQuantity}) => {
   }
 
 
-
   return (
     <Container>
 
@@ -51,5 +50,6 @@ const ItemBuySection = ({inStock, price, throwToBasket, handleQuantity}) => {
     </Container>
   )
 }
+
 
 export default ItemBuySection

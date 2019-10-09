@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { Router, Route, Switch } from 'react-router-dom';
 import history from './history';
 import { GlobalStyles } from './global-styles';
-import { CSSTransition, Transition, TransitionGroup } from 'react-transition-group';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 // redux
 import { Provider } from 'react-redux';

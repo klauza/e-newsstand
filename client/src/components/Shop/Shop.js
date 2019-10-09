@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import history from '../../history';
@@ -19,7 +19,6 @@ const Categories = styled.div`
   justify-content: center;
 
   a{ text-decoration: none; }
-
 `;
 const CategoryBox = styled.div`
   border: 2px solid black;
@@ -42,22 +41,9 @@ const CategoryBox = styled.div`
 `;
 
 
-
-
-
-
 const Shop = () => {
   const inputRef = useRef();
   const [query, setQuery] = useState("");
-
-
-  useEffect(()=> {
-
-    
-  //eslint-disable-next-line
-  }, [])
-
-
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -66,15 +52,12 @@ const Shop = () => {
     } else {
       console.log('ALERT, please put a value into input');
     }
-    
-
   }
   const handleChange = () => {
     setQuery(inputRef.current.value.trim());
   }
     
   return (
-
     <Wrapper>
 
     <Title>Search whatever you like</Title>
@@ -95,7 +78,6 @@ const Shop = () => {
       <input type="submit" value="Submit" />
     </SearchForm>
 
-
       <Title>Or pick a category</Title>
 
       <Categories>
@@ -104,12 +86,13 @@ const Shop = () => {
         <Link to='shop/search?cat=gadgets'><CategoryBox image={gadgetsImage}><h2>Gadgets</h2></CategoryBox></Link>
       </Categories>
 
-
-
     </Wrapper>
 
   )
   
 }
+
+
+
 
 export default Shop

@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addToBasket } from '../../actions/basketActions';
 import { setAlert } from '../../actions/alertActions';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import ContactDelivery from '../Contact/ContactDelivery';
-import Loader from '../../layout/Loader';
+// import Loader from '../../layout/Loader';
 import { Wrapper, BackButton, Button } from '../../layout/StyledComponents';
 import ItemImageGallery from './ItemImageGallery';
 import ItemDescription from './ItemDescription';
@@ -20,10 +21,13 @@ const Keywords = styled.div`
   }
 `;
 
+
+
+
 const Item = ({addToBasket, setAlert, props}) => {
 
-  const [quantity, setQuantity] = useState("1");
-  const [theItem, setTheItem] = useState('');
+  const [quantity, setQuantity] = useState(1);
+  const [theItem, setTheItem] = useState(null);
 
   useEffect(()=> {
 
@@ -54,7 +58,7 @@ const Item = ({addToBasket, setAlert, props}) => {
       <Wrapper>
         <div>
           <BackButton>Back</BackButton>
-          <Keywords>keywords in All categories: {theItem.slugs.map((slug, id) => <span><Link to={`/shop/search?query=${slug}`} key={id}><span>{slug}</span></Link>,</span> )}</Keywords>
+          <Keywords>keywords in All categories: {theItem.slugs.map((slug, id) => <span key={id}><Link to={`/shop/search?query=${slug}`}><span>{slug}</span></Link>,</span> )}</Keywords>
           <h2>{theItem.longName}</h2>
 
           <ItemImageGallery images={theItem.imgs} />
@@ -80,7 +84,24 @@ const Item = ({addToBasket, setAlert, props}) => {
   }
  
 }
-
+Item.propTypes = {
+  addToBasket: PropTypes.func,
+  setAlert: PropTypes.func,
+  quantity: PropTypes.number,
+  theItem: PropTypes.object
+}
+ItemImageGallery.propTypes = {
+  images: PropTypes.arrayOf(PropTypes.string)
+}
+ItemBuySection.propTypes = {
+  inStock: PropTypes.number,
+  price: PropTypes.number,
+  throwToBasket: PropTypes.func,
+  handleQuantity: PropTypes.func
+}
+ItemDescription.propTypes = {
+  longDesc: PropTypes.string
+}
 
 const mapStateToProps = (state, ownProps) => ({
   props: ownProps,

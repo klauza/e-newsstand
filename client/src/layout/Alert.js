@@ -48,7 +48,7 @@ const AlertBox = styled.div`
 // styles-end
 
 const Alert = ({alerts}) => {
-  console.log(alerts);
+  // console.log(alerts);
   return (
     alerts.length > 0 && alerts.map(alert => (     
       <AlertBox timeout={alert.timeout} key={alert.id} className={`alert alert-${alert.type}`}>

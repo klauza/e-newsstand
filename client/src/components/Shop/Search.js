@@ -12,9 +12,7 @@ const Category = styled.h3`
   text-align: center;
   margin: 20px 0;
 `;
-const Form = styled.form`
-  text-align: center;
-`;
+
 
 const Search = (props) => {
 

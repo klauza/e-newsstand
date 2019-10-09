@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import ItemImageActive from './ItemImageActive';
 import ItemImageThumbails from './ItemImageThumbails';
@@ -14,7 +15,9 @@ const GalleryContainer = styled.div`
   }
 `;
 
-const Item_Image_Gallery = ({images}) => {
+
+
+const ItemImageGallery = ({images}) => {
 
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -45,7 +48,7 @@ const Item_Image_Gallery = ({images}) => {
 
     <GalleryContainer>
 
-      <ItemImageActive key={activeIndex} activeThumbnail={images[activeIndex]} arrowClick={arrowClick}/>
+      <ItemImageActive activeThumbnail={images[activeIndex]} arrowClick={arrowClick}/>
       <ItemImageThumbails activeIndex={activeIndex} imgs={images} handleClick={handleClick} />
 
     </GalleryContainer>
@@ -53,4 +56,8 @@ const Item_Image_Gallery = ({images}) => {
   )
 }
 
-export default Item_Image_Gallery
+ItemImageActive.propTypes = {
+  images: PropTypes.arrayOf(PropTypes.string)
+}
+
+export default ItemImageGallery

@@ -59,7 +59,7 @@ const ItemImageActive = ({activeThumbnail, arrowClick}) => {
       <LeftArrow onClick={()=>arrowClick("left")}><i className="fa fa-chevron-left"></i></LeftArrow>
       <RightArrow onClick={()=>arrowClick("right")}><i className="fa fa-chevron-right"></i></RightArrow>
 
-      <Image src={activeThumbnail} alt="" />
+      <Image src={activeThumbnail} alt="active-image" />
     </Container>
   )
 }

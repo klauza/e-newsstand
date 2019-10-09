@@ -15,12 +15,16 @@ const ThumbDiv = styled.div`
     filter: brightness(0.8);
     cursor: pointer;
   }
+
+  img{
+    width: 100%; height: 100%; object-fit: cover;
+  }
 `;
 
 const ItemImageThumb = ({img, index, handleClick, activeIndex}) => {
   return (
     <ThumbDiv isActive={index===activeIndex}>
-      <img onClick={handleClick} data-index={index}  src={img} alt="" style={{width: "100%", height: "100%", objectFit: "cover"}}/>
+      <img onClick={handleClick} data-index={index} src={img} alt="" />
     </ThumbDiv>
   )
 }
