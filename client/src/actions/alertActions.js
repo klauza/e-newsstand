@@ -8,7 +8,7 @@ import { SET_ALERT, REMOVE_ALERT } from './types';
   
   dispatch({
     type: SET_ALERT,
-    payload: { msg, type, id, timeout}
+    payload: { id, msg, type, timeout}
   });
 
   // disappearing:
