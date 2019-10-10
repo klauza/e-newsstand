@@ -1,8 +1,14 @@
 import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyles = createGlobalStyle`
-  *, *::before, *::after{ margin: 0; padding: 0; box-sizing: border-box; } 
+  *, *::before, *::after{ 
+    margin: 0; padding: 0; box-sizing: border-box; 
+    @import url('https://fonts.googleapis.com/css?family=Oswald:400,500,700&display=swap'); /* font-family: 'Oswald', sans-serif; */
+    @import url('https://fonts.googleapis.com/css?family=Lato:400,700&display=swap'); /* font-family: 'Lato', sans-serif; */
+    
+  } 
   body{
+    
     width: 100%;
     overflow-x: hidden; overflow-y: scroll;
   }
