@@ -17,7 +17,7 @@ const shopItems = [
       },
       {
         id: 2,
-        name: "The New York Times Titanic story",
+        name: "New York Times Titanic story",
         longName: "The New York Times Titanic story newspaper",
         slugs: ["titanic", "new york times"],
         price: 39.99,
@@ -28,7 +28,7 @@ const shopItems = [
       },
       {
         id: 3,
-        name: "Newspapers collection, 1 random piece",
+        name: "Newspapers collection, 1 piece",
         longName: "Random newspaper from XIX century, get it from this collection",
         slugs: ["newspaper", "collection", "random", "gadget", "paper", "old"],
         price: 11.99,
@@ -119,7 +119,7 @@ const shopItems = [
       },
       {
         id: 11,
-        name: "Christopher Columbus navigation set",
+        name: "Christopher Columbus set",
         longName: "Christopher Columbus navigation gadgets - instruments needed to be a captain",
         slugs: ["navigation", "gadgets", "instruments", "captain", "map", "set", "maps", "adventure", "journey"],
         price: 119.19,

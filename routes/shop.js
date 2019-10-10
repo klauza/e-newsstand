@@ -80,7 +80,7 @@ router.get('/search', (req, res, next) => {
     let allResults = [];
     shopItems.forEach((itemSet) => {
       itemSet.items.filter((item) => {
-        let found = item.name.includes(querySearchTerm) || item.slugs.find(slug => slug === querySearchTerm);
+        let found = item.longName.toLowerCase().includes(querySearchTerm) || item.name.includes(querySearchTerm) || item.slugs.find(slug => slug === querySearchTerm || slug.includes(querySearchTerm));
         if(found) allResults.push(item)
       })
       
