@@ -30,10 +30,15 @@ const Item = ({addToBasket, setAlert, props}) => {
   const [theItem, setTheItem] = useState(null);
 
   useEffect(()=> {
-
+    setTimeout(()=>{
+      window.scrollTo({ top: 60, left: 0, behavior: 'auto' })
+    }, 150);
+    
     fetch(`/api/shop/item/${props.match.params.item}`)
       .then(res => res.json())
       .then(data => setTheItem(data.result[0]) )
+      
+ 
 
   //eslint-disable-next-line
   }, [])
@@ -79,7 +84,7 @@ const Item = ({addToBasket, setAlert, props}) => {
       return( <Wrapper> <Link to="/shop"><Button>Back to shop</Button></Link> <h3 style={{textAlign: "center"}}>Item not found</h3> </Wrapper> )
 
     } else{     //Item is fetching 
-      return( null  )
+      return( <Wrapper>fetchin</Wrapper>  )
     }
   }
  

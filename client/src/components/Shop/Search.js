@@ -1,4 +1,5 @@
 import React, {useRef, useEffect, useState} from 'react';
+import { connect } from 'react-redux';
 import PopulateWithData from './PopulateWithData';
 import Loader from '../../layout/Loader';
 import {Link} from 'react-router-dom';
@@ -14,7 +15,7 @@ const Category = styled.h3`
 `;
 
 
-const Search = (props) => {
+const Search = ({props, misc: {pageLocation}}) => {
 
   const inputRef = useRef();
   const { location } = props;
@@ -25,16 +26,15 @@ const Search = (props) => {
   const [isFetching, setIsFetching] = useState(true);
 
 
-
   useEffect(()=> {
+
     setQuery(params.query); // set the query on page load
-    // console.log("Location: ",location);
-    // console.log("Params: ",params); // query params on page load
 
     
 
     const initPage = () => {
-    
+ 
+
       fetch(`/api/shop/search?cat=${params.cat}&query=${params.query}`)
       .then(res => res.json())
       .then(data => {
@@ -55,8 +55,16 @@ const Search = (props) => {
           inputRef.current.value = params.query;
         } catch(err){}
       })
-     
-       
+      .then(()=>{
+        if(pageLocation.shop !== null){
+          window.scrollTo({  
+            top: pageLocation.shop,
+            left: 0,
+            behavior: 'auto'
+          })
+          
+        } 
+      })
 
     }
     initPage();
@@ -127,6 +135,8 @@ const Search = (props) => {
     
   }
 
+  
+
 
   return (
     <Wrapper>
@@ -167,5 +177,8 @@ const Search = (props) => {
   )
   
 }
-
-export default Search
+const mapStateToProps = (state, ownProps) => ({
+  props: ownProps,
+  misc: state.misc
+})
+export default connect(mapStateToProps, {})(Search)

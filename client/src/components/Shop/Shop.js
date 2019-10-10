@@ -1,9 +1,11 @@
 import React, { useRef, useState } from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import history from '../../history';
 import { Wrapper, SearchForm } from '../../layout/StyledComponents';
 import { newspapersImage, lettersImage, gadgetsImage } from '../../media/index';
+import { setPageLocation } from '../../actions/miscActions';
 
 
 const Title = styled.h2`
@@ -41,7 +43,7 @@ const CategoryBox = styled.div`
 `;
 
 
-const Shop = () => {
+const Shop = ({setPageLocation, misc: {pageLocation}}) => {
   const inputRef = useRef();
   const [query, setQuery] = useState("");
 
@@ -56,7 +58,7 @@ const Shop = () => {
   const handleChange = () => {
     setQuery(inputRef.current.value.trim());
   }
-    
+  
   return (
     <Wrapper>
 
@@ -81,9 +83,9 @@ const Shop = () => {
       <Title>Or pick a category</Title>
 
       <Categories>
-        <Link to='shop/search?cat=newspapers'><CategoryBox image={newspapersImage}><h2>Newspapers</h2></CategoryBox></Link>
-        <Link to='shop/search?cat=letters'><CategoryBox image={lettersImage}><h2>Letters</h2></CategoryBox></Link>
-        <Link to='shop/search?cat=gadgets'><CategoryBox image={gadgetsImage}><h2>Gadgets</h2></CategoryBox></Link>
+        <Link to='shop/search?cat=newspapers'><CategoryBox image={newspapersImage} onClick={()=> setPageLocation({...pageLocation, shop: 0})}><h2>Newspapers</h2></CategoryBox></Link>
+        <Link to='shop/search?cat=letters'><CategoryBox image={lettersImage} onClick={()=> setPageLocation({...pageLocation, shop: 0})}><h2>Letters</h2></CategoryBox></Link>
+        <Link to='shop/search?cat=gadgets'><CategoryBox image={gadgetsImage} onClick={()=> setPageLocation({...pageLocation, shop: 0})}><h2>Gadgets</h2></CategoryBox></Link>
       </Categories>
 
     </Wrapper>
@@ -94,5 +96,7 @@ const Shop = () => {
 
 
 
-
-export default Shop
+const mapStateToProps = (state) => ({
+  misc: state.misc
+})
+export default connect(mapStateToProps, {setPageLocation})(Shop)

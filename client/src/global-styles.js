@@ -25,6 +25,7 @@ export const GlobalStyles = createGlobalStyle`
 
   .fade-exit.fade-exit-active {
       opacity: 0;
-      transition: opacity 150ms linear;
+      transition: opacity 0ms linear; /* 150ms */
+      
   }
 `;

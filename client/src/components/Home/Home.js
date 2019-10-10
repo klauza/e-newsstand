@@ -1,15 +1,15 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import HomeHero from './HomeHero';
 import HomeFeaturedProducts from './HomeFeaturedProducts';
 
 
 const Home = () => {
   return (
-    <Fragment>
+    <div style={{position: "absolute", left: "0", right: "0"}}>
       <HomeHero/>
       <HomeFeaturedProducts/>
 
-    </Fragment>
+    </div>
   )
 }
 

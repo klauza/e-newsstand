@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { persistSearchView } from '../../actions/miscActions';
+import { persistSearchView, setPageLocation } from '../../actions/miscActions';
 import { Link } from 'react-router-dom';
-import { addToBasket } from '../../actions/basketActions';
 import styled from 'styled-components';
 
 const PageWrap = styled.div`
@@ -74,29 +73,34 @@ const ItemsWrapper = styled.div`
   margin: 15px 0 20px;
   width: 100%;
   display: grid; 
-  grid-template-columns: repeat(auto-fit, minmax(205px, 1fr));
-  ${props => props.Display ? (`grid-template-columns: repeat(auto-fit, minmax(205px, 1fr))`) : (`grid-template-columns: 1fr`)}
-  grid-auto-rows: auto;
   grid-column-gap: 10px;
   grid-row-gap: 35px;
   justify-content: center;
-  a{
-    text-decoration: none;
-  }
+  grid-auto-rows: ${props => props.Display ? ("350px") : ("auto")};
+  grid-template-columns: repeat(auto-fit, minmax(205px, 250px));
+  ${props => props.Display ? (`grid-template-columns: repeat(auto-fit, minmax(205px, 1fr))`) : (`grid-template-columns: 1fr`)}
+  
+
+
   @media(max-width: 768px){
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     ${props => props.Display ? (`grid-template-columns: repeat(auto-fit, minmax(150px, 1fr))`) : (`grid-template-columns: 1fr`)}
     grid-column-gap: 5px;
     grid-row-gap: 20px;
   }
+
+  a{
+    text-decoration: none;
+  }
 `;
 
 const Item = styled.div`
+
   height: 100%;
   display: grid;
   grid-template-columns: ${props => props.Display ? ('1fr') : ('1fr 1fr') };
   /* grid-template-columns: 1fr; */
-  grid-template-rows: ${props => props.Display ? ('auto') : ('90px 20px 90px') };
+  grid-template-rows: ${props => props.Display ? ('40px auto 20px 60px') : ('90px 20px 90px') };
   border: 1px solid grey;
   box-shadow: 0px 4px 4px -3px rgba(0,0,0,0.6);
   transition: box-shadow 175ms ease, border 175ms ease;
@@ -116,12 +120,16 @@ const ItemName = styled.h4`
 
 `;
 const ItemImage = styled.div`
-  width: 100%; height: 100%;
-  padding: ${props => props.Display? ("0 5px") : ("0")}; 
+  width: auto; height: auto;
+  display: block; margin: 0 auto;
+  padding: ${props => props.Display? ("5px") : ("0")}; 
   grid-column: ${props => props.Display ? (null) : ("1 / 2")};
   grid-row: ${props => props.Display ? (null) : ("1 / 4")};
+  overflow: hidden;
+  /* border: 1px solid red; */
 
   img{
+    display: block;
     width: 100%; height: 100%;
     object-fit: cover;
   }
@@ -142,10 +150,11 @@ const ItemShortDesc = styled.div`
   grid-row: ${props => props.Display ? (null) : ("3 / 4")};
 `;
 
-const PopulateWithData = ({misc: {searchView}, shopData, addToBasket, persistSearchView}) => {
+const PopulateWithData = ({ misc: {searchView, pageLocation}, shopData, persistSearchView, setPageLocation }) => {
 
   const [view, setView] = useState(searchView); // true=inline || false=blocks
   
+
 
 
   const setViewToInline = () => {
@@ -162,6 +171,9 @@ const PopulateWithData = ({misc: {searchView}, shopData, addToBasket, persistSea
     }
   }
 
+  const saveWindowPosition = () => {
+    setPageLocation({...pageLocation, shop: window.pageYOffset});
+  }
 
 
     return ( 
@@ -190,7 +202,7 @@ const PopulateWithData = ({misc: {searchView}, shopData, addToBasket, persistSea
 
           <ItemsWrapper Display={view}>
             {shopData.map(item => 
-              <Link key={item.id} to={{ pathname: `/shop/item/${item.id}`}}>
+              <Link key={item.id} to={{ pathname: `/shop/item/${item.id}`}} onClick={()=> saveWindowPosition()}>
                 <Item Display={view}>
                   <ItemName Display={view}>{item.name}</ItemName>
                   <ItemImage Display={view}><img src={item.imgs[0]} alt=""/></ItemImage>
@@ -210,7 +222,6 @@ const PopulateWithData = ({misc: {searchView}, shopData, addToBasket, persistSea
 
 
 const mapStateToProps = (state) => ({
-  basket: state.basket,
   misc: state.misc
 })
-export default connect(mapStateToProps, {addToBasket, persistSearchView})(PopulateWithData)
+export default connect(mapStateToProps, {persistSearchView, setPageLocation})(PopulateWithData)

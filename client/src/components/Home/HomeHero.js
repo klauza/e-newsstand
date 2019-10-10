@@ -55,7 +55,7 @@ const HomeHero = () => {
       <img src={HeroImage} alt=""/>
       <div>
         <p>Welcome to our humble shop</p>
-        <Link to="/shop"><button>SHOP</button></Link>
+        <Link to="/shop" onClick={()=>{window.scrollTo({ top: 0,left: 0,behavior: 'smooth'})}}><button>SHOP</button></Link>
       </div>
     </HeroWrapper>
   )
