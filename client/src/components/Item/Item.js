@@ -34,7 +34,7 @@ const Header = styled.h2`
 
 
 
-const Item = ({addToBasket, setAlert, props}) => {
+const Item = ({addToBasket, setAlert, props, basket: {items}}) => {
 
   const [quantity, setQuantity] = useState(1);
   const [theItem, setTheItem] = useState(null);
@@ -60,18 +60,33 @@ const Item = ({addToBasket, setAlert, props}) => {
   }
 
   const throwToBasket = () => {
-    if(theItem && theItem.inStock > 0){
+    if(theItem.inStock > 0){
+
+      if(items.length > 0){
+        console.log(items);
+
+        let inBasket = items.some((item) => item.id === theItem.id )
+
+        if(inBasket === true){ 
+          setAlert("Item already in basket", "info", 2000);
+          return 
+        }
+      }
+
       addToBasket({
         id: theItem.id,
         name: theItem.name,
         price: theItem.price,
-        quantity
-      }); 
+        quantity,
+        inStock: theItem.inStock,
+        img: theItem.imgs[0]
+      });
       setAlert("Item added to basket", "success", 2000);
     } else{
       setAlert("Item not in stock", "warning", 2000);
     }
   }
+  console.log(items);
 
   if(theItem){
     return (
