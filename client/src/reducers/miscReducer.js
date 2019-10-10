@@ -1,7 +1,11 @@
-import { PERSIST_SEARCH_VIEW } from '../actions/types';
+import { PERSIST_SEARCH_VIEW, PAGE_LOCATION } from '../actions/types';
 
 const initialState = {
-  searchView: true
+  searchView: true,
+  pageLocation:  {
+      shop: null
+    }
+  
 }
 
 export default (state = initialState, action) => {
@@ -11,6 +15,12 @@ export default (state = initialState, action) => {
       return{
         ...state,
         searchView: action.payload
+      }
+
+    case PAGE_LOCATION:
+      return{
+        ...state,
+        pageLocation: action.payload
       }
 
     default:
