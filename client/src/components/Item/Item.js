@@ -13,12 +13,22 @@ import ItemDescription from './ItemDescription';
 import ItemBuySection from './ItemBuySection';
 
 const Keywords = styled.div`
-  margin: 10px 0; padding: 10px;
-  background: yellowgreen;
-  height: 100px;
+  margin: 10px 0; padding: 10px 0;
+  height: auto;
+  border-bottom: 1px solid maroon;
   a{
+    font-size: 0.9em;
+    color: black;
     margin: 0 0 0 3px;
+    &:active{
+      color: purple;
+    }
   }
+`;
+const Header = styled.h2`
+  font-family: 'Oswald', sans-serif;
+  font-weight: 500;
+  margin: 5px 0 15px 0;
 `;
 
 
@@ -31,7 +41,7 @@ const Item = ({addToBasket, setAlert, props}) => {
 
   useEffect(()=> {
     setTimeout(()=>{
-      window.scrollTo({ top: 60, left: 0, behavior: 'auto' })
+      window.scrollTo({ top: 60, left: 0, behavior: `${window.pageYOffset < 60 ? ('smooth') : ('auto')}` })
     }, 150);
     
     fetch(`/api/shop/item/${props.match.params.item}`)
@@ -51,20 +61,25 @@ const Item = ({addToBasket, setAlert, props}) => {
 
   const throwToBasket = () => {
     if(theItem && theItem.inStock > 0){
-      addToBasket(theItem);
-      setAlert("Item added to basket", "green");
+      addToBasket({
+        id: theItem.id,
+        name: theItem.name,
+        price: theItem.price,
+        quantity
+      }); 
+      setAlert("Item added to basket", "success", 2000);
     } else{
-      alert("item not in stock");
+      setAlert("Item not in stock", "warning", 2000);
     }
   }
 
   if(theItem){
     return (
-      <Wrapper>
+      <Wrapper style={{fontFamily: "'Oswald', sans-serif"}}>
         <div>
           <BackButton>Back</BackButton>
-          <Keywords>keywords in All categories: {theItem.slugs.map((slug, id) => <span key={id}><Link to={`/shop/search?query=${slug}`}><span>{slug}</span></Link>,</span> )}</Keywords>
-          <h2>{theItem.longName}</h2>
+          <Keywords>keywords: {theItem.slugs.map((slug, id) => <span key={id}><Link to={`/shop/search?query=${slug}`}><span>{slug}</span></Link>,</span> )}</Keywords>
+          <Header>{theItem.longName}</Header>
 
           <ItemImageGallery images={theItem.imgs} />
 
@@ -84,7 +99,7 @@ const Item = ({addToBasket, setAlert, props}) => {
       return( <Wrapper> <Link to="/shop"><Button>Back to shop</Button></Link> <h3 style={{textAlign: "center"}}>Item not found</h3> </Wrapper> )
 
     } else{     //Item is fetching 
-      return( <Wrapper>fetchin</Wrapper>  )
+      return( <Wrapper></Wrapper>  )
     }
   }
  

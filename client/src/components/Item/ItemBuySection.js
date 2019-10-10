@@ -2,8 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div`
-  border: 2px solid yellow;
-  display: grid; grid-template-columns: 1fr 1fr;
+  display: grid; grid-template-columns: 2fr 1fr;
+  justify-items: center;
+  align-items: center;
+  font-weight: 700;
+  margin: 25px 0;
+`;
+const Price = styled.div`
+  text-align: center;
 `;
 const InStock = styled.span`
   color: green;
@@ -11,10 +17,30 @@ const InStock = styled.span`
 const OutOfStock = styled.span`
   color: red;
 `;
+
+const Quantity = styled.div`
+
+`;
 const Select = styled.select`
-  width: 50px; height: 50px;
+  width: 50px; height: auto;
   option{
 
+  }
+`;
+const BuyButton = styled.button`
+  font-family: 'Oswald', sans-serif;
+  border: 1px solid grey; border-radius: 2px;
+  transition: all 250ms ease;
+  box-shadow: 0px 0px 4px -1px rgba(0,0,0,0.75);
+  height: 30px;
+  width: 100%; margin: 5px auto;
+  background: lightgrey;
+  &:hover{
+    transition: all 250ms ease;
+    box-shadow: 0px 0px 6px 1px rgba(0,0,0,0.75);
+    cursor: pointer;
+    color: white; background: green;
+    border: 1px solid white;
   }
 `;
 
@@ -23,7 +49,7 @@ const ItemBuySection = ({inStock, price, throwToBasket, handleQuantity}) => {
  
   const qtyOptions = [];
 
-  for(let i=1; i<=25; i++){
+  for(let i=1; i<=10; i++){
     qtyOptions.push( <option key={i} value={i}>{i}</option> )
   }
 
@@ -31,21 +57,21 @@ const ItemBuySection = ({inStock, price, throwToBasket, handleQuantity}) => {
   return (
     <Container>
 
-      <div>
-        <p>PRICE: {price}</p>
-        <p>Availability: {inStock > 0 ? (<InStock>In stock</InStock>) : (<OutOfStock>Out of stock</OutOfStock>)}</p>
-      </div>
+      <Price>
+        <p>Price: {price}</p>
+        <p>Availability: {inStock > 0 ? (<InStock>In stock <i className="fa fa-check"></i></InStock>) : (<OutOfStock>Out of stock <i className="fa fa-times"></i></OutOfStock>)}</p>
+      </Price>
 
-      <div>
+      <Quantity>
         <div>
-          <span>Quantity</span>
-          <Select name="" id="" onChange={(e) => handleQuantity(e.target.value)} disabled={inStock === 0}>
+          <span>Quantity: </span>
+          <Select name="" id="" onChange={(e) => handleQuantity(Number(e.target.value))} disabled={inStock === 0}>
             {qtyOptions}
           </Select>
         </div>
 
-        <button onClick={throwToBasket}>ADD TO BASKET</button>
-      </div>
+        <BuyButton onClick={throwToBasket}><i className="fa fa-shopping-cart"></i> Add to basket</BuyButton>
+      </Quantity>
 
     </Container>
   )

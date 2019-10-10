@@ -9,9 +9,12 @@ const Container = styled.div`
   position: relative;
 `;
 const Image = styled.img`
+  display: block;
   height: 100%;
-  width: 100%;
+  width: auto;
+  max-width: 100%;
   object-fit: cover;
+  margin: 0 auto;
 `;
 
 const LeftArrow = styled.button`
@@ -29,6 +32,8 @@ const LeftArrow = styled.button`
   }
 
   i{
+    color: white;
+    text-shadow: 2px 2px 2px #000;
     position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
     font-size: 1.85em;
   }
@@ -48,6 +53,8 @@ const RightArrow = styled.button`
   }
 
   i{
+    color: white;
+    text-shadow: 2px 2px 2px #000;
     position: absolute; top: 50%; right: 50%; transform: translate(50%, -50%);
     font-size: 1.85em;
   }
