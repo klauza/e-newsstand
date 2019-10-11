@@ -3,11 +3,14 @@ import React from 'react';
 import styled from 'styled-components';
 const ContactNav = styled.div`
   display: grid;
-  grid-template-columns: 150px;
-  grid-template-rows: repeat(4, 1fr);
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 50px;
 
   div{
     border: 1px solid black;
+    text-align: center;
+    line-height: 50px;
+  
     &:hover{
       cursor: pointer;
       transition: background-color 150ms ease;

@@ -1,8 +1,10 @@
 import React from 'react';
-import { Wrapper } from '../../layout/StyledComponents';
 import styled from 'styled-components';
 
-
+const Container = styled.div`
+  margin-top: 75px;
+  display: flex; flex-direction: column;
+`;
 const DeliveryWrapper = styled.div`
   border: 1px solid black;
 `;
@@ -26,7 +28,7 @@ const ReturnPolicy = styled.div`
 
 const Delivery = () => {
   return (
-    <Wrapper>
+    <Container>
       
       <DeliveryWrapper>
         
@@ -47,7 +49,7 @@ const Delivery = () => {
         </ReturnPolicy>
         
       </DeliveryWrapper>
-    </Wrapper>
+    </Container>
   )
 }
 

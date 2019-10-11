@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { Wrapper } from '../../layout/StyledComponents';
 import ContactNavigation from './ContactNavigation';
 
@@ -14,14 +14,15 @@ const Contact = (props) => {
   const [active, setActive] = useState(0);
 
 
+
   // functions
   const setHashUrl = (hash) => { 
-    window.history.pushState(null, null, `#${hash}`); 
+    window.history.pushState(null, null, hash); 
   }
   const changePage = (i, hash) => {
     setActive(i);
     setPage(`#${hash}`);
-    setHashUrl(hash);
+    setHashUrl(`#${hash}`);
   }
   const renderPage = () => {
     switch(page){
