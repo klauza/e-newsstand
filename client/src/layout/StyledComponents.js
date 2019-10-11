@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import history from '../history';
 
-// Styles
+// Wrapper
 const WrapperStyled = styled.div`
   position: absolute;
   top: 60px;
@@ -15,6 +15,16 @@ const WrapperStyled = styled.div`
   @media(max-width: 998px){ width: 85%; }
   @media(max-width: 768px){ width: 95%; }
 `;
+const ChildOfWrapper = styled.div`
+  width: 70%;
+  margin: 50px auto 50px;
+  padding: 0 10px 50px 10px;
+  /* background: white; */
+  @media(max-width: 998px){ width: 85%; }
+  @media(max-width: 768px){ width: 95%; }
+`;
+
+// Button
 const ButtonStyled = styled.button`
   padding: 10px;
   border: 1px solid grey; border-radius: 2px;
@@ -31,9 +41,13 @@ const ButtonStyled = styled.button`
     background: grey;
   }
 `;
+
+// BackButton
 const BackButtonStyled = styled(ButtonStyled)`
 
 `;
+
+// SearchForm
 const SearchFormStyled = styled.form`
   text-align: center;
   width: 30%; height: 100%;
@@ -126,6 +140,13 @@ export const Wrapper = (props) => {
     <WrapperStyled>
       {props.children}
     </WrapperStyled>
+  )
+}
+export const ChildWrapper = (props) => {
+  return (
+    <ChildOfWrapper>
+      {props.children}
+    </ChildOfWrapper>
   )
 }
 export const Button = (props) => {
