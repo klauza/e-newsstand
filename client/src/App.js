@@ -9,18 +9,18 @@ import { Provider } from 'react-redux';
 import store from './store';
 
 // pages
-import NotFound from './layout/NotFound';
 import Navigation from './layout/Navigation/Navigation';
 import Alert from './layout/Alert';
+import NotFound from './layout/NotFound';
+//Home
 import Home from './components/Home/Home';
+//Shop
 import Shop from './components/Shop/Shop';
-import AboutWireframes from './components/Contact/AboutWireframes';
-import AboutAuthor from './components/Contact/AboutAuthor';
+import Search from './components/Shop/Search';
 import Item from './components/Item/Item';
 import Basket from './components/Basket/Basket';
+//Contact
 import Contact from './components/Contact/Contact';
-import Search from './components/Shop/Search';
-
 
 
 function App() {
@@ -33,10 +33,15 @@ function App() {
         <GlobalStyles />
         <Navigation/>
         <Alert />
+        
+
 
         <Route render={({ location }) => (
 
+
         <TransitionGroup>
+
+
           <CSSTransition
             key={location.key}
             timeout={450}
@@ -48,13 +53,12 @@ function App() {
               <Route exact path="/shop/item/:item" component={Item} />
               <Route exact path="/shop/search" component={Search} />
               <Route exact path="/contact" component={Contact} />
-              <Route exact path="/contact/author" component={AboutAuthor} />
-              <Route exact path="/contact/wireframes" component={AboutWireframes} />
               <Route exact path="/basket" component={Basket} />
 
               <Route component={NotFound} />
             </Switch>
           </CSSTransition>
+
         </TransitionGroup>
 
 

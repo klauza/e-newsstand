@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Wrapper } from '../../layout/StyledComponents';
 import styled from 'styled-components';
 
 const AboutWrapper = styled.div`
@@ -32,11 +32,13 @@ const AboutWrapper = styled.div`
 
 const About = () => {
   return (
-    <AboutWrapper>
-      <h2>About page</h2>
-      <Link to="/contact/wireframes"><button>Wireframes</button></Link>
-      <Link to="/contact/author"><button>Author</button></Link>
-    </AboutWrapper>
+    <Wrapper>
+      <AboutWrapper>
+    
+        <h2>About website</h2>
+
+      </AboutWrapper>
+    </Wrapper>
   )
 }
 

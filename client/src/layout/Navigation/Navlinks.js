@@ -32,7 +32,7 @@ const Navlinks = () => {
           <NavLink exact activeClassName="active" to="/basket" className="link">Basket <i className="fa fa-shopping-basket"></i></NavLink>
         </li>
         <li className="link-contact">
-          <NavLink exact activeClassName="active" to="/contact" className="link">Contact</NavLink>
+          <NavLink exact activeClassName="active" to="/contact#us" className="link">Contact</NavLink>
         </li>
         <li className="link-search">
           <form onSubmit={submitNavSearch}>
