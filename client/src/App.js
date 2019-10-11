@@ -21,6 +21,8 @@ import Item from './components/Item/Item';
 import Basket from './components/Basket/Basket';
 //Contact
 import Contact from './components/Contact/Contact';
+//Admin
+import Admin from './components/Admin/Admin';
 
 
 function App() {
@@ -54,6 +56,7 @@ function App() {
               <Route exact path="/shop/search" component={Search} />
               <Route exact path="/contact" component={Contact} />
               <Route exact path="/basket" component={Basket} />
+              <Route exact path="/admin" component={Admin} />
 
               <Route component={NotFound} />
             </Switch>
