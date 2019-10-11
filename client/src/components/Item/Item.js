@@ -5,7 +5,7 @@ import { addToBasket } from '../../actions/basketActions';
 import { setAlert } from '../../actions/alertActions';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import ContactDelivery from '../Contact/ContactDelivery';
+
 // import Loader from '../../layout/Loader';
 import { Wrapper, BackButton, Button } from '../../layout/StyledComponents';
 import ItemImageGallery from './ItemImageGallery';
@@ -30,7 +30,9 @@ const Header = styled.h2`
   font-weight: 500;
   margin: 5px 0 15px 0;
 `;
-
+const ContactDelivery = styled.a`
+  text-align: center;
+`;
 
 
 
@@ -61,17 +63,14 @@ const Item = ({addToBasket, setAlert, props, basket: {items}}) => {
 
   const throwToBasket = () => {
     if(theItem.inStock > 0){
-
+      
       if(items.length > 0){
-        console.log(items);
-
         let inBasket = items.some((item) => item.id === theItem.id )
 
-        if(inBasket === true){ 
-          setAlert("Item already in basket", "info", 2000);
-          return 
-        }
+        if(inBasket === true) return setAlert("Item already in basket", "info", 2000);
       }
+
+      if(theItem.inStock < quantity) return setAlert("Not enough items in stock", "info", 2000);
 
       addToBasket({
         id: theItem.id,
@@ -83,10 +82,9 @@ const Item = ({addToBasket, setAlert, props, basket: {items}}) => {
       });
       setAlert("Item added to basket", "success", 2000);
     } else{
-      setAlert("Item not in stock", "warning", 2000);
+      setAlert("Item is not in stock", "warning", 2000);
     }
   }
-  console.log(items);
 
   if(theItem){
     return (
@@ -104,7 +102,7 @@ const Item = ({addToBasket, setAlert, props, basket: {items}}) => {
           
         </div>
 
-        <ContactDelivery />
+        <ContactDelivery href="/contact/delivery">Check our delivery</ContactDelivery>
       </Wrapper>
     )
 
