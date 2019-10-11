@@ -11,3 +11,7 @@ export const PAGE_LOCATION = "PAGE_LOCATION";
 // Alert
 export const SET_ALERT = "SET_ALERT";
 export const REMOVE_ALERT = "REMOVE_ALERT";
+
+// Admin
+export const ADMIN_LOGIN = "ADMIN_LOGIN";
+export const ADMIN_LOGIN_ERROR = "ADMIN_LOGIN_ERROR";
