@@ -1,7 +1,8 @@
 import React, {useRef} from 'react';
 import { connect } from 'react-redux';
-import { adminLogin } from '../../actions/adminActions';
+import { adminLogin, adminLogOut } from '../../actions/adminActions';
 
+import AdminLogged from './AdminLogged';
 import styled from 'styled-components';
 import { Wrapper } from '../../layout/StyledComponents';
 
@@ -9,7 +10,9 @@ const Header = styled.h1`
   text-align: center;
 `;
 const LoginContainer = styled.div`
-  width: 600px; height: auto; margin: 0 auto;
+  width: auto; max-width: 400px; height: auto; 
+  margin: 0 auto; padding: 0 5px;
+  border: 1px solid black;
   
   form{
     input{
@@ -18,7 +21,7 @@ const LoginContainer = styled.div`
     }
   }
 `;
-const Admin = ({adminLogin, admin: {isAuthenticated}}) => {
+const Admin = ({adminLogin, adminLogOut, admin: {isAuthenticated}}) => {
 
   const loginRef = useRef();
   const pwdRef = useRef();
@@ -34,27 +37,37 @@ const Admin = ({adminLogin, admin: {isAuthenticated}}) => {
     });
   }
 
-  return (
-    <Wrapper>
-      <Header>Admin panel</Header>
+  const logout = () => {
+    adminLogOut();
+  }
 
-      <LoginContainer>
-        <form onSubmit={login}>
-          <input ref={loginRef} type="text"
-            placeholder="login"
-          />
-          <input ref={pwdRef} type="password"
-            placeholder="password"
-          />
-          <input type="submit" value="SUBMIT" />
-        </form>
-      </LoginContainer>
+  if(!isAuthenticated){
+    return (
+      <Wrapper>
+        <Header>Admin panel</Header>
 
-    </Wrapper>
-  )
+        <LoginContainer>
+          <form onSubmit={login}>
+            <input ref={loginRef} type="text"
+              placeholder="login"
+            />
+            <input ref={pwdRef} type="password"
+              placeholder="password"
+            />
+            <input type="submit" value="SUBMIT" />
+          </form>
+        </LoginContainer>
+
+      </Wrapper>
+    ) 
+  } else{
+    return(
+      <AdminLogged logout={logout} />
+    )
+  }
 }
 
 const mapStateToProps = (state) => ({
   admin: state.admin
 })
-export default connect(mapStateToProps, {adminLogin})(Admin)
+export default connect(mapStateToProps, {adminLogin, adminLogOut})(Admin)

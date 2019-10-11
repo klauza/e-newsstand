@@ -15,3 +15,4 @@ export const REMOVE_ALERT = "REMOVE_ALERT";
 // Admin
 export const ADMIN_LOGIN = "ADMIN_LOGIN";
 export const ADMIN_LOGIN_ERROR = "ADMIN_LOGIN_ERROR";
+export const ADMIN_LOGOUT = "ADMIN_LOGOUT";

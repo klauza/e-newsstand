@@ -1,4 +1,4 @@
-import { ADMIN_LOGIN, ADMIN_LOGIN_ERROR } from '../actions/types';
+import { ADMIN_LOGIN, ADMIN_LOGIN_ERROR, ADMIN_LOGOUT } from '../actions/types';
 
 const initialState = {
   isAuthenticated: false
@@ -15,6 +15,12 @@ export default (state = initialState, action) => {
     case ADMIN_LOGIN_ERROR:
       return{
         ...state
+      }
+
+    case ADMIN_LOGOUT:
+      return{
+        ...state,
+        isAuthenticated: false
       }
 
     default:
