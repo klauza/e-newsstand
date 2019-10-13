@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { Router, Route, Switch } from 'react-router-dom';
 import history from './history';
-import { GlobalStyles } from './global-styles';
+import './App.scss';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 // redux
@@ -32,7 +32,7 @@ function App() {
     <Provider store={store}>
       <Router history={history}>
       <Fragment>
-        <GlobalStyles />
+        
         <Navigation/>
         <Alert />
         
@@ -45,6 +45,8 @@ function App() {
 
 
           <CSSTransition
+            in={true}
+            appear={true}
             key={location.key}
             timeout={450}
             classNames="fade" 
@@ -69,8 +71,8 @@ function App() {
         )} />
 
         
-
       </Fragment>
+      
       </Router>
     </Provider>
   );
