@@ -4,6 +4,10 @@ import styled from 'styled-components';
 const Container = styled.div`
   margin-top: 75px;
   display: flex; flex-direction: column;
+  position: absolute;
+  top: 75px;
+  left: 0;
+  right: 0;
 `;
 const DeliveryWrapper = styled.div`
   border: 1px solid black;

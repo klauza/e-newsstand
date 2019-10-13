@@ -6,6 +6,10 @@ const Container = styled.div`
   margin-top: 75px;
   display: flex; flex-direction: column;
   text-align: center;
+  position: absolute;
+  top: 75px;
+  left: 0;
+  right: 0;
 `;
 
 const AboutWebsite = () => {

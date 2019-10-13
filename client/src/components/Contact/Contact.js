@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Wrapper } from '../../layout/StyledComponents';
 import ContactNavigation from './ContactNavigation';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import styled from 'styled-components';
 
 import Delivery from './Delivery';
 import AboutWebsite from './AboutWebsite';
@@ -8,6 +10,35 @@ import Staff from './Staff';
 import Us from './Us';
 
 
+const ContactAnimations = styled.div`
+  .contact-animations{
+    .contact-enter {
+      transform: translateY(-25px);
+      opacity: 0;
+      z-index: 1;
+    }
+    .contact-enter.contact-enter-active {
+      transform: translateY(0);
+      opacity: 1;
+      transition: opacity 300ms linear 300ms, transform 300ms linear 300ms;
+    }
+
+    .contact-exit {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .contact-exit.contact-exit-active {
+      transform: translateY(25px);
+      opacity: 0;
+      transition: opacity 300ms linear, transform 300ms linear;   
+        
+    }
+    .contact-exit-done{
+      opacity: 0;
+    }
+  }
+`;
 
 const Contact = (props) => {
   const [page, setPage] = useState(props.location.hash);
@@ -41,8 +72,20 @@ const Contact = (props) => {
   return (
     <Wrapper>
       <ContactNavigation active={active} page={page} changePage={changePage}/>
-      
-      {renderPage()}
+
+      <ContactAnimations>
+        <TransitionGroup className="contact-animations">
+          <CSSTransition
+
+            key={active}
+            timeout={600}
+            classNames="contact"
+          >
+            {renderPage()}
+          </CSSTransition>
+        </TransitionGroup>
+      </ContactAnimations>
+
     </Wrapper>
   )
 }

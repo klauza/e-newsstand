@@ -5,6 +5,11 @@ const Container = styled.div`
   text-align: center;
   display: flex; flex-direction: column;
   margin-top: 75px;
+  margin-bottom: 50px;
+  position: absolute;
+  top: 75px;
+  left: 0;
+  right: 0;
   p{margin: 10px 0 25px;}
 `;
 const Header = styled.h2`
@@ -13,10 +18,13 @@ const Header = styled.h2`
 
 const ImagesContainer = styled.div`
   display: grid; 
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   grid-auto-rows: 1fr;
-  justify-content: center;
   grid-gap: 25px;
+  align-content:center;
+  @media(max-width:768px){
+    grid-gap: 5px;
+  }
 
 `;
 const Card = styled.div`
@@ -56,7 +64,7 @@ const Staff = () => {
     <Container>
       <Header>Staff</Header>
       <p>Meet our staff members</p>
-      <ImagesContainer>
+      <ImagesContainer staffCount={staff.length}>
         {staff.map((member, id) => <Card key={id} image={member.img}><span>{member.name}</span><span>{member.position}</span></Card>)}
       </ImagesContainer>
     </Container>

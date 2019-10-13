@@ -7,6 +7,11 @@ const Container = styled.div`
   justify-content: space-between; 
   margin-top: 75px;
   font-family: 'Lato', sans-serif;
+  
+  position: absolute;
+  top: 75px;
+  left: 0;
+  right: 0;
   i{
     display: block; text-align: center;
     font-size: 3em;
