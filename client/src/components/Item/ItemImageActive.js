@@ -51,13 +51,12 @@ const Image = styled.img`
 `;
 
 const LeftArrow = styled.button`
-  z-index: 1;
+  z-index: 2;
   position: absolute; top: 0; left: 0;
   background: rgba(0,0,0,0);
   height: 100%;
   width: 100px; 
   @media(max-width: 768px){ width: 60px; }
-  /* border: 1px solid yellow; */
   border: 0;
   outline: 0;
   &:hover{
@@ -73,13 +72,12 @@ const LeftArrow = styled.button`
   }
 `;
 const RightArrow = styled.button`
-  z-index: 1;
+  z-index: 2;
   position: absolute; top: 0; right: 0;
   background: rgba(0,0,0,0);
   height: 100%;
   width: 100px;
   @media(max-width: 768px){ width: 60px; }
-  /* border: 1px solid yellow; */
   border: 0;
   outline: 0;
   &:hover{

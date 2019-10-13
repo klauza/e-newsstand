@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div`
+  padding: 0 5px;
   width: 100%; height: auto;
   margin: 25px 0 150px 0;
 `;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Wrapper } from '../../layout/StyledComponents';
 import ContactNavigation from './ContactNavigation';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
@@ -44,6 +44,13 @@ const Contact = (props) => {
   const [page, setPage] = useState(props.location.hash);
   const [active, setActive] = useState(0);
 
+  useEffect(()=>{
+    window.scrollTo({  
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    })
+  }, [])
 
 
   // functions

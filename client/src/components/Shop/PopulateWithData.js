@@ -74,6 +74,7 @@ const ItemsWrapper = styled.div`
   a{
     text-decoration: none;
   }
+  padding: 0 5px;
   margin: 15px 0 20px;
   width: 100%;
   display: grid; 
@@ -83,10 +84,11 @@ const ItemsWrapper = styled.div`
   grid-auto-rows: ${props => props.view ? ("350px") : ("auto")};
   grid-template-columns: ${props => props.view ? ('repeat(auto-fill, minmax(205px, 1fr))') : ('grid-template-columns: 1fr')};
 
-  @media(max-width: 670px){
+  @media(max-width: 768px){
     grid-column-gap: 5px;
     grid-row-gap: 20px;
-    grid-template-columns: ${props => props.view ? ('repeat(auto-fill, minmax(200px, 1fr))') : ('grid-template-columns: 1fr')};
+    grid-auto-rows: ${props => props.view ? ("280px") : ("auto")};
+    grid-template-columns: ${props => props.view ? ('repeat(auto-fill, minmax(165px, 1fr))') : ('grid-template-columns: 1fr')};
   }
 `;
 
@@ -95,11 +97,13 @@ const Item = styled.div`
   height: 100%;
   display: grid;
   grid-template-columns: ${props => props.view ? ('1fr') : ('1fr 1fr') };
-  /* grid-template-columns: 1fr; */
-  grid-template-rows: ${props => props.view ? ('40px 230px 20px 60px') : ('90px 20px 90px') };
+  grid-template-rows: ${props => props.view ? ('40px 230px 20px 60px') : ('90px 20px 90px') }; /* 350px height */
   border: 1px solid grey;
   box-shadow: 0px 4px 4px -3px rgba(0,0,0,0.6);
   transition: box-shadow 175ms ease, border 175ms ease;
+  @media(max-width: 768px){
+    grid-template-rows: ${props => props.view ? ('40px 210px 20px') : ('90px 20px 90px') }; /* 270px height */
+  }
   &:hover{
     transition: all 175ms ease;
     border: 1px solid black;
@@ -107,6 +111,7 @@ const Item = styled.div`
   }
 `;
 const ItemName = styled.h4`
+  /* font-size: .6em; */
   padding: 5px 0;
   text-align: center;
   color: black;
@@ -146,6 +151,9 @@ const ItemShortDesc = styled.div`
   color: grey;
   grid-column: ${props => props.view ? (null) : ("2 / 3")};
   grid-row: ${props => props.view ? (null) : ("3 / 4")};
+  @media(max-width: 768px){
+    ${props => props.view ? ("display: none") : (null)};
+  }
 `;
 
 const PopulateWithData = ({ misc: {searchView, pageLocation}, shopData, persistSearchView, setPageLocation }) => {

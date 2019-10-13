@@ -13,15 +13,18 @@ const WrapperStyled = styled.div`
   padding: 0 10px 50px 10px;
   /* background: white; */
   @media(max-width: 998px){ width: 85%; }
-  @media(max-width: 768px){ width: 95%; }
+  @media(max-width: 768px){ 
+    width: 100%; 
+    padding: 0 0px 50px 0px;
+  }
 `;
-const ChildOfWrapper = styled.div`
+const ChildOfWrapper = styled.div` /* non-absolute Wrapper */
   width: 70%;
   margin: 50px auto 50px;
-  padding: 0 10px 50px 10px;
+  padding: 0 0px 50px 0px;
   /* background: white; */
   @media(max-width: 998px){ width: 85%; }
-  @media(max-width: 768px){ width: 95%; }
+  @media(max-width: 768px){ width: 100%; }
 `;
 
 // Button
@@ -31,6 +34,14 @@ const ButtonStyled = styled.button`
   box-shadow: 0px 4px 4px -3px rgba(0,0,0,0.6); 
   background: lightgrey;
   transition: box-shadow 175ms ease, border 175ms ease;
+  font-size: 2.25em;
+  @media(max-width:768px){
+    background: black; color: white;
+    border: 1px solid white;
+    position: sticky; top: 50px;
+    padding: 0; width: 50px; height: 50px;
+    z-index: 5;
+  }
   &:hover{
     cursor: pointer;    
     transition: box-shadow 175ms ease, border 175ms ease;
@@ -137,7 +148,7 @@ const goBackOnePage = () => {
 // Elements
 export const Wrapper = (props) => {
   return (
-    <WrapperStyled>
+    <WrapperStyled {...props}>
       {props.children}
     </WrapperStyled>
   )
@@ -151,7 +162,7 @@ export const ChildWrapper = (props) => {
 }
 export const Button = (props) => {
   return(
-    <ButtonStyled>{props.children}</ButtonStyled>
+    <ButtonStyled {...props}>{props.children}</ButtonStyled>
   )
 }
 export const BackButton = (props) => {

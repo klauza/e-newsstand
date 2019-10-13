@@ -140,9 +140,9 @@ const Search = ({props, misc: {pageLocation}}) => {
 
   return (
     <Wrapper>
-
+      <Link to="/shop"><Button><i className="fa fa-angle-double-left"></i></Button></Link>
       <SearchHeader>
-        <Link to="/shop"><Button>Back to all categories</Button></Link>
+        
         <Category> Category: {params.cat !== "" ? (params.cat.toUpperCase()) : ("All")} </Category>
 
         <SearchForm onSubmit={handleSearch}>

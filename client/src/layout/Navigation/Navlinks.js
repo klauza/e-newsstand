@@ -29,7 +29,7 @@ const Navlinks = ({showIcon, hideMobileNav}) => {
           <NavLink exact activeClassName="active" to="/shop" className="link" onTouchEnd={hideMobileNav}>Shop</NavLink>
         </li>
         <li className="link-basket">
-          <NavLink exact activeClassName="active" to="/basket" className="link" onTouchEnd={hideMobileNav}>Basket <i className="fa fa-shopping-basket"></i></NavLink>
+          <NavLink exact activeClassName="active" to="/basket" className="link" onTouchEnd={hideMobileNav}>Basket</NavLink>
         </li>
         <li className="link-contact">
           <NavLink exact activeClassName="active" to="/contact#us" className="link" onTouchEnd={hideMobileNav}>Contact</NavLink>

@@ -13,7 +13,7 @@ import ItemDescription from './ItemDescription';
 import ItemBuySection from './ItemBuySection';
 
 const Keywords = styled.div`
-  margin: 10px 0; padding: 10px 0;
+  margin: 10px 5px; padding: 10px 0;
   height: auto;
   border-bottom: 1px solid maroon;
   a{
@@ -28,7 +28,7 @@ const Keywords = styled.div`
 const Header = styled.h2`
   font-family: 'Oswald', sans-serif;
   font-weight: 500;
-  margin: 5px 0 15px 0;
+  margin: 5px 5px 15px;
 `;
 const ContactDelivery = styled.a`
   text-align: center;
@@ -55,7 +55,7 @@ const Item = ({addToBasket, setAlert, props, basket: {items}}) => {
   //eslint-disable-next-line
   }, [])
 
-  console.log(theItem);
+  // console.log(theItem);
 
   const handleQuantity = (qty) => {
     setQuantity(qty);
@@ -90,7 +90,7 @@ const Item = ({addToBasket, setAlert, props, basket: {items}}) => {
     return (
       <Wrapper style={{fontFamily: "'Oswald', sans-serif"}}>
         <div>
-          <BackButton>Back</BackButton>
+          <BackButton><i className="fa fa-angle-left"></i></BackButton>
           <Keywords>keywords: {theItem.slugs.map((slug, id) => <span key={id}><Link to={`/shop/search?query=${slug}`}><span>{slug}</span></Link>,</span> )}</Keywords>
           <Header>{theItem.longName}</Header>
 

@@ -7,6 +7,9 @@ const Container = styled.div`
   align-items: center;
   font-weight: 700;
   margin: 25px 0;
+  @media(max-width:768px){
+    grid-template-columns: 1fr 1fr;
+  }
 `;
 const Price = styled.div`
   text-align: center;
@@ -58,7 +61,7 @@ const ItemBuySection = ({inStock, price, throwToBasket, handleQuantity}) => {
     <Container>
 
       <Price>
-        <p>Price: {price}</p>
+        <p>Price: £{price}</p>
         <p>Availability: {inStock > 0 ? (<InStock>In stock <i className="fa fa-check"></i></InStock>) : (<OutOfStock>Out of stock <i className="fa fa-times"></i></OutOfStock>)}</p>
       </Price>
 

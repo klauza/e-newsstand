@@ -10,6 +10,7 @@ const GridContainer = styled.div`
   justify-content: center;
   height: 100%;
   width: 100%;
+  margin-top: 5px;
 `;
 
 const ItemImageThumbails = ({imgs, handleClick, activeIndex}) => {

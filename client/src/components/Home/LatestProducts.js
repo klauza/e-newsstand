@@ -35,7 +35,7 @@ const LatestProducts = () => {
         <Product>
           <div>IMAGE</div>
           <p>Product desc</p>
-          <a href="#">product link</a>
+          <a href="!#">product link</a>
         </Product>
 
         <div>2</div>
