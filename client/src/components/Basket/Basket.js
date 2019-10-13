@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { updateBasket, deleteItem } from '../../actions/basketActions';
 import styled from 'styled-components';
 import { Wrapper } from '../../layout/StyledComponents';
+import { setAlert } from '../../actions/alertActions';
 
 const Container = styled.div`
   width: 70%;
@@ -97,7 +98,7 @@ const PayButton = styled.button`
 `;
 
 
-const Basket = ({updateBasket, deleteItem, basket: {items}}) => {
+const Basket = ({setAlert, updateBasket, deleteItem, basket: {items}}) => {
 
 
 
@@ -122,7 +123,9 @@ const Basket = ({updateBasket, deleteItem, basket: {items}}) => {
     return  Math.round(count * 100)/100
   }
 
-  
+  const paymentStart = () => {
+    setAlert("Payment feature coming soon", "info", 2000);
+  }
 
 
   return (
@@ -156,7 +159,7 @@ const Basket = ({updateBasket, deleteItem, basket: {items}}) => {
           </ItemsWrapper>
           {/* {total !== 0 ?  <div>Total to pay: {total}</div> : null } */}
           total to pay: £ {calculateTotalPrice()}
-          <PayButton>Pay</PayButton>
+          <PayButton onClick={paymentStart}>Pay</PayButton>
       </Container>
     </Wrapper>
   )
@@ -165,4 +168,4 @@ const Basket = ({updateBasket, deleteItem, basket: {items}}) => {
 const mapStateToProps = (state) => ({
   basket: state.basket
 })
-export default connect(mapStateToProps, {updateBasket, deleteItem})(Basket)
+export default connect(mapStateToProps, {setAlert, updateBasket, deleteItem})(Basket)
