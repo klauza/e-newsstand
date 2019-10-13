@@ -5,12 +5,13 @@ import Navlinks from './Navlinks';
 const MobileNavWrapper = styled.div`
   position: fixed;
   top: 0;
-  z-index: 2;
+  z-index: 98;
   display: flex; flex-direction: row;
   width: 100%;
   height: 50px;
   background: black;
   font-family: 'Oswald', sans-serif;
+  box-shadow: 0px 4px 4px -3px rgba(0,0,0,0.6); 
   @media(min-width: 769px){ display: none; }
 
   /* NON-HAMBURGER MENU */
@@ -65,13 +66,16 @@ const MenuBtn = styled.button`
 // HAMBURGER MENU
 const MobileLinks = styled.div`
   z-index: 99;
+  border-left: 1px solid black;
+
   background: grey;
-  width: calc(100% - 49px); height: 100vh;
-  position: fixed; top: 0; right: 0;
+  width: calc(100% - 50px); height: 100vh;
+  position: absolute; top: 0; right: 0;
   transition: transform 450ms, opacity 450ms;
   transform: translateX( ${ props => props.toggled ? ("0") : ("calc(100% + 15px)")} );
   opacity: ${ props => props.toggled ? ("1") : ("0")};
   display: flex; flex-direction: column;
+  box-shadow: -3px 0px 5px -2px rgba(0,0,0,0.75);
 
 
   .nav-links{
@@ -110,12 +114,12 @@ const MobileLinks = styled.div`
         font-size: 1.05rem;
         border: 0;
         font-family: 'Oswald', sans-serif;
-        &[type=text]{
-          
-        }
+        box-shadow: 0px 3px 6px 1px rgba(0,0,0,0.55);
+
+        /* &[type=text]{ } */
+
         &[type=submit]{ 
           color: red; 
-          box-shadow: 0px 3px 6px 1px rgba(0,0,0,0.55);
           &:hover{
             cursor: pointer;
           }
@@ -138,12 +142,22 @@ const MobileLinks = styled.div`
 const Mobile = () => {
 
   const [toggled, setToggled] = useState(false);
+  
 
   const toggleMobileNav = () => {
     setToggled(!toggled);
+
+    // freeze background, block scrolling
+    if(!toggled){ 
+      document.querySelector('body').style.overflowY = "hidden";
+    } else { 
+      document.querySelector('body').style.overflowY = "scroll";
+    } 
   }
+
   const hideMobileNav = () => {
     setToggled(false);
+    document.querySelector('body').style.overflowY = "scroll";
   }
 
   return (
