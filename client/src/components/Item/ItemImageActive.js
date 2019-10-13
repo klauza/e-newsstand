@@ -94,23 +94,37 @@ const RightArrow = styled.button`
     font-size: 1.85em;
   }
 `;
+const ImageCounter = styled.div`
+  width: 50%; text-align: center;
+  background: linear-gradient(
+    to right,
+  rgba(0,0,0,0) 0%,
+  rgba(0,0,0,0.35) 25%,
+  rgba(0,0,0,0.35) 75%,
+  rgba(0,0,0,0) 100% );
+  color: white;
+  z-index: 1;
+  position: absolute;
+  bottom: 10px; left: 50%; transform: translateX(-50%);
+`;
 
-const ItemImageActive = ({active, activeThumbnail, arrowClick}) => {
+const ItemImageActive = ({imgCount, active, activeThumbnail, arrowClick}) => {
   return (
     <Container>
       <LeftArrow onClick={()=>arrowClick("left")}><i className="fa fa-chevron-left"></i></LeftArrow>
       <RightArrow onClick={()=>arrowClick("right")}><i className="fa fa-chevron-right"></i></RightArrow>
      
-        <TransitionGroup className="active-img-animations">
-          <CSSTransition
-            key={active}
-            timeout={600}
-            classNames="img-anim"
-          >
-            <Image src={activeThumbnail} alt="active-image" />
-          </CSSTransition>
-        </TransitionGroup>
+      <TransitionGroup className="active-img-animations">
+        <CSSTransition
+          key={active}
+          timeout={600}
+          classNames="img-anim"
+        >
+          <Image src={activeThumbnail} alt="active-image" />
+        </CSSTransition>
+      </TransitionGroup>
         
+      <ImageCounter>{active+1} of {imgCount} </ImageCounter>
     </Container>
   )
 }
