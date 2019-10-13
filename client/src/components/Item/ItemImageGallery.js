@@ -48,7 +48,7 @@ const ItemImageGallery = ({images}) => {
 
     <GalleryContainer>
 
-      <ItemImageActive activeThumbnail={images[activeIndex]} arrowClick={arrowClick}/>
+      <ItemImageActive active={activeIndex} activeThumbnail={images[activeIndex]} arrowClick={arrowClick}/>
       <ItemImageThumbails activeIndex={activeIndex} imgs={images} handleClick={handleClick} />
 
     </GalleryContainer>
