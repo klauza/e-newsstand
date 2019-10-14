@@ -9,10 +9,13 @@ const Container = styled.div`
   background: #333;
   position: relative;
   overflow: hidden;
+
   .active-img-animations{
     .img-anim-enter {
-      z-index: 1;opacity: 0; transform: translateY(-25px) translateX(100px) rotate(15deg) scale(0.85);
-      
+      z-index: 1;opacity: 0; 
+      transform: ${props => props.animationDirection === "right" 
+        ? ("translateY(-25px) translateX(100px) rotate(15deg) scale(0.85)") 
+        : ("translateY(-25px) translateX(-100px) rotate(-15deg) scale(0.85)")};
       
     }
     .img-anim-enter.img-anim-enter-active {
@@ -27,7 +30,11 @@ const Container = styled.div`
     }
 
     .img-anim-exit.img-anim-exit-active {
-      transform: translateY(25px) translateX(-100px) rotate(-15deg) scale(0.85);
+
+      transform: ${props => props.animationDirection === "right" 
+        ? ("translateY(-25px) translateX(-100px) rotate(-15deg) scale(0.85)") 
+        : ("translateY(-25px) translateX(100px) rotate(15deg) scale(0.85)")};
+
       opacity: 0;
       transition: opacity 300ms linear, transform 300ms ease-in;   
         
@@ -106,9 +113,9 @@ const ImageCounter = styled.div`
   bottom: 10px; left: 50%; transform: translateX(-50%);
 `;
 
-const ItemImageActive = ({imgCount, active, activeThumbnail, arrowClick}) => {
+const ItemImageActive = ({animationDirection, imgCount, active, activeThumbnail, arrowClick}) => {
   return (
-    <Container>
+    <Container animationDirection={animationDirection}>
       <LeftArrow onClick={()=>arrowClick("left")}><i className="fa fa-chevron-left"></i></LeftArrow>
       <RightArrow onClick={()=>arrowClick("right")}><i className="fa fa-chevron-right"></i></RightArrow>
      

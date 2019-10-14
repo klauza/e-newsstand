@@ -20,35 +20,53 @@ const GalleryContainer = styled.div`
 const ItemImageGallery = ({images}) => {
 
   const [activeIndex, setActiveIndex] = useState(0);
+  const [animationDirection, setAnimationDirection] = useState('')
 
   const handleClick = (e) => {
-    const newActiveIndex = e.target.getAttribute('data-index');
+    let currentIndex = activeIndex;
+
+    let newActiveIndex = e.target.getAttribute('data-index');
     setActiveIndex(parseInt(newActiveIndex, 10));
+    
+    if(currentIndex < newActiveIndex){
+      // animate right
+      setAnimationDirection('right');
+    } else{
+      // animate left
+      setAnimationDirection('left');
+    }
   }
 
   const arrowClick = (direction) => {
+    let newActiveIndex;
+
     if(direction === "left"){
-      let newActiveIndex = activeIndex - 1;
+      newActiveIndex = activeIndex - 1;
       if(newActiveIndex === -1){
         newActiveIndex = images.length-1;
       }
       setActiveIndex(newActiveIndex);
+      setAnimationDirection('left'); // animate left
     }
 
     if(direction === "right"){
-      let newActiveIndex = activeIndex + 1;
+      newActiveIndex = activeIndex + 1;
       if(newActiveIndex === images.length){
         newActiveIndex = 0;
       }
       setActiveIndex(newActiveIndex);
+      setAnimationDirection('right'); // animate right
     }
+
+
   }
+
 
   return (
 
     <GalleryContainer>
 
-      <ItemImageActive imgCount={images.length} active={activeIndex} activeThumbnail={images[activeIndex]} arrowClick={arrowClick}/>
+      <ItemImageActive animationDirection={animationDirection} imgCount={images.length} active={activeIndex} activeThumbnail={images[activeIndex]} arrowClick={arrowClick}/>
       <ItemImageThumbails activeIndex={activeIndex} imgs={images} handleClick={handleClick} />
 
     </GalleryContainer>
