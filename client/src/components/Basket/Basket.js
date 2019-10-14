@@ -20,29 +20,31 @@ const Container = styled.div`
 const ItemsWrapper = styled.div`
   display: grid;
   grid-auto-rows: 200px;
-  grid-row-gap: 5px;
-  margin-top: 15px;
+  grid-row-gap: 35px;
+  margin: 22px 0;
 `;
 
 // ITEM
 const Item = styled.div`
   position: relative;
-  border: 1px solid black; border-radius: 2px;
-  display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 200px;
+  border-top: 1px solid black; 
+  border-bottom: 1px solid black; 
+  display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 198px;
 `;
 const ItemImage = styled.div`
   width: auto; height: 100%;
-  padding: 15px;
+  padding: 5px;
   @media(max-width: 768px){ padding: 5px; }
   img{ width: 100%; height: 100%; object-fit: cover; }
 `;
 
 const ItemDesc = styled.div`
   border-left: 1px solid grey;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 15px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  align-items: center;
+  padding: 5px;
 
   button{
     margin-left: 3px;
@@ -67,14 +69,19 @@ const ItemDesc = styled.div`
 
 const DeleteItem = styled.button`
   position: absolute;
-  top: 50%; right: 5px; 
-  transform: translateY(-50%);
+  top: 2%; right: 5px; 
   background: red;
   width: 30px;
   height: 30px;
   box-shadow: 0 0px 3px -1px black;
   color: white;
   border: 1px solid white;
+  @media(max-width: 768px){
+    width: 50px;
+    top: unset; bottom: -15px;
+    right: 50%; transform: translateX(50%);
+    box-shadow: 0 0px 3px 0px black;
+  }
   &:hover{
     cursor: pointer;
     box-shadow: 0 0px 4px 0px black;
@@ -147,7 +154,7 @@ const Basket = ({setAlert, updateBasket, deleteItem, basket: {items}}) => {
                         <button disabled={item.inStock <= item.quantity} onClick={()=>{ updtItem({...item, quantity: item.quantity+1})  }}><i className="fa fa-plus"></i></button>
                         <button disabled={item.quantity === 1} onClick={()=>{ updtItem({...item, quantity: item.quantity-1})  }}><i className="fa fa-minus"></i></button> 
                       </div>
-                      <div>£ {calculatePrice(item.price, item.quantity)} <span style={{display: "block"}}>{item.quantity > 1 ? (`(£ ${item.price} for one)`) : (null)}</span></div>
+                      <div>£ {calculatePrice(item.price, item.quantity)} <span style={{display: "block", fontSize: "0.65em"}}>{item.quantity > 1 ? (`(£ ${item.price} for one)`) : (null)}</span></div>
                     </ItemDesc>
                  
                     <DeleteItem onClick={()=>delItem(item.id)}> X </DeleteItem>
