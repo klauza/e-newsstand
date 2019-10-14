@@ -52,8 +52,9 @@ const ItemBuySection = ({inStock, price, throwToBasket, handleQuantity}) => {
  
   const qtyOptions = [];
 
-  for(let i=1; i<=10; i++){
+  for(let i=1; (i <= inStock && i <= 10); i++){
     qtyOptions.push( <option key={i} value={i}>{i}</option> )
+    
   }
 
 
