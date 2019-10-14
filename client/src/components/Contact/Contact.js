@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { Wrapper } from '../../layout/StyledComponents';
 import ContactNavigation from './ContactNavigation';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
@@ -95,6 +96,16 @@ const Contact = (props) => {
 
     </Wrapper>
   )
+}
+
+Contact.propTypes = {
+  page: PropTypes.string,
+  active: PropTypes.number
+}
+ContactNavigation.propTypes = {
+  page: PropTypes.string,
+  active: PropTypes.number,
+  changePage: PropTypes.func
 }
 
 export default Contact
