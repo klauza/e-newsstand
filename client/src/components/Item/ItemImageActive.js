@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import styled from 'styled-components';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
@@ -116,9 +116,14 @@ const ImageCounter = styled.div`
 const ItemImageActive = ({animationDirection, imgCount, active, activeThumbnail, arrowClick}) => {
   return (
     <Container animationDirection={animationDirection}>
-      <LeftArrow onClick={()=>arrowClick("left")}><i className="fa fa-chevron-left"></i></LeftArrow>
-      <RightArrow onClick={()=>arrowClick("right")}><i className="fa fa-chevron-right"></i></RightArrow>
-     
+      {imgCount === 1 ? (null) 
+      : (
+        <Fragment>
+          <LeftArrow onClick={()=>arrowClick("left")}><i className="fa fa-chevron-left"></i></LeftArrow>
+          <RightArrow onClick={()=>arrowClick("right")}><i className="fa fa-chevron-right"></i></RightArrow>
+        </Fragment>
+      )}
+
       <TransitionGroup className="active-img-animations">
         <CSSTransition
           key={active}
