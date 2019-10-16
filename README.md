@@ -3,12 +3,19 @@
 E-newsstand is an e-commerce platform and is being created for small to medium sized businesses.
 
 Project features
-- basket on items 
-- query string search
-- payment system
-- admin dashboard, includes actions like:
-  - changing layout
-  - adding items to the shop
+- mobile friendly
+- Home 
+  - carousel with featured items
+  - section for 3 newest products 
+- Basket
+  - adding items to basket
+  - payment system
+- Shop
+  - query string search
+- admin dashboard
+  - can change UI layout
+  - can add items to the shop
+  - can change featured items
 
 Project is still in development mode, so some features might not work yet
 <br/>
@@ -28,6 +35,8 @@ Project is still in development mode, so some features might not work yet
 | **styled-components** | 4.3.2  |
 | **react-transition-group** | 4.3.0  |
 | **history** | 4.10.1  |
+| **@svgr/cli** | 4.3.3 |
+
 
 <br/>
 
