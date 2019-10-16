@@ -6,105 +6,94 @@ import { useRect } from './UseRect';
 const FeaturedItemsMobileBtn = styled.button`
   display: none;
   @media(max-width: 768px){
+    z-index: 2;
     display: block;
-    font-family: 'Oswald', sans-serif;
+    clip-path: polygon(0 0, 80% 0, 100% 100%, 0% 100%);
     width: 50%; height: 50px;
+    position: fixed; bottom: 0;
+    padding-right: 35px;
+
+    font-family: 'Oswald', sans-serif;
     text-align: right;
     color: black;
-    padding-right: 35px;
-    clip-path: polygon(0 0, 80% 0, 100% 100%, 0% 100%);
-    position: fixed;
-    bottom: 0;
-    z-index: 2;
     border: 1px solid black;
     background: white;
     outline: none;
-    &:active{
-      background: lightgrey;
-    }
+    &:active{ background: lightgrey; }
   }
-`;
-
-const Header = styled.h2`
-  text-align: center;
-  font-family: 'Oswald', sans-serif;
-  margin: 50px 0;
 `;
 
 const FeaturedWrapper = styled.div`
   display: flex; flex-direction: column;
   margin: 100px 0 0px;
 `;
+const Header = styled.h2`
+  margin: 50px 0;
+  text-align: center;
+  font-family: 'Oswald', sans-serif;
+`;
 
 const FeaturedBody = styled.div`
-  display: grid;
-  grid-template-columns: 50px 1fr 50px; /* button body button */
-  grid-auto-rows: 250px;
   overflow: hidden;
-  padding-bottom: 5px;
+  display: grid;
+  grid-template-columns: 50px 1fr 50px; /* button body button = screen view only*/
+  grid-auto-rows: 250px;
   justify-content: center;
+  padding-bottom: 5px;
 
   @media(max-width: 768px){
-    grid-template-columns: 1fr; /* no buttons, just body. Scrolling with finger */
     overflow-x: scroll;
-      transition: transform 175ms ease;
+    grid-template-columns: 1fr; /* no buttons, just body = mobile view */
     &.moveActive{
-      transition: transform 175ms ease;
       transform: scale(0.95);
+      transition: transform 175ms ease;
     }
   }
 `;
 const FeaturedArrow = styled.div`
-  transition: opacity 125ms ease;
-  opacity: ${props => props.visible ? ("0") : ("1")};
+  overflow: hidden;
   z-index: 2;
+  opacity: ${props => props.visible ? ("0") : ("1")};
   border: 1px solid black; border-radius: 2px;
   box-shadow: 0px 3px 4px -2px rgba(0,0,0,0.75);
-  overflow: hidden;
+  transition: opacity 125ms ease;
+
+  @media(max-width: 768px){ 
+    display: none; 
+  }
+  
   button{
-    border: 0;
     display: grid; align-items: center;
     width: 100%; height: 100%;
+    border: 0;
     background: white;
     transition: all 250ms ease;
     i{
-      transition: transform 250ms ease;
-      font-size: 3.25em;
       transform: translateX(0px);
+      font-size: 3.25em;
+      transition: transform 250ms ease;
     }
-    &:hover{
-      cursor: pointer;
-    }
+    &:hover{ cursor: pointer; }
 
     &[disabled]{
       cursor: default;
       i{
-        transition: all 250ms ease;
         transform: translateY(50px);
+        transition: all 250ms ease;
       }
-
     }
-  }
-
-
-
-  @media(max-width: 768px){
-    display: none;
   }
 `;
 
 // Content
 const FeaturedProducts = styled.div`
   display: grid; 
-  /* grid-template-columns: repeat(5, minmax(135px, 200px));  */
   justify-content: center;
   transition: transform 200ms ease;
   position: relative;
-  /* transform: translateX(-800px); */
+  /* using transformX on this component */
 
   @media(max-width: 768px){
-    /* display: grid; */
-    /* grid-template-columns: repeat(${props => props.imgQty}, minmax(135px, 200px)); */
     display: flex;
     flex-direction: row;
     justify-content: left;
@@ -112,46 +101,34 @@ const FeaturedProducts = styled.div`
 `;
 const Card = styled.div`
   width: calc( ${props => props.featureWidth+'px'} - 20px ); 
-  margin-left: 10px;
-  /* max-width: 250px; */
-  
-  height: 100%;
   position: absolute; top: 0; left: 0;
-
+  margin-left: 10px;
+  height: 100%;
+  
   display: grid; grid-template-columns: 1fr; 
-
   grid-template-rows: 1fr 1fr;
   align-items: center;
-  /* border: 1px solid black; */
-  
 
-  @media(max-width: 998px){
- 
-  }
   @media(max-width: 768px){
     border: 0;
     padding: 0 2.5px;
   }
   img{
-    padding: 5px;
     width: 100%; height: 100%; object-fit: cover;
+    padding: 5px;
     box-shadow: 0px 3px 4px -2px rgba(0,0,0,0.75);
   }
 `;
 const CardItemDesc = styled.div`
-  height: 100%;
   display: grid; grid-template-rows: 1fr 1fr 1fr;
   align-items: center;
-  /* border: 1px solid black; */
+  height: 100%;
 `;
 const CardItemName = styled.div`
   text-align: center;
-  /* border: 1px solid yellow; */
 `;
 const CardItemValue = styled.div`
   text-align: center;
-  /* border: 1px solid red; */
-
 `;
 
 
@@ -210,7 +187,7 @@ const HomeFeaturedProducts = () => {
   // need photos to display (6? => 2 x 3)
   // fetch only 6, no more
 
-  // moving in mobile screen
+  // mobile screen func
   const movingBody = () => {
     theBody.current.classList.add('moveActive');
   }
@@ -218,6 +195,7 @@ const HomeFeaturedProducts = () => {
     theBody.current.classList.remove('moveActive');
   }
 
+  // big screen func
   const moveCarousel = (direction) => {
     if(direction === "right"){
       setArrowPos(1);
@@ -227,13 +205,7 @@ const HomeFeaturedProducts = () => {
       setArrowPos(0);
       featuredContainerDiv.current.style.transform = 'translateX(0)';
     } 
-
-    
   }
-
-
-  // console.log(useRect(featuredContainerDiv).width);
-  // console.log(featureWidth);
 
 
   return (
@@ -243,7 +215,7 @@ const HomeFeaturedProducts = () => {
       <ChildWrapper>
         <FeaturedWrapper>
           <Header>FEATURED PRODUCTS</Header>
-          
+
           <FeaturedBody ref={theBody} onTouchStart={movingBody} onTouchEnd={notMovingBody}>
             <FeaturedArrow onClick={()=>moveCarousel("left")} visible={arrowPos===0}><button disabled={arrowPos===0} ><i className="fa fa-caret-left"></i></button></FeaturedArrow>
 
@@ -265,11 +237,9 @@ const HomeFeaturedProducts = () => {
             <FeaturedArrow onClick={()=>moveCarousel("right")} visible={arrowPos===1}><button disabled={arrowPos===1}><i className="fa fa-caret-right"></i></button></FeaturedArrow>
           </FeaturedBody>
 
-
         </FeaturedWrapper>
       </ChildWrapper>
     </Fragment>
   )
 }
-
 export default HomeFeaturedProducts
