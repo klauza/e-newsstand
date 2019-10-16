@@ -3,8 +3,7 @@ import styled from 'styled-components';
 import Navlinks from './Navlinks';
 
 const MobileNavWrapper = styled.div`
-  position: fixed;
-  top: 0;
+  position: fixed; top: 0;
   z-index: 98;
   display: flex; flex-direction: row;
   width: 100%;
@@ -15,45 +14,41 @@ const MobileNavWrapper = styled.div`
   @media(min-width: 769px){ display: none; }
 
   /* NON-HAMBURGER MENU */
-  &>li{ display: none; }
+  /* HAMBURGER - HOME | SHOP - BASKET */
+  &>li{ display: none; } /* hide all links, display only the above ones */
+  &>.link-home, 
+  &>.link-shop,
+  &>.link-basket{
+    display: block;
+    border: 1px solid white;
+
+    /* default */
+    a svg.active-svg{ display: none; }
+    a svg.inactive-svg{ display: block; }
+
+    /* active */
+    a.active svg.active-svg{ display: block; }
+    a.active svg.inactive-svg{ display: none; }
+  }
 
 
   /* HOME */
   &>.link-home{
     width: 50px; height: 50px;
-    display: block;
-
     a{
-      border: 1px solid white;
+      display: grid; 
+      align-items: center; justify-items: center;
       width: 50px; height: 50px;
-      display: grid; align-items: center; justify-items: center;
       svg{
         width: 30px; height: 30px;
         fill: white;
-        &.active-svg{
-          display: none;
-        }
-        &.inactive-svg{
-          display: block;
-        }
-      }
-      &.active{
-        svg.active-svg{
-          display: block;
-        }
-        svg.inactive-svg{
-          display: none;
-        }
+        margin-bottom: 5px; margin-right: 2px;
       }
     }
- 
   }
 
   &>.link-shop, &>.link-basket{
-    display: block;
-    border: 1px solid white;
     width: calc((100vw - 100px) / 2);
-
     a{ 
       display: flex; flex-direction: row;
       align-items: center; justify-content: center;
@@ -67,25 +62,14 @@ const MobileNavWrapper = styled.div`
       svg{
         width: 22.5px; height: 22.5px;
         fill: white;
-        /* default */
-        &.active-svg{ display: none; } 
-        &.inactive-svg{  display: block; } 
-      }
-
-      &.active{
-        /* active */
-        svg.active-svg{ display: block; } 
-        svg.inactive-svg{ display: none; }
       }
     }
-
 
     &:active{
       background: grey;
     }
   }
 `;
-
 const MenuBtn = styled.button`
   height: 100%;
   width: 50px;
@@ -103,20 +87,21 @@ const MenuBtn = styled.button`
   }
 `;
 
+
 // HAMBURGER MENU
 const MobileLinks = styled.div`
   z-index: 99;
-  border-left: 1px solid black;
-
-  background: grey;
-  width: calc(100% - 50px); height: 100vh;
   position: absolute; top: 0; right: 0;
+  display: flex; flex-direction: column;
+  width: calc(100% - 50px); height: 100vh;
+
   transition: transform 450ms, opacity 450ms;
   transform: translateX( ${ props => props.toggled ? ("0") : ("calc(100% + 15px)")} );
   opacity: ${ props => props.toggled ? ("1") : ("0")};
-  display: flex; flex-direction: column;
-  box-shadow: -3px 0px 5px -2px rgba(0,0,0,0.75);
 
+  background: grey;
+  box-shadow: -3px 0px 5px -2px rgba(0,0,0,0.75);
+  border-left: 1px solid black;
 
   .nav-links{
     display: flex;
@@ -125,37 +110,26 @@ const MobileLinks = styled.div`
     li{
       a{
         border-bottom: 1px dashed lightgrey;
-        /* text-align: center; */
         width: 100%; 
         line-height: 50px;
         display: grid; grid-template-columns: 50px auto;
         align-items: center; justify-items: center;
         
         .link-text{
-          margin-left: -25px;
+          margin-left: -37.5px;
         }
 
         svg{
           width: 25px; height: 25px;
           fill: white;
-          &.active-svg{
-            display: none;
-          }
-          &.inactive-svg{
-            display: block;
-          }
+          &.active-svg{ display: none; }
+          &.inactive-svg{ display: block; }
         }
 
         &.active{
-         
-          svg.active-svg{
-            display: block;
-          }
-          svg.inactive-svg{
-            display: none;
-          }
+          svg.active-svg{ display: block; }
+          svg.inactive-svg{ display: none; }
         }
-
 
         &:hover{
           background: lightgrey;
@@ -164,9 +138,9 @@ const MobileLinks = styled.div`
     }
 
     .link-logo{
-      padding: 25px 0;
       display: flex; flex-direction: row;
       justify-content: center; align-items: center;
+      padding: 25px 0;
       outline: 1px solid white; outline-offset: -15px;
       div{
         width: 50px; height: 50px;
@@ -185,16 +159,11 @@ const MobileLinks = styled.div`
         font-family: 'Oswald', sans-serif;
         box-shadow: 0px 3px 6px 1px rgba(0,0,0,0.55);
 
-        /* &[type=text]{ } */
-
         &[type=submit]{ 
           color: red; 
-          &:hover{
-            cursor: pointer;
-          }
+          &:hover{ cursor: pointer; }
         }
       }
-      
     }
   }
   .nav-links li{
@@ -210,13 +179,13 @@ const MobileLinks = styled.div`
 
 const Mobile = () => {
 
-  const [toggled, setToggled] = useState(false);
+  const [toggled, setToggled] = useState(true);
   
 
   const toggleMobileNav = () => {
     setToggled(!toggled);
 
-    // freeze background, block scrolling
+    // block scrolling
     if(!toggled){ 
       document.querySelector('body').style.overflowY = "hidden";
     } else { 
@@ -233,7 +202,7 @@ const Mobile = () => {
     <MobileNavWrapper>
 
       <MenuBtn onClick={toggleMobileNav}>{toggled ? (<i className="fa fa-times"></i>) : (<i className="fa fa-bars"></i>)}</MenuBtn> 
-      <Navlinks mobileNotToggled={true} /> { /* showing only home, shop and basket */ }
+      <Navlinks mobileNotToggled={true} /> { /* showing only menuBtn, home, shop and basket */ }
 
       <MobileLinks toggled={toggled}>
         <ul className="nav-links">
