@@ -44,9 +44,8 @@ const ButtonStyled = styled.button`
   }
   &:hover{
     cursor: pointer;    
-    transition: box-shadow 175ms ease, border 175ms ease;
-    border: 1px solid black;
-    box-shadow: 0px 4px 5px -2px rgba(0,0,0,0.7);
+    /* transition: box-shadow 175ms ease, border 175ms ease;
+    box-shadow: 0px 4px 5px -2px rgba(0,0,0,0.7); */
   }
   &:active{
     background: grey;

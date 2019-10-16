@@ -7,18 +7,30 @@ const ContactNav = styled.div`
   grid-template-rows: 50px;
 
   div{
-    border: 1px solid black;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
     text-align: center;
     line-height: 50px;
+    margin: 5px 0;
+    background: lightgrey;
+    box-shadow: inset 0px -2px 5px 0px rgba(0,0,0,0.75);
   
     &:hover{
       cursor: pointer;
       transition: background-color 150ms ease;
-      background: green;
+      background: lightgrey;
     }
     &.active{
+      box-shadow: inset 0px 0px 0px 0px rgba(0,0,0,0.0);
+      background: white;
       transition: background-color 150ms ease;
-      background: green;
+      /* background: green; */
+      border-bottom: 1px solid transparent;
+      border-top: 1px solid black;
+      border-left: 1px solid black;
+      border-right: 1px solid black;
     }
   }
 `;

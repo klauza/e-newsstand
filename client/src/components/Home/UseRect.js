@@ -40,6 +40,7 @@ export const useRect = (ref) => {
         window.removeEventListener('resize', handleResize)
       }
     }
+    //eslint-disable-next-line
   }, [ref.current])
 
   return rect

@@ -154,7 +154,7 @@ const Basket = ({setAlert, updateBasket, deleteItem, basket: {items}}) => {
                         <button disabled={item.inStock <= item.quantity} onClick={()=>{ updtItem({...item, quantity: item.quantity+1})  }}><i className="fa fa-plus"></i></button>
                         <button disabled={item.quantity === 1} onClick={()=>{ updtItem({...item, quantity: item.quantity-1})  }}><i className="fa fa-minus"></i></button> 
                       </div>
-                      <div>£ {calculatePrice(item.price, item.quantity)} <span style={{display: "block", fontSize: "0.65em"}}>{item.quantity > 1 ? (`(£ ${item.price} for one)`) : (null)}</span></div>
+                      <div>£ {calculatePrice(item.price, item.quantity)} <span style={{display: "block", fontSize: "0.65em"}}>{item.quantity > 1 ? (`(£ ${item.price} for each)`) : (null)}</span></div>
                     </ItemDesc>
                  
                     <DeleteItem onClick={()=>delItem(item.id)}> X </DeleteItem>
