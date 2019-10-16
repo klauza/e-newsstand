@@ -22,6 +22,7 @@ const FeaturedBody = styled.div`
   overflow: hidden;
   padding-bottom: 5px;
   justify-content: center;
+
   @media(max-width: 768px){
     grid-template-columns: 1fr; /* no buttons, just body. Scrolling with finger */
     overflow-x: scroll;
@@ -33,31 +34,38 @@ const FeaturedBody = styled.div`
   }
 `;
 const FeaturedArrow = styled.div`
+  transition: opacity 125ms ease;
+  opacity: ${props => props.visible ? ("0") : ("1")};
   z-index: 2;
-  border: 1px solid black;
+  border: 1px solid black; border-radius: 2px;
   box-shadow: 0px 3px 4px -2px rgba(0,0,0,0.75);
+  overflow: hidden;
   button{
     border: 0;
     display: grid; align-items: center;
     width: 100%; height: 100%;
     background: white;
-    transition: background-color 250ms ease;
+    transition: all 250ms ease;
     i{
-      font-size: 2.25em;
+      transition: transform 250ms ease;
+      font-size: 3.25em;
+      transform: translateX(0px);
     }
     &:hover{
       cursor: pointer;
     }
+
     &[disabled]{
-      transition: background-color 250ms ease;
       cursor: default;
-      background: grey;
       i{
-        transition: opacity 250ms ease;
-        opacity: none;
+        transition: all 250ms ease;
+        transform: translateY(50px);
       }
+
     }
   }
+
+
 
   @media(max-width: 768px){
     display: none;
@@ -175,12 +183,6 @@ const HomeFeaturedProducts = () => {
       name: "name_6",
       price: 43,
       inStock: 15
-    },
-    {
-      img: "https://cdn11.bigcommerce.com/s-xa92dr7qw8/images/stencil/1280x1280/products/608/4375/C6-kraft-envelope__63921.1561109293.jpg?c=2&imbypass=on",
-      name: "name_7",
-      price: 55,
-      inStock: 55
     }
   ]
 
@@ -219,7 +221,7 @@ const HomeFeaturedProducts = () => {
         <FeaturedTitle>Featured products</FeaturedTitle>
 
         <FeaturedBody ref={theBody} onTouchStart={movingBody} onTouchEnd={notMovingBody}>
-          <FeaturedArrow onClick={()=>moveCarousel("left")}><button disabled={arrowPos===0}><i className="fa fa-caret-left"></i></button></FeaturedArrow>
+          <FeaturedArrow onClick={()=>moveCarousel("left")} visible={arrowPos===0}><button disabled={arrowPos===0} ><i className="fa fa-caret-left"></i></button></FeaturedArrow>
 
           <FeaturedProducts ref={featuredContainerDiv} imgQty={imgQty}>
             
@@ -236,7 +238,7 @@ const HomeFeaturedProducts = () => {
             
           </FeaturedProducts>
 
-          <FeaturedArrow onClick={()=>moveCarousel("right")}><button disabled={arrowPos===1}><i className="fa fa-caret-right"></i></button></FeaturedArrow>
+          <FeaturedArrow onClick={()=>moveCarousel("right")} visible={arrowPos===1}><button disabled={arrowPos===1}><i className="fa fa-caret-right"></i></button></FeaturedArrow>
         </FeaturedBody>
 
 
