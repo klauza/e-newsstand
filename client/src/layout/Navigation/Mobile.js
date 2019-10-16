@@ -16,36 +16,76 @@ const MobileNavWrapper = styled.div`
 
   /* NON-HAMBURGER MENU */
   &>li{ display: none; }
-  &>.link-shop, &>.link-basket, &>.link-home{
-    display: block;
-  }
+
+
+  /* HOME */
   &>.link-home{
-    i{
-      width: 100%;
-      line-height: 50px; text-align: center;
-      width: 50px;
-      height: 100%;
-      background: black;
-      border: 1px solid white; outline: none;
-      color: white;
-      font-size: 2em;
+    width: 50px; height: 50px;
+    display: block;
+
+    a{
+      border: 1px solid white;
+      width: 50px; height: 50px;
+      display: grid; align-items: center; justify-items: center;
+      svg{
+        width: 30px; height: 30px;
+        fill: white;
+        &.active-svg{
+          display: none;
+        }
+        &.inactive-svg{
+          display: block;
+        }
+      }
+      &.active{
+        svg.active-svg{
+          display: block;
+        }
+        svg.inactive-svg{
+          display: none;
+        }
+      }
     }
-    &:active i{
-      background: grey;
-    }
+ 
   }
+
   &>.link-shop, &>.link-basket{
-    
-    
-    a{ text-align: center; line-height: 50px; color: white; text-decoration: none; display: block; width: 100%; height: 100%; }
+    display: block;
     border: 1px solid white;
     width: calc((100vw - 100px) / 2);
+
+    a{ 
+      display: flex; flex-direction: row;
+      align-items: center; justify-content: center;
+      text-decoration: none;
+
+      line-height: 50px; 
+      color: white; 
+      .link-text{
+        margin-left: 10px;
+      }
+      svg{
+        width: 22.5px; height: 22.5px;
+        fill: white;
+        /* default */
+        &.active-svg{ display: none; } 
+        &.inactive-svg{  display: block; } 
+      }
+
+      &.active{
+        /* active */
+        svg.active-svg{ display: block; } 
+        svg.inactive-svg{ display: none; }
+      }
+    }
+
+
     &:active{
       background: grey;
     }
   }
-
 `;
+
 const MenuBtn = styled.button`
   height: 100%;
   width: 50px;
@@ -85,9 +125,38 @@ const MobileLinks = styled.div`
     li{
       a{
         border-bottom: 1px dashed lightgrey;
-        text-align: center;
-        width: 100%; line-height: 50px;
-        display: block;
+        /* text-align: center; */
+        width: 100%; 
+        line-height: 50px;
+        display: grid; grid-template-columns: 50px auto;
+        align-items: center; justify-items: center;
+        
+        .link-text{
+          margin-left: -25px;
+        }
+
+        svg{
+          width: 25px; height: 25px;
+          fill: white;
+          &.active-svg{
+            display: none;
+          }
+          &.inactive-svg{
+            display: block;
+          }
+        }
+
+        &.active{
+         
+          svg.active-svg{
+            display: block;
+          }
+          svg.inactive-svg{
+            display: none;
+          }
+        }
+
+
         &:hover{
           background: lightgrey;
         }
@@ -164,11 +233,11 @@ const Mobile = () => {
     <MobileNavWrapper>
 
       <MenuBtn onClick={toggleMobileNav}>{toggled ? (<i className="fa fa-times"></i>) : (<i className="fa fa-bars"></i>)}</MenuBtn> 
-      <Navlinks showIcon={true} /> { /* showing only home, shop and basket */ }
+      <Navlinks mobileNotToggled={true} /> { /* showing only home, shop and basket */ }
 
       <MobileLinks toggled={toggled}>
         <ul className="nav-links">
-          <Navlinks hideMobileNav={hideMobileNav} />  { /* showing all links */ }
+          <Navlinks mobileToggled={true} hideMobileNav={hideMobileNav} />  { /* showing all links */ }
         </ul>
       </MobileLinks>
 
