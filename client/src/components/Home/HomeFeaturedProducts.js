@@ -1,20 +1,41 @@
-import React, {useState, useRef} from 'react';
+import React, { Fragment, useState, useRef } from 'react';
 import styled from 'styled-components';
 import { ChildWrapper } from '../../layout/StyledComponents';
 import { useRect } from './UseRect';
+
+const FeaturedItemsMobileBtn = styled.button`
+  display: none;
+  @media(max-width: 768px){
+    display: block;
+    font-family: 'Oswald', sans-serif;
+    width: 50%; height: 50px;
+    text-align: right;
+    color: black;
+    padding-right: 35px;
+    clip-path: polygon(0 0, 80% 0, 100% 100%, 0% 100%);
+    position: fixed;
+    bottom: 0;
+    z-index: 2;
+    border: 1px solid black;
+    background: white;
+    outline: none;
+    &:active{
+      background: lightgrey;
+    }
+  }
+`;
+
+const Header = styled.h2`
+  text-align: center;
+  font-family: 'Oswald', sans-serif;
+  margin: 50px 0;
+`;
 
 const FeaturedWrapper = styled.div`
   display: flex; flex-direction: column;
   margin: 100px 0 0px;
 `;
 
-const FeaturedTitle = styled.h3`
-  font-family: 'Oswald', sans-serif;
-  width: 100%;
-  text-align: center;
-  color: black;
-  margin: 25px 0;
-`;
 const FeaturedBody = styled.div`
   display: grid;
   grid-template-columns: 50px 1fr 50px; /* button body button */
@@ -216,34 +237,38 @@ const HomeFeaturedProducts = () => {
 
 
   return (
-    <ChildWrapper>
-      <FeaturedWrapper>
-        <FeaturedTitle>Featured products</FeaturedTitle>
+    <Fragment>
+      <FeaturedItemsMobileBtn>See featured items</FeaturedItemsMobileBtn>
 
-        <FeaturedBody ref={theBody} onTouchStart={movingBody} onTouchEnd={notMovingBody}>
-          <FeaturedArrow onClick={()=>moveCarousel("left")} visible={arrowPos===0}><button disabled={arrowPos===0} ><i className="fa fa-caret-left"></i></button></FeaturedArrow>
+      <ChildWrapper>
+        <FeaturedWrapper>
+          <Header>FEATURED PRODUCTS</Header>
+          
+          <FeaturedBody ref={theBody} onTouchStart={movingBody} onTouchEnd={notMovingBody}>
+            <FeaturedArrow onClick={()=>moveCarousel("left")} visible={arrowPos===0}><button disabled={arrowPos===0} ><i className="fa fa-caret-left"></i></button></FeaturedArrow>
 
-          <FeaturedProducts ref={featuredContainerDiv} imgQty={imgQty}>
-            
-            {cards.map((card, id)=> 
-            <Card key={id} featureWidth={featureWidth} style={{transform: `translateX(${featureWidth*id + 'px'})`}}>
-              <img src={card.img} alt=""/>
-              <CardItemDesc>
-                <CardItemName>{card.name}</CardItemName>
-                <CardItemValue>£{card.price}</CardItemValue>
-                <CardItemValue>only {card.inStock} left</CardItemValue>
-              </CardItemDesc>
-            </Card>
-             )}
-            
-          </FeaturedProducts>
+            <FeaturedProducts ref={featuredContainerDiv} imgQty={imgQty}>
+              
+              {cards.map((card, id)=> 
+              <Card key={id} featureWidth={featureWidth} style={{transform: `translateX(${featureWidth*id + 'px'})`}}>
+                <img src={card.img} alt=""/>
+                <CardItemDesc>
+                  <CardItemName>{card.name}</CardItemName>
+                  <CardItemValue>£{card.price}</CardItemValue>
+                  <CardItemValue>only {card.inStock} left</CardItemValue>
+                </CardItemDesc>
+              </Card>
+              )}
+              
+            </FeaturedProducts>
 
-          <FeaturedArrow onClick={()=>moveCarousel("right")} visible={arrowPos===1}><button disabled={arrowPos===1}><i className="fa fa-caret-right"></i></button></FeaturedArrow>
-        </FeaturedBody>
+            <FeaturedArrow onClick={()=>moveCarousel("right")} visible={arrowPos===1}><button disabled={arrowPos===1}><i className="fa fa-caret-right"></i></button></FeaturedArrow>
+          </FeaturedBody>
 
 
-      </FeaturedWrapper>
-    </ChildWrapper>
+        </FeaturedWrapper>
+      </ChildWrapper>
+    </Fragment>
   )
 }
 

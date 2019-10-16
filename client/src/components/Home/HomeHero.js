@@ -1,8 +1,34 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { HeroImage } from '../../media/index';
 
+const ButtonMobileMiddle = styled.button`
+  display: none;
+  @media(max-width: 768px){
+    display: block;
+    position: fixed;
+    bottom: 0px; 
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20%;
+    height: 50px;
+    z-index: 3;
+    background: black;
+    clip-path: polygon(50% 100%, 0 0, 100% 0);
+    border: 0;
+    border-top: 1px solid black;
+    outline: none;
+    &:active{
+      background: grey;
+    }
+    i{
+      margin-bottom: 10px;
+      color: white;
+      font-size: 2.5em;
+    }
+  }
+`;
 const HeroWrapper = styled.div`
   position: relative;
   width: 100%; height: calc(100vh - 60px);
@@ -54,13 +80,16 @@ const HeroWrapper = styled.div`
 `;
 const HomeHero = () => {
   return (
-    <HeroWrapper>
-      <img src={HeroImage} alt=""/>
-      <div>
-        <p>Welcome to our humble shop</p>
-        <Link to="/shop" onClick={()=>{window.scrollTo({ top: 0,left: 0,behavior: 'smooth'})}}><button>SHOP</button></Link>
-      </div>
-    </HeroWrapper>
+    <Fragment>
+      <ButtonMobileMiddle><i className="fa fa-angle-double-up"></i></ButtonMobileMiddle>
+      <HeroWrapper>
+        <img src={HeroImage} alt=""/>
+        <div>
+          <p>Welcome to our humble shop</p>
+          <Link to="/shop" onClick={()=>{window.scrollTo({ top: 0,left: 0,behavior: 'smooth'})}}><button>SHOP</button></Link>
+        </div>
+      </HeroWrapper>
+    </Fragment>
   )
 }
 
