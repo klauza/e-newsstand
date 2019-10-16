@@ -62,6 +62,11 @@ const Contact = (props) => {
     setActive(i);
     setPage(`#${hash}`);
     setHashUrl(`#${hash}`);
+    window.scrollTo({  
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    })
   }
   const renderPage = () => {
     switch(page){

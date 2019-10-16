@@ -7,7 +7,6 @@ const Container = styled.div`
   justify-content: space-between; 
   margin-top: 75px;
   font-family: 'Lato', sans-serif;
-  
   position: absolute;
   top: 75px;
   left: 0;
@@ -15,6 +14,14 @@ const Container = styled.div`
   i{
     display: block; text-align: center;
     font-size: 3em;
+  }
+
+  @media(max-width: 768px){
+    position: unset;
+    grid-template-columns: 1fr; 
+    grid-auto-rows: auto;
+    margin-top: 0;
+    /* margin-bottom: 100px; */
   }
 `;
 
@@ -36,6 +43,15 @@ const Card = styled.div`
     display: block;
     &:active{
       color: purple;
+    }
+  }
+
+  @media(max-width: 768px){
+    padding: 25px 0;
+    border-bottom: 1px solid lightgrey;
+    i::after{ display: none; }
+    span{
+      padding: 0 7.5px;
     }
   }
 `;
@@ -60,7 +76,7 @@ const Us = () => {
       <Card>
         <i className="fa fa-paper-plane-o"></i>
         <span>If you'd like to, you can visit us in-person. You can also make a shopping in our place.</span>
-        <a target="_blank" href="https://www.google.co.uk/maps/place/Gorgon+Rd,+Sunset+Beach+WA+6530,+Australia/@-28.7260757,114.6236067,17z/data=!3m1!4b1!4m5!3m4!1s0x2bda45fbf1164d19:0xebcb4e2ba4bbfd64!8m2!3d-28.7260757!4d114.6257954">Australia, 44 Gorgon rd.</a>
+        <a target="_blank" rel="noopener noreferrer" href="https://www.google.co.uk/maps/place/Gorgon+Rd,+Sunset+Beach+WA+6530,+Australia/@-28.7260757,114.6236067,17z/data=!3m1!4b1!4m5!3m4!1s0x2bda45fbf1164d19:0xebcb4e2ba4bbfd64!8m2!3d-28.7260757!4d114.6257954">Australia, 44 Gorgon rd.</a>
       </Card>
     </Container>
   )
