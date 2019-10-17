@@ -23,6 +23,8 @@ import Basket from './components/Basket/Basket';
 import Contact from './components/Contact/Contact';
 //Admin
 import Admin from './components/Admin/Admin';
+import AdminSettings from './components/Admin/AdminSettings';
+import AdminStock from './components/Admin/AdminStock';
 
 
 function App() {
@@ -58,7 +60,10 @@ function App() {
               <Route exact path="/shop/search" component={Search} />
               <Route exact path="/contact" component={Contact} />
               <Route exact path="/basket" component={Basket} />
+
               <Route exact path="/admin" component={Admin} />
+              <Route exact path="/admin/settings" component={AdminSettings} />
+              <Route exact path="/admin/stock" component={AdminStock} />
 
               <Route component={NotFound} />
             </Switch>
