@@ -113,7 +113,7 @@ const ProductNumber = styled.div`
 // useState holds these products
 
 // if products, then
-const LatestProducts = () => {
+const LatestProducts = ({refs, handleClick, anchor}) => {
 
   const products = [
     {
@@ -140,11 +140,11 @@ const LatestProducts = () => {
   ]
   return (
     <Fragment>
-      <LatestProductsMobileBtn>Our newest products</LatestProductsMobileBtn> {/* isSticky bottom */}
+      <LatestProductsMobileBtn onClick={()=>handleClick(anchor.id)}>Our newest products</LatestProductsMobileBtn> {/* isSticky bottom */}
 
       <ChildWrapper>
         <Container>
-          <Header>NEWEST PRODUCTS</Header>
+          <Header ref={refs[anchor.id]}>NEWEST PRODUCTS</Header>
 
             {/* loop through 3 products */}
             {products.map((product, id) => 

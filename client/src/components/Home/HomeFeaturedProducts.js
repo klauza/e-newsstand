@@ -25,10 +25,11 @@ const FeaturedItemsMobileBtn = styled.button`
 
 const FeaturedWrapper = styled.div`
   display: flex; flex-direction: column;
-  margin: 100px 0 0px;
+  
 `;
 const Header = styled.h2`
-  margin: 50px 0;
+padding-top: 100px;
+margin: 0px 0 50px;
   text-align: center;
   font-family: 'Oswald', sans-serif;
 `;
@@ -132,7 +133,7 @@ const CardItemValue = styled.div`
 `;
 
 
-const HomeFeaturedProducts = () => {
+const HomeFeaturedProducts = ({refs, handleClick, anchor}) => {
 
   // const [fetched, setFetched] = useState(false);
   const theBody = useRef();
@@ -210,11 +211,11 @@ const HomeFeaturedProducts = () => {
 
   return (
     <Fragment>
-      <FeaturedItemsMobileBtn>See featured items</FeaturedItemsMobileBtn>
+      <FeaturedItemsMobileBtn onClick={()=>handleClick(anchor.id)}>See featured items</FeaturedItemsMobileBtn>
 
       <ChildWrapper>
-        <FeaturedWrapper>
-          <Header>FEATURED PRODUCTS</Header>
+        <FeaturedWrapper >
+          <Header ref={refs[anchor.id]}>FEATURED PRODUCTS</Header>
 
           <FeaturedBody ref={theBody} onTouchStart={movingBody} onTouchEnd={notMovingBody}>
             <FeaturedArrow onClick={()=>moveCarousel("left")} visible={arrowPos===0}><button disabled={arrowPos===0} ><i className="fa fa-caret-left"></i></button></FeaturedArrow>

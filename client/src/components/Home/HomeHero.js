@@ -78,12 +78,12 @@ const HeroWrapper = styled.div`
     }
   }
 `;
-const HomeHero = () => {
+const HomeHero = ({refs, handleClick, anchor}) => {
   return (
     <Fragment>
-      <ButtonMobileMiddle><i className="fa fa-angle-double-up"></i></ButtonMobileMiddle>
+      <ButtonMobileMiddle onClick={()=>handleClick(anchor.id)}><i className="fa fa-angle-double-up"></i></ButtonMobileMiddle>
       <HeroWrapper>
-        <img src={HeroImage} alt=""/>
+        <img ref={refs[anchor.id]} src={HeroImage} alt=""/>
         <div>
           <p>Welcome to our humble shop</p>
           <Link to="/shop" onClick={()=>{window.scrollTo({ top: 0,left: 0,behavior: 'smooth'})}}><button>SHOP</button></Link>
