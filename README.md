@@ -36,6 +36,7 @@ Project is still in development mode, so some features might not work yet
 | **react-transition-group** | 4.3.0  |
 | **history** | 4.10.1  |
 | **@svgr/cli** | 4.3.3 |
+| **react-pose** | 4.0.9 |
 
 
 <br/>
