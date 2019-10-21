@@ -59,77 +59,55 @@ const BackButtonStyled = styled(ButtonStyled)`
 
 // SearchForm
 const SearchFormStyled = styled.form`
-  text-align: center;
-  width: 30%; height: 100%;
-  position: relative;
-  margin: 0 auto; 
-  overflow: hidden;
-  .main-input{
-    width: 100%;
-    overflow: hidden;
+    display: none;
+  @media(max-width:768px){
     display: block;
-    padding: 5px 0 5px 30px;
-    border: 0; 
-
-    &:focus ~ .label-name{
-      border: 2px solid rgba(45,98,110, 1);
-    }
-    &:focus ~ .label-name::after{
-      transform: translateX(0%);
-    }
-    &:focus ~ .label-name::before{
-      transform: translateX(0%);
-    }
-    &:focus ~ i{
-      transform: translate(0px, -50%);
+    box-shadow: 0px -4px 4px -3px rgba(0,0,0,0.6); 
+    position: fixed; bottom: 0; left: 0;
+    width: 100%;
+    z-index: 2;
+  }
+  .main-input{
+    @media(max-width:768px){
+      width: 100%;
+      padding: 12.5px 50px; 
+      border: 1px solid white;
+      background: black;
     }
   } 
   i{
-    color: #5fa8d3;
-    transition: all 0.3s ease;
-    position: absolute;
-    top: 50%; left: 5px;
-    transform: translate(-40px, -50%);
+    @media(max-width: 768px){
+      position: absolute;
+      color: #5fa8d3;
+      transform: translate(50px,-50%);
+      top: 50%; left: 17.5px;
+      transform: translate(0px, -50%);
+      color: white;
+      font-size: 1.25em;
+    }
   }
-  .label-name{
-    border: 1px solid rgba(0,0,0,0.25);
-    transition: border 300ms ease;
-    position: absolute; bottom: 0px; left: 0%;
-    width: 100%; height: 100%;
-    pointer-events: none;
 
-    &::after, ::before{
-      content: "";
-      position: absolute;
-      height: 100%;
-      width: 100%;
-      /* background: red; */
-      transform: translateX(-100%);
-      transition: transform 0.3s ease;
-    }
-    &::before{
-      right: 0; top: 1px;
-    }
-    &::after{
-      left: 0; bottom: -1px;
-    }
-    span{
-      position: absolute;
-      bottom: 2.5px; left: 0px;
-      transition: all 0.3s ease;
-    }
-  }
   input[type=text]{
-    color: black;
+    @media(max-width: 768px){
+      color: black;
+      border: 1px solid white;
+      color: white;
+      font-size: 1.15em;
+      &:focus{outline: 0; border: 1px solid white;}
+    }
   }
   input[type=submit]{
-    position: absolute; bottom: 0px; right: 0%;
-    color: white;
-    height: 25px;
-    padding: 0 5px;
-    border: 1px solid black;
-    background: rgba(45,98,110, 0.7);
-    transition: background-color 225ms ease;
+    @media(max-width: 768px){    
+      position: absolute; bottom: 0; right: 0;
+      color: white;
+      border: 1px solid black;
+      background: rgba(45,98,110, 0.7);
+      height: 100%; width:50px;
+      border: 0;
+      border-left: 1px solid white;
+      border-bottom: 1px solid white;
+      border-top: 1px solid white;
+    }
     &:hover{
       cursor: pointer;
       background: rgba(45,98,110, 0.95);

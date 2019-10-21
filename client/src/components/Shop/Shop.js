@@ -73,9 +73,7 @@ const Shop = ({setPageLocation, misc: {pageLocation}}) => {
         autoComplete="off" 
       />
       <i className="fa fa-search"></i>
-      <label htmlFor="name" className="label-name">
-        <span className="content-name"></span>
-      </label>
+
       
       <input type="submit" value="Submit" />
     </SearchForm>

@@ -9,6 +9,8 @@ import styled from 'styled-components';
 const SearchHeader = styled.div`
   border: 1px solid black;
 `;
+
+
 const Category = styled.h3`
   text-align: center;
   margin: 20px 0;
@@ -141,25 +143,24 @@ const Search = ({props, misc: {pageLocation}}) => {
   return (
     <Wrapper>
       <Link to="/shop"><Button><i className="fa fa-angle-double-left"></i></Button></Link>
+      <SearchForm onSubmit={handleSearch}>
+        <input
+          className="main-input"
+          type="text"
+          onChange={handleChange}
+          ref={inputRef}
+          autoComplete="off" 
+          required={`${params.cat}` === "" ? (true) : (false)}
+        />
+        <i className="fa fa-search"></i>
+    
+        <input type="submit" value="Submit" />
+      </SearchForm>
+      
       <SearchHeader>
         
         <Category> Category: {params.cat !== "" ? (params.cat.toUpperCase()) : ("All")} </Category>
 
-        <SearchForm onSubmit={handleSearch}>
-          <input
-            className="main-input"
-            type="text"
-            onChange={handleChange}
-            ref={inputRef}
-            autoComplete="off" 
-            required={`${params.cat}` === "" ? (true) : (false)}
-          />
-          <i className="fa fa-search"></i>
-          <label htmlFor="name" className="label-name">
-            <span className="content-name"></span>
-          </label>
-          <input type="submit" value="Submit" />
-        </SearchForm>
 
       </SearchHeader>
 
