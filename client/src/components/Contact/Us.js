@@ -1,5 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
+import SvgEmail from '../../Icons/Email';
+import SvgDeal from '../../Icons/Deal';
+import SvgPhone from '../../Icons/Phone';
+
 
 
 const Container = styled.div`
@@ -17,7 +21,7 @@ const Container = styled.div`
   }
 
   @media(max-width: 768px){
-    position: unset;
+    top: 0; margin-bottom: 100px;
     grid-template-columns: 1fr; 
     grid-auto-rows: auto;
     margin-top: 0;
@@ -27,6 +31,9 @@ const Container = styled.div`
 
 const Card = styled.div`
   text-align: center; 
+  svg{
+    width: 50px; height: 50px;
+  }
   i::after{
     content: ''; display: block; 
     width: 60px; height: 1px; margin: 10px auto;
@@ -62,19 +69,19 @@ const Us = () => {
   return (
     <Container>
       <Card>
-        <i className="fa fa-volume-control-phone"></i>
+        <SvgPhone />
         <span>We are under the phone each day, including Sunday from 9am to 3pm. So grab a phone and have a chat with us.</span>
         <a href="tel:0928348643">09283486433</a>
       </Card>
 
       <Card>
-        <i className="fa fa-envelope-o"></i>
+        <SvgEmail />
         <span>You can write an e-mail to us. We are keen to answer any question you got. Send it to this mail:</span>
         <a href="mailto:shop@email.com">shop@email.com</a>
       </Card>
 
       <Card>
-        <i className="fa fa-paper-plane-o"></i>
+        <SvgDeal />
         <span>If you'd like to, you can visit us in-person. You can also make a shopping in our place.</span>
         <a target="_blank" rel="noopener noreferrer" href="https://www.google.co.uk/maps/place/Gorgon+Rd,+Sunset+Beach+WA+6530,+Australia/@-28.7260757,114.6236067,17z/data=!3m1!4b1!4m5!3m4!1s0x2bda45fbf1164d19:0xebcb4e2ba4bbfd64!8m2!3d-28.7260757!4d114.6257954">Australia, 44 Gorgon rd.</a>
       </Card>

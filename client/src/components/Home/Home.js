@@ -43,7 +43,6 @@ const Home = () => {
     });
 
   
-  console.log(refs);
   return (
     <div style={{position: "absolute", left: "0", right: "0"}}>
       <HomeHero refs={refs} handleClick={handleClick} anchor={anchors[0]} />

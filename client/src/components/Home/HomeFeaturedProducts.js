@@ -6,7 +6,7 @@ import { useRect } from './UseRect';
 const FeaturedItemsMobileBtn = styled.button`
   display: none;
   @media(max-width: 768px){
-    z-index: 2;
+    z-index: 6;
     display: block;
     clip-path: polygon(0 0, 80% 0, 100% 100%, 0% 100%);
     width: 50%; height: 50px;
@@ -28,7 +28,7 @@ const FeaturedWrapper = styled.div`
   
 `;
 const Header = styled.h2`
-padding-top: 100px;
+padding-top: 55px;
 margin: 0px 0 50px;
   text-align: center;
   font-family: 'Oswald', sans-serif;

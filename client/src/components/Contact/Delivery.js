@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import SvgBox from '../../Icons/Box';
 
 const Container = styled.div`
   margin-top: 75px;
@@ -8,26 +9,46 @@ const Container = styled.div`
   top: 75px;
   left: 0;
   right: 0;
+  font-family: 'Lato', sans-serif;
+  @media(max-width: 768px){
+    margin-bottom: 100px;
+    top: 0;
+    margin-top: 0;
+  }
 `;
 const DeliveryWrapper = styled.div`
-  border: 1px solid black;
+
 `;
 const Postage = styled.div`
-  h2{
-    text-align: center;
-    &::after{
-      content: ''; height: 1px; width: 150px; 
+  svg{
+      width: 100px; height: 100px;
       margin: 0 auto;
       display: block;
-      background: black;
+  }
+  h2{
+    text-align: center;
+    
+    &::after{
+      content: ''; height: 1px; width: 25%; 
+      margin: 15px auto;
+      display: block;
+      background: lightgrey;
     }
   }
 `;
 const Timing = styled.div`
-
+  h3{
+    margin-bottom: 5px;
+  }
+  margin-top: 50px;
+  text-align: center;
 `;
 const ReturnPolicy = styled.div`
-
+  h3{
+    margin-bottom: 5px;
+  }
+  margin-top: 50px;
+  text-align: center;
 `;
 
 const Delivery = () => {
@@ -38,11 +59,12 @@ const Delivery = () => {
         
         <Postage>
           <h2>Delivery</h2>
-          <p>We send parcels as a priority, give 2-3 business days for a middleman</p>
+          <SvgBox />
         </Postage>
 
         <Timing>
           <h3>Duration</h3>
+          <p>We send parcels as a priority, give 2-3 business days for a middleman</p>
           <p>We make a delivery within 24 hours from a purchase</p>
         </Timing>
 

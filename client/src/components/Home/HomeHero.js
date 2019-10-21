@@ -13,7 +13,7 @@ const ButtonMobileMiddle = styled.button`
     transform: translateX(-50%);
     width: 20%;
     height: 50px;
-    z-index: 3;
+    z-index: 6;
     background: black;
     clip-path: polygon(50% 100%, 0 0, 100% 0);
     border: 0;

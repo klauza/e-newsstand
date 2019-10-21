@@ -16,7 +16,7 @@ const LatestProductsMobileBtn = styled.button`
     left: 50%;
     text-align: left;
     padding-left: 35px;
-    z-index: 2;
+    z-index: 6;
     border: 1px solid black;
     background: white;
     outline: none;

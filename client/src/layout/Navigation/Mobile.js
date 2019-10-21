@@ -150,16 +150,19 @@ const MobileLinks = styled.div`
     }
 
     .link-search{
-      position: absolute;
-      bottom: 100px; left: 50%; transform: translateX(-50%);
+      display: block;
+      margin: 50px auto 0;
+      width: 70vw;
       form input{
-        width: 70vw; padding: 12.5px 5px;
+        width: 100%;
+         padding: 12.5px 5px;
         font-size: 1.05rem;
         border: 0;
         font-family: 'Oswald', sans-serif;
         box-shadow: 0px 3px 6px 1px rgba(0,0,0,0.55);
 
         &[type=submit]{ 
+          width: 100%;
           color: red; 
           &:hover{ cursor: pointer; }
         }
@@ -179,7 +182,7 @@ const MobileLinks = styled.div`
 
 const Mobile = () => {
 
-  const [toggled, setToggled] = useState(true);
+  const [toggled, setToggled] = useState(false);
   
 
   const toggleMobileNav = () => {
