@@ -11,31 +11,26 @@ import {Container, ItemsWrapper, Item, ItemImage, ItemDesc, DeleteItem, PayButto
 const Basket = ({setAlert, updateBasket, deleteItem, basket: {items}}) => {
 
 
+  // ITEM UPDATE
+  const updtItem = (item) => updateBasket(item);
 
-  const updtItem = (item) => {
-    updateBasket(item);
-  }
-  const delItem = (id) => {
-    deleteItem(id);
-  }
+  // ITEM DELETE
+  const delItem = (id) => deleteItem(id);
 
-  const calculatePrice = (price, qty) => {
-    
-    return  Math.round(qty * price * 100)/100
-  }
+  // DISPLAY ITEM'S SUM PRICE
+  const calculatePrice = (price, qty) =>  Math.round(qty * price * 100)/100
 
+  // DISPLAY ALL ITEMS PRICE
   const calculateTotalPrice = () => {
     let count = 0;
     
-    items.forEach(item => {
-      count = count + item.price * item.quantity
-    });
+    items.forEach(item => count = count + item.price * item.quantity);
+    
     return  Math.round(count * 100)/100
   }
 
-  const paymentStart = () => {
-    setAlert("Payment feature coming soon", "info", 2000);
-  }
+  // PAYMENT FUNC
+  const paymentStart = () => setAlert("Payment feature coming soon", "info", 2000);
 
 
   return (
@@ -67,8 +62,8 @@ const Basket = ({setAlert, updateBasket, deleteItem, basket: {items}}) => {
 
             ) : (<div>no items in basket</div>)}
           </ItemsWrapper>
-          {/* {total !== 0 ?  <div>Total to pay: {total}</div> : null } */}
-          total to pay: £ {calculateTotalPrice()}
+          
+          <span>total to pay: £ {calculateTotalPrice()}</span>
           <PayButton onClick={paymentStart}>Pay</PayButton>
       </Container>
     </Wrapper>
