@@ -1,23 +1,24 @@
 import React, {useRef, useEffect, useState} from 'react';
+import {Link} from 'react-router-dom';
+import Loader from '../../layout/Loader';
+
 import { connect } from 'react-redux';
 import SearchPopulate from './SearchPopulate';
-import Loader from '../../layout/Loader';
-import {Link} from 'react-router-dom';
+import { setAlert } from '../../actions/alertActions';
+
+// CSS
 import { Wrapper, Button, SearchForm } from '../../layout/StyledComponents';
 import styled from 'styled-components';
-
 const SearchHeader = styled.div`
   border: 1px solid black;
 `;
-
-
 const Category = styled.h3`
   text-align: center;
   margin: 20px 0;
 `;
 
 
-const Search = ({props, misc: {pageLocation}}) => {
+const Search = ({props, misc: {pageLocation}, setAlert}) => {
 
   const inputRef = useRef();
   const { location } = props;
@@ -29,14 +30,11 @@ const Search = ({props, misc: {pageLocation}}) => {
 
 
   useEffect(()=> {
+    // auto-set the query on page load
+    setQuery(params.query); 
 
-    setQuery(params.query); // set the query on page load
-
-    
 
     const initPage = () => {
- 
-
       fetch(`/api/shop/search?cat=${params.cat}&query=${params.query}`)
       .then(res => res.json())
       .then(data => {
@@ -44,18 +42,22 @@ const Search = ({props, misc: {pageLocation}}) => {
           if(params.query !== ""){
             setShopData(data.result);
             setAllData(data.result);
-
           } else{
             setShopData(data.result.items);
             setAllData(data.result.items);
-            
           }
-        }catch(err){}
+
+        }catch(err){
+          // backend problems
+        }
 
         setIsFetching(false);
         try{
           inputRef.current.value = params.query;
-        } catch(err){}
+        } catch(err){
+          // dom not loaded yet
+        }
+
       })
       .then(()=>{
         if(pageLocation.shop !== null){
@@ -75,10 +77,7 @@ const Search = ({props, misc: {pageLocation}}) => {
   }, [location])
 
 
-  
-  // console.log(query); // query test, in useEffect not seen
-
-
+  // get query from url
   function getParams(location) {
     const searchParams = new URLSearchParams(location.search);
     return {
@@ -92,31 +91,26 @@ const Search = ({props, misc: {pageLocation}}) => {
     return searchParams.toString().toLowerCase();
   }
 
-
+  // * * *
   const updateURL = () => {
     const url = setParams();
-
     props.history.push(`?cat=${params.cat}&${url}`);
   };
-
   const clearURL = () => {
     props.history.push(`?cat=${params.cat}`);
   }
 
-
-
-
+  // * * *
   const handleChange = (e) => {
     setQuery(e.target.value.trim());
   }
 
-
   const handleSearch = (e) => {
     setIsFetching(true);
     e.preventDefault();
-    // console.log(query);
+    
     if(params.cat === "" && inputRef.current.value === ""){
-      console.log('ALERT, field cannot be empty!');
+      setAlert("Field cannot be empty!", "warning", 2000);
       setIsFetching(false);
     } else{
 
@@ -129,12 +123,8 @@ const Search = ({props, misc: {pageLocation}}) => {
       } else{
         updateURL();
       }
-      
       setIsFetching(false);
- 
     }
-
-    
   }
 
   
@@ -150,7 +140,6 @@ const Search = ({props, misc: {pageLocation}}) => {
           onChange={handleChange}
           ref={inputRef}
           autoComplete="off" 
-          required={`${params.cat}` === "" ? (true) : (false)}
         />
         <i className="fa fa-search"></i>
     
@@ -182,4 +171,4 @@ const mapStateToProps = (state, ownProps) => ({
   props: ownProps,
   misc: state.misc
 })
-export default connect(mapStateToProps, {})(Search)
+export default connect(mapStateToProps, {setAlert})(Search)

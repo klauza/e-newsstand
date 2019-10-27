@@ -1,6 +1,8 @@
 import React, {Fragment, useState, useRef} from 'react';
 import { NavLink } from 'react-router-dom';
 import history from '../../history';
+import { connect } from 'react-redux';
+import { setAlert } from '../../actions/alertActions';
 
 // icons
 import { logo } from '../../media/index';
@@ -11,7 +13,7 @@ import SvgContact from '../../Icons/Contact';
 import SvgCancel from '../../Icons/Cancel';
 
 
-const Navlinks = ({ isDesktop, mobileToggled, mobileNotToggled, hideMobileNav }) => {
+const Navlinks = ({ isDesktop, mobileToggled, mobileNotToggled, hideMobileNav, setAlert }) => {
 
   const [navQuery, setNavQuery] = useState("");
   const textInput = useRef();
@@ -19,7 +21,12 @@ const Navlinks = ({ isDesktop, mobileToggled, mobileNotToggled, hideMobileNav })
   // Search input located on navbar
   const submitNavSearch = (e) => {
     e.preventDefault();
-    history.push(`/shop/search?query=${navQuery}`);
+    if(navQuery === ""){
+      setAlert("Field cannot be empty!", "warning", 2000);
+    } else{
+      history.push(`/shop/search?query=${navQuery}`);
+      hideMobileNav();
+    }
   }
   const handleNavInputChange = (e) => {
     setNavQuery(e.target.value.trim());
@@ -68,7 +75,7 @@ const Navlinks = ({ isDesktop, mobileToggled, mobileNotToggled, hideMobileNav })
         <li className="link-search">
           <form onSubmit={submitNavSearch}>
             <input ref={textInput} type="text" placeholder="search in shop..." onChange={handleNavInputChange} />
-            <input type="submit" onTouchEnd={hideMobileNav}/>
+            <input type="submit"/>
           </form>
           {isDesktop && (<button className="deleteInputBtn" onClick={clearAndFocusInput}><SvgCancel /></button>)}
         </li>
@@ -77,4 +84,5 @@ const Navlinks = ({ isDesktop, mobileToggled, mobileNotToggled, hideMobileNav })
   )
 }
 
-export default Navlinks
+
+export default connect(null, {setAlert})(Navlinks)

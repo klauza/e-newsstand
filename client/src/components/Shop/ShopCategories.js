@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setPageLocation } from '../../actions/miscActions';
+import { setAlert } from '../../actions/alertActions';
 
 import history from '../../history';
 
@@ -45,7 +46,7 @@ const CategoryBox = styled.div`
 `;
 
 
-const Shop = ({setPageLocation, misc: {pageLocation}}) => {
+const Shop = ({setPageLocation, misc: {pageLocation}, setAlert}) => {
   const inputRef = useRef();
   const [query, setQuery] = useState("");
 
@@ -54,7 +55,7 @@ const Shop = ({setPageLocation, misc: {pageLocation}}) => {
     if(query !== ""){
       history.push(`/shop/search?query=${query}`)
     } else {
-      console.log('ALERT, please put a value into input');
+      setAlert("Field cannot be empty!", "warning", 2000);
     }
   }
   const handleChange = () => {
@@ -95,4 +96,4 @@ const Shop = ({setPageLocation, misc: {pageLocation}}) => {
 const mapStateToProps = (state) => ({
   misc: state.misc
 })
-export default connect(mapStateToProps, {setPageLocation})(Shop)
+export default connect(mapStateToProps, {setPageLocation, setAlert})(Shop)

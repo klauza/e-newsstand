@@ -13,6 +13,7 @@ export const DetailedSearch = styled.div`
   border: 1px solid red;
   min-height: 150px;
   @media(max-width: 768px){
+    display: none;
     margin: 20px 0 20px 0;
   }
   .popular-items-header{
