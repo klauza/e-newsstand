@@ -1,6 +1,6 @@
 import React, {useRef, useEffect, useState} from 'react';
 import { connect } from 'react-redux';
-import PopulateWithData from './PopulateWithData';
+import SearchPopulate from './SearchPopulate';
 import Loader from '../../layout/Loader';
 import {Link} from 'react-router-dom';
 import { Wrapper, Button, SearchForm } from '../../layout/StyledComponents';
@@ -167,7 +167,7 @@ const Search = ({props, misc: {pageLocation}}) => {
       {isFetching ? ( <Loader /> ) : 
       (
         (shopData && shopData.length > 0) ? (
-        <PopulateWithData shopData={shopData} />
+        <SearchPopulate shopData={shopData} />
         ) : 
         (
           <div>No item was found</div>
