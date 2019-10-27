@@ -1,6 +1,6 @@
 import React, {useEffect, createRef} from 'react';
 import HomeHero from './HomeHero';
-import HomeFeaturedProducts from './HomeFeaturedProducts';
+import HomeFeaturedProducts from './HomeFeaturedProducts/HomeFeaturedProducts';
 import LatestProducts from './LatestProducts';
 import AboutUs from './AboutUs';
 
