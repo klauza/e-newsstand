@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { updateBasket, deleteItem } from '../../actions/basketActions';
 import { setAlert } from '../../actions/alertActions';
@@ -68,6 +69,13 @@ const Basket = ({setAlert, updateBasket, deleteItem, basket: {items}}) => {
       </Container>
     </Wrapper>
   )
+}
+
+Basket.propTypes = {
+  setAlert: PropTypes.func,
+  updateBasket: PropTypes.func,
+  deleteItem: PropTypes.func,
+  items: PropTypes.arrayOf(PropTypes.object)
 }
 
 const mapStateToProps = (state) => ({
