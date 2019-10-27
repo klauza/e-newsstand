@@ -1,38 +1,9 @@
 import React, {useRef} from 'react';
 import { connect } from 'react-redux';
 import { adminLogin, adminLogOut } from '../../actions/adminActions';
-
 import AdminLogged from './AdminLogged';
-import styled from 'styled-components';
-import { Wrapper } from '../../layout/StyledComponents';
+import { Container, Header, LoginContainer } from './AdminCSS';
 
-const Container = styled(Wrapper)`
-  width: 100%;
-  background: lightgrey;
-  position: fixed;
-  top: 60px; left: 0; bottom: 0; right: 0;
-  padding: 0; margin: 0;
-  @media(max-width:768px){
-    top: 50px;
-  }
-`;
-const Header = styled.h1`
-  text-align: center;
-`;
-const LoginContainer = styled.div`
-  h3{ text-align: center;}
-  width: auto; max-width: 400px; height: auto; 
-  margin: 0 auto; padding: 0 5px;
-  border: 1px solid black;
-  position: absolute;
-  top: 50%; left: 50%; transform: translate(-50%, -50%);
-  form{
-    input{
-      margin: 0 auto;
-      display: block;
-    }
-  }
-`;
 const Admin = ({adminLogin, adminLogOut, admin: {isAuthenticated}}) => {
 
   const loginRef = useRef();
