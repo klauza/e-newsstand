@@ -15,7 +15,7 @@ import NotFound from './layout/NotFound';
 //Home
 import Home from './components/Home/Home';
 //Shop
-import Shop from './components/Shop/Shop';
+import ShopCategories from './components/Shop/ShopCategories';
 import Search from './components/Shop/Search';
 import Item from './components/Item/Item';
 import Basket from './components/Basket/Basket';
@@ -55,7 +55,7 @@ function App() {
           >
             <Switch location={location}>
               <Route exact path="/" component={Home} />
-              <Route exact path="/shop" component={Shop} />
+              <Route exact path="/shop" component={ShopCategories} />
               <Route exact path="/shop/item/:item" component={Item} />
               <Route exact path="/shop/search" component={Search} />
               <Route exact path="/contact" component={Contact} />

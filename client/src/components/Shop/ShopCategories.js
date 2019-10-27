@@ -1,11 +1,13 @@
 import React, { useRef, useState } from 'react';
-import { connect } from 'react-redux';
-import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { setPageLocation } from '../../actions/miscActions';
+
 import history from '../../history';
+
+import styled from 'styled-components';
 import { Wrapper, SearchForm } from '../../layout/StyledComponents';
 import { newspapersImage, lettersImage, gadgetsImage } from '../../media/index';
-import { setPageLocation } from '../../actions/miscActions';
 
 
 const Title = styled.h2`
@@ -87,12 +89,8 @@ const Shop = ({setPageLocation, misc: {pageLocation}}) => {
       </Categories>
 
     </Wrapper>
-
   )
-  
 }
-
-
 
 const mapStateToProps = (state) => ({
   misc: state.misc
