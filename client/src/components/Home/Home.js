@@ -4,6 +4,7 @@ import HomeFeaturedProducts from './HomeFeaturedProducts/HomeFeaturedProducts';
 import LatestProducts from './LatestProducts';
 import AboutUs from './AboutUs';
 import HomeCards from './HomeCards';
+import HomeCards2 from './HomeCards2';
 
 
 const Home = () => {
@@ -47,7 +48,8 @@ const Home = () => {
   return (
     <div style={{position: "absolute", left: "0", right: "0"}}>
       <HomeHero refs={refs} handleClick={handleClick} anchor={anchors[0]} />
-      <HomeCards />
+      {/* <HomeCards /> */}
+      <HomeCards2 />
       <HomeFeaturedProducts refs={refs} handleClick={handleClick} anchor={anchors[1]} />
       <AboutUs />
       <LatestProducts refs={refs} handleClick={handleClick} anchor={anchors[2]} />
