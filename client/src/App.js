@@ -23,8 +23,9 @@ import Basket from './components/Basket/Basket';
 import Contact from './components/Contact/Contact';
 //Admin
 import Admin from './components/Admin/Admin';
-import AdminSettings from './components/Admin/AdminSettings';
-import AdminStock from './components/Admin/AdminStock';
+import AdminSettings from './components/Admin/Settings/AdminSettings';
+import AdminStock from './components/Admin/Stock/AdminStock';
+import AdminUI from './components/Admin/PageLook/AdminUI';
 
 
 function App() {
@@ -64,6 +65,7 @@ function App() {
               <Route exact path="/admin" component={Admin} />
               <Route exact path="/admin/settings" component={AdminSettings} />
               <Route exact path="/admin/stock" component={AdminStock} />
+              <Route exact path="/admin/change-ui" component={AdminUI} />
 
               <Route component={NotFound} />
             </Switch>

@@ -8,6 +8,7 @@ const Main = styled.div`
   bottom: 0px;
   background: rgba(0,0,0,0.5);
   color: white;
+  z-index: 100;
 `;
 const Content = styled.div`
   display: grid; 

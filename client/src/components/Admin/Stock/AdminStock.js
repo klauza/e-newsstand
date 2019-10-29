@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
-import { Wrapper } from '../../layout/StyledComponents';
+import { Wrapper } from '../../../layout/StyledComponents';
 import AdminCategory from './AdminCategory';
 
 const Header = styled.h2`

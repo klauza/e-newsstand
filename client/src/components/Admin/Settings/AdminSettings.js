@@ -1,5 +1,5 @@
 import React from 'react';
-import { Wrapper } from '../../layout/StyledComponents';
+import { Wrapper } from '../../../layout/StyledComponents';
 
 const AdminSettings = () => {
   return (
