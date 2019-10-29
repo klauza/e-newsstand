@@ -2,7 +2,7 @@ import React, {useEffect, createRef} from 'react';
 import { Link } from 'react-router-dom';
 import HomeHero from './HomeHero';
 import HomeFeaturedProducts from './HomeFeaturedProducts/HomeFeaturedProducts';
-import LatestProducts from './LatestProducts';
+import LatestProducts from './NewestProducts/LatestProducts';
 import AboutUs from './AboutUs';
 import HomeCards from './HomeCards';
 import HomeCards2 from './HomeCards2';
@@ -12,7 +12,7 @@ const Button = styled.button`
   position: absolute;
   left: 50%; transform: translateX(-50%);
   top: 2.5%;
-  z-index: 15;
+  z-index: 3;
   border: 2px solid white;
   background: black;
   color: white;

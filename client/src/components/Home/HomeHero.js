@@ -31,10 +31,11 @@ const ButtonMobileMiddle = styled.button`
   }
 `;
 const HeroWrapper = styled.div`
-  position: relative;
-  width: 100%; height: calc(100vh - 60px);
+  position: relative; top: 60px;
+  width: 100%; height: 100vh;
   @media(max-width: 768px){
     height: 100vh;
+    top: 0;
   }
   img{
     position: absolute;top:0;
@@ -43,12 +44,12 @@ const HeroWrapper = styled.div`
   img:nth-child(2){
     opacity: 0.75;
     position: absolute;
-    top: -4px;
+    top: -5px;
     left: 50%;
     transform: translateX(-50%);
     width: 30%;  height: auto;
     object-fit: contain;
-    z-index: 10;
+    z-index: 2;
     @media(max-width:1200px){
       width: 50%;
     }

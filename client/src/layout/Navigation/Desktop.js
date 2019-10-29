@@ -8,7 +8,9 @@ const DesktopNavWrapper = styled.div`
   height: 60px;
   background: #367887;
   /* background: #727ba1; */
+  position: absolute; top: 0px;
   border-bottom: 1px solid lightgrey;
+  z-index: 10;
   @media(max-width: 768px){ display: none; }
 `;
 
