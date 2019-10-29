@@ -2,6 +2,7 @@ import React, {Fragment} from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { HeroImage } from '../../media/index';
+import awesomeTopbg from '../../media/Home/awesomeTopbg.png';
 
 const ButtonMobileMiddle = styled.button`
   display: none;
@@ -36,7 +37,25 @@ const HeroWrapper = styled.div`
     height: 100vh;
   }
   img{
+    position: absolute;top:0;
     width: 100%; height: 100%; object-fit: cover;
+  }
+  img:nth-child(2){
+    opacity: 0.75;
+    position: absolute;
+    top: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30%;  height: auto;
+    object-fit: contain;
+    z-index: 10;
+    @media(max-width:1200px){
+      width: 50%;
+    }
+    @media(max-width:768px){
+      width: 80%;
+    top: 46px;
+    }
   }
   div{
     padding: 50px;
@@ -84,6 +103,7 @@ const HomeHero = ({refs, handleClick, anchor}) => {
       <ButtonMobileMiddle onClick={()=>handleClick(anchor.id)}><i className="fa fa-angle-double-up"></i></ButtonMobileMiddle>
       <HeroWrapper>
         <img ref={refs[anchor.id]} src={HeroImage} alt=""/>
+        <img src={awesomeTopbg} alt=""/>
         <div>
           <p>Welcome to our humble shop</p>
           <Link to="/shop" onClick={()=>{window.scrollTo({ top: 0,left: 0,behavior: 'smooth'})}}><button>SHOP</button></Link>
