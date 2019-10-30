@@ -14,7 +14,9 @@ const GridPosed = posed.div({
     staggerChildren: 50
   },
   closed: {     
-    opacity: 0
+    opacity: 0,
+    staggerChildren: 50,
+    staggerDirection: -1
   }
 })
 
