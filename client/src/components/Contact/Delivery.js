@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import posed from 'react-pose';
 import SvgBox from '../../Icons/Box';
+
 
 const Container = styled.div`
   margin-top: 75px;
@@ -16,7 +18,13 @@ const Container = styled.div`
     margin-top: 0;
   }
 `;
-const DeliveryWrapper = styled.div`
+const DeliveryWrapperPose = posed.div({
+  loaded: {
+    delayChildren: 500, 
+    staggerChildren: 250
+  }
+})
+const DeliveryWrapper = styled(DeliveryWrapperPose)`
 
 `;
 const Postage = styled.div`
@@ -36,14 +44,22 @@ const Postage = styled.div`
     }
   }
 `;
-const Timing = styled.div`
+const TimingPose = posed.div({
+  loaded: { y: 0, opacity: 1 },
+  notLoaded: { y: -20, opacity: 0 }
+})
+const Timing = styled(TimingPose)`
   h3{
     margin-bottom: 5px;
   }
   margin-top: 50px;
   text-align: center;
 `;
-const ReturnPolicy = styled.div`
+const ReturnPolicyPose = posed.div({
+  loaded: { y: 0, opacity: 1 },
+  notLoaded: { y: -20, opacity: 0 }
+})
+const ReturnPolicy = styled(ReturnPolicyPose)`
   h3{
     margin-bottom: 5px;
   }
@@ -52,10 +68,16 @@ const ReturnPolicy = styled.div`
 `;
 
 const Delivery = () => {
+
+  const [isLoaded, setIsLoaded] = React.useState(false);
+  React.useEffect(()=>{
+    setIsLoaded(true);
+  }, [])
+
   return (
     <Container>
       
-      <DeliveryWrapper>
+      <DeliveryWrapper pose={isLoaded ? 'loaded' : 'notLoaded'}>
         
         <Postage>
           <h2>Delivery</h2>

@@ -1,12 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
+import posed from 'react-pose';
 import SvgEmail from '../../Icons/Email';
 import SvgDeal from '../../Icons/Deal';
 import SvgPhone from '../../Icons/Phone';
 
 
-
-const Container = styled.div`
+const ContainerPosed = posed.div({
+  loaded: {
+    delayChildren: 500, 
+    staggerChildren: 125
+  }
+})
+const Container = styled(ContainerPosed)`
   display: grid; grid-template-columns: repeat(3, minmax(auto, 250px)); grid-auto-rows: 200px;
   justify-content: space-between; 
   margin-top: 75px;
@@ -29,6 +35,7 @@ const Container = styled.div`
   }
 `;
 
+
 const Card = styled.div`
   text-align: center; 
   svg{
@@ -39,12 +46,11 @@ const Card = styled.div`
     width: 60px; height: 1px; margin: 10px auto;
     background: black;
   }
-  span{ 
+  span{
     line-height: 23px;
     margin-bottom: 10px;
     display: block; 
   }
- 
   a{
     color: blue;
     display: block;
@@ -63,26 +69,37 @@ const Card = styled.div`
   }
 `;
 
+const Span = posed.span({
+  loaded: { y: 0, opacity: 1 },
+  notLoaded: { y: -20, opacity: 0 }
+});
+
 
 
 const Us = () => {
+
+  const [isloaded, setIsLoaded] = React.useState(false);
+
+  React.useEffect(()=>{
+    setIsLoaded(true);
+  }, [])
   return (
-    <Container>
+    <Container pose={isloaded ? 'loaded' : 'notLoaded'}>
       <Card>
         <SvgPhone />
-        <span>We are under the phone each day, including Sunday from 9am to 3pm. So grab a phone and have a chat with us.</span>
+        <Span>We are under the phone each day, including Sunday from 9am to 3pm. So grab a phone and have a chat with us.</Span>
         <a href="tel:0928348643">09283486433</a>
       </Card>
 
       <Card>
         <SvgEmail />
-        <span>You can write an e-mail to us. We are keen to answer any question you got. Send it to this mail:</span>
+        <Span>You can write an e-mail to us. We are keen to answer any question you got. Send it to this mail:</Span>
         <a href="mailto:shop@email.com">shop@email.com</a>
       </Card>
 
       <Card>
         <SvgDeal />
-        <span>If you'd like to, you can visit us in-person. You can also make a shopping in our place.</span>
+        <Span>If you'd like to, you can visit us in-person. You can also make a shopping in our place.</Span>
         <a target="_blank" rel="noopener noreferrer" href="https://www.google.co.uk/maps/place/Gorgon+Rd,+Sunset+Beach+WA+6530,+Australia/@-28.7260757,114.6236067,17z/data=!3m1!4b1!4m5!3m4!1s0x2bda45fbf1164d19:0xebcb4e2ba4bbfd64!8m2!3d-28.7260757!4d114.6257954">Australia, 44 Gorgon rd.</a>
       </Card>
     </Container>

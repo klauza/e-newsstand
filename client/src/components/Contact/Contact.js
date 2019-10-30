@@ -30,9 +30,9 @@ const ContactAnimations = styled.div`
     }
 
     .contact-exit.contact-exit-active {
-      transform: translateY(25px);
+      transform: translateY(75px);
       opacity: 0;
-      transition: opacity 300ms linear, transform 300ms linear;   
+      transition: opacity 300ms linear, transform 300ms ease-in;   
         
     }
     .contact-exit-done{
