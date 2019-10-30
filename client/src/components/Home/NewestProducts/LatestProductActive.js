@@ -104,6 +104,17 @@ const LatestProductActive = ({activeProduct, showBackdrop, setShowBackdrop}) => 
 
   const [isZoomed, setIsZoomed] = useState(false);
 
+  React.useEffect(()=>{
+    console.log('fire');
+    window.addEventListener('scroll', ()=>{
+      if(isZoomed){
+        setIsZoomed(false);
+        setShowBackdrop(false);
+      }
+    })
+
+  }, [isZoomed])
+
   return (
     <PoseGroup flipMove={false}>
       <Product key={activeProduct.id}>
