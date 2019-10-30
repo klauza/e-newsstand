@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
 import { Wrapper } from '../../../layout/StyledComponents';
-import AdminCategory from './AdminCategory';
+import AdminCategoryModal from './AdminCategoryModal';
 
 const Header = styled.h2`
   text-align: center;
@@ -37,13 +37,18 @@ const Category = styled.li`
 
 const AdminStock = () => {
 
-  const [isOpen, setIsOpen] = useState(false);
-  const [modalIndex, setModalIndex] = useState(null);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modal, setModal] = useState(null);
 
-  const openModal = (id) => {
+  const [addNewItem, setAddNewItem] = useState({
+    category: null,
+    item: null
+  })
 
-    setModalIndex(id);
-    setIsOpen(true);
+  const openModal = (category) => {
+
+    setModal(category);
+    setModalOpen(true);
   }
 
   const temporaryArray = [
@@ -71,7 +76,7 @@ const AdminStock = () => {
 
         {temporaryArray.map( (cat,id) =>
           <Category key={id}>
-            <div className="category-name" onClick={()=>openModal(cat.id)}>{cat.name}</div>
+            <div className="category-name" onClick={()=>openModal(cat)}>{cat.name}</div>
             <div className="category-edit"><i className="fa fa-pencil-square"></i></div>
             <div className="category-delete"><i className="fa fa-times"></i></div>
           </Category>
@@ -80,7 +85,7 @@ const AdminStock = () => {
 
       </ul>
 
-      {isOpen ? (<AdminCategory setIsOpen={setIsOpen} modal={modalIndex} />) : (null)}
+      {modalOpen && (<AdminCategoryModal setModalOpen={setModalOpen} modal={modal} />) }
 
       <StockButton>Add new category</StockButton>
     </Wrapper>
