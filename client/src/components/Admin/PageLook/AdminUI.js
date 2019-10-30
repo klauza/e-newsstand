@@ -117,7 +117,6 @@ const AdminUI = () => {
   const [showModal, setShowModal] = useState(null);
 
 
-  console.log(showModal);
   
   return (
     <React.Fragment>
