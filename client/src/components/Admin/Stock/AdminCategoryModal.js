@@ -52,6 +52,7 @@ const Content = styled(ContentPosed)`
       width: 120px; height: 30px;
       background: lightskyblue;
       cursor: pointer;
+
     }
   }
 
@@ -73,9 +74,9 @@ const Content = styled(ContentPosed)`
     div:nth-of-type(3){
       grid-area: div3;
     }
+    
     div{
-    padding: 5px;
-
+      padding: 5px;
       border-right: 1px solid lightgrey;
     }
     button:nth-of-type(1){
@@ -83,6 +84,7 @@ const Content = styled(ContentPosed)`
       grid-area: btn1;
       border: 0;
     }
+      
     button:nth-of-type(2){
       grid-area: btn2;
       border: 0;
@@ -139,18 +141,24 @@ const AdminCategoryModal = ({modal, setModalOpen}) => {
     {
       id: 0,
       name: 'item-1',
+      shortDsc: "this is a short description",
+      longDsc: "This is long description about this item, describing what is this item about. It may have more than just one sentence",
       price: 2.99,
       inStock: 10
     },
     {
       id: 1,
       name: 'item-2',
+      shortDsc: "this is a short description",
+      longDsc: "This is long description about this item, describing what is this item about. It may have more than just one sentence",
       price: 4.99,
       inStock: 5
     },
     {
       id: 2,
       name: 'item-3',
+      shortDsc: "this is a short description",
+      longDsc: "This is long description about this item, describing what is this item about. It may have more than just one sentence",
       price: 7.99,
       inStock: 25
     }
@@ -166,6 +174,12 @@ const AdminCategoryModal = ({modal, setModalOpen}) => {
   const openEditModal = (item) => {
     setEditModalContent(item);
     setEditModalOpen(true);
+
+
+    
+
+    // animate gear-icon
+
   }
 
   return (
@@ -192,8 +206,8 @@ const AdminCategoryModal = ({modal, setModalOpen}) => {
           </Item>
 
           {tempDB.map((item,id) =>
-            <Item key={id}>
-              <button onClick={()=>openEditModal(item)}><i className="fa fa-cog"></i></button>
+            <Item key={id} >
+              <button onClick={(e)=>openEditModal(item)}><i className="fa fa-cog"></i></button>
               <div>{item.name}</div>
               <div>{item.price}</div>
               <div>{item.inStock}</div>

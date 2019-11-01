@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import posed from 'react-pose';
+import SvgGearLampEdit from '../../../Icons/SvgGearLampEdit';
 
 const MainPosed = posed.div({
   initialPose: 'closed',
@@ -45,7 +46,7 @@ const DataPosed = posed.div({
     }
   },
   editclosed: { 
-    x: '100%',    
+    x: '30%',    
     opacity: 0,
     transition: { duration: 500 }
   }
@@ -54,9 +55,61 @@ const Data = styled(DataPosed)`
   border: 2px solid red;
   background: lightblue;
   color: #000;
+  svg{
+    width: 250px; height: 250px;
+    margin: 0 auto;
+    display: block;
+    .animate-element{
+      transform-origin: 50% 50%;
+      transform-box: fill-box;
+      animation: animation 2000ms infinite linear;
+      @keyframes animation{
+        100%{
+          transform: rotate(180deg);
+        }
+      }
+    }
+  }
+
+  .buttons{
+    width: auto;
+    margin: 10px auto;
+    display: flex; flex-direction: row;
+    justify-content: center;
+    button{
+      width: auto;
+      margin: 5px;
+    }
+  }
+
+  .input-grid{
+    div{
+      padding: 5px 0;
+      margin: 5px;
+      display: grid; grid-template-columns: minmax(auto, 200px) auto;
+        
+      label, input{
+        line-height: 20px;
+      }
+      #longDescription{
+        /* height: 40px; */
+        font-family: sans-serif;
+      }
+    }
+    /* justify-items: center; */
+
+  }
 `;
 
 const EditItemModal = ({editModalContent, setEditModalOpen}) => {
+
+  const [inputs, setInputs] = React.useState({
+    name: editModalContent.name,
+    shortDescription: editModalContent.shortDsc,
+    longDescription: editModalContent.longDsc,
+    price: editModalContent.price,
+    inStock: editModalContent.inStock
+  });
 
   const [isOpen, setIsOpen] = React.useState(false);
   React.useEffect(()=>{
@@ -64,12 +117,19 @@ const EditItemModal = ({editModalContent, setEditModalOpen}) => {
   }, [])
 
   const closeEditModal = () => {
+
     setIsOpen(false);
+
     setTimeout(()=>{
       setEditModalOpen(false)
     }, 500)
   }
 
+  const setInputValue = (e) => {
+    setInputs( { ...inputs, [e.target.id]: e.target.value} );
+  }
+
+  console.log(inputs);
   return (
     <Main pose={isOpen ? "editopen" : "editclosed"}>
       <Container>
@@ -77,10 +137,40 @@ const EditItemModal = ({editModalContent, setEditModalOpen}) => {
           <div></div>
 
           <Data pose={isOpen ? "editopen" : "editclosed"}>
-            <button onClick={closeEditModal}>Confirm changes</button>
-            <button onClick={closeEditModal}>Cancel changes</button>
-            <div>Item name: {editModalContent.name}</div>
-            <div>Item price: {editModalContent.price}</div>
+            <SvgGearLampEdit />
+
+
+            <div className="input-grid">
+              <div>
+                <label htmlFor="name">Item name:</label>
+                <input type="text" id="name" value={inputs.name} onChange={(e)=>setInputValue(e)} />
+              </div>
+              <div>
+                <label htmlFor="shortDescription">Item short description:</label>
+                <input type="text" id="shortDescription" value={inputs.shortDescription} onChange={(e)=>setInputValue(e)} />
+              </div>
+              <div>
+                <label htmlFor="longDescription">Item long description:</label>
+                <textarea rows="4" id="longDescription" value={inputs.longDescription} onChange={(e)=>setInputValue(e)} />
+              </div>
+              <div>
+                <label htmlFor="price">Price per item:</label>
+                <input type="number" id="price" value={inputs.price} onChange={(e)=>setInputValue(e)} />
+              </div>
+              <div>
+                <label htmlFor="inStock">Items in stock:</label>
+                <input type="number" id="inStock" value={inputs.inStock} onChange={(e)=>setInputValue(e)} />
+              </div>
+              <div>
+                <label htmlFor="image">Image:</label>
+                
+              </div>
+            </div>
+
+            <div className="buttons">
+              <button onClick={closeEditModal}>Confirm changes</button>
+              <button onClick={closeEditModal}>Cancel changes</button>
+            </div>
           </Data>
 
         </Content>
