@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
-import posed from 'react-pose';
+// import posed from 'react-pose';
 import { Wrapper } from '../../../layout/StyledComponents';
 import ModalUI from './ModalUI';
 import { homeImage0, homeImage1, homeImage2, homeImage3, homeImage4, homeImage5 } from '../../../media/index';
@@ -125,7 +125,7 @@ const AdminUI = () => {
 
       <Wrapper>
         <Container disableClick={showModal !== null}>
-          <Header r={100} >Choose page you'd like to change</Header>
+          <Header>Choose page you'd like to change</Header>
 
           {linkDatabase.map((section, id) => 
           <section key={id}>
@@ -134,6 +134,9 @@ const AdminUI = () => {
             <span className="endpoint">{section.endpoint}</span>
           </section>
           )}
+
+          <Header style={{marginTop: "25px"}}>Change color scheme</Header>
+          <div>Some list of colors</div>
 
         </Container>
       </Wrapper>

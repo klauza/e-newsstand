@@ -25,7 +25,7 @@ const Navlinks = ({ isDesktop, mobileToggled, mobileNotToggled, hideMobileNav, s
       setAlert("Field cannot be empty!", "warning", 2000);
     } else{
       history.push(`/shop/search?query=${navQuery}`);
-      hideMobileNav();
+      mobileToggled && hideMobileNav();
     }
   }
   const handleNavInputChange = (e) => {

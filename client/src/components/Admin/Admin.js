@@ -32,10 +32,16 @@ const Admin = ({adminLogin, adminLogOut, admin: {isAuthenticated}}) => {
         <LoginContainer>
           <h3>Login</h3>
           <form onSubmit={login}>
-            <input ref={loginRef} type="text"
+            <input 
+              value="login"
+              ref={loginRef} 
+              type="text" 
               placeholder="login"
             />
-            <input ref={pwdRef} type="password"
+            <input 
+              value="password"
+              ref={pwdRef} 
+              type="password"
               placeholder="password"
             />
             <input type="submit" value="SUBMIT" />

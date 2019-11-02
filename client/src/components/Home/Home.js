@@ -64,7 +64,7 @@ const Home = () => {
   
   return (
     <div style={{position: "absolute", left: "0", right: "0"}}>
-      <Link to="/admin"><Button style={{}}>Admin panel</Button></Link>
+      <Link to="/admin"><Button style={{}}> <i className="fa fa-cog"></i> Admin panel</Button></Link>
       <HomeHero refs={refs} handleClick={handleClick} anchor={anchors[0]} />
       {/* <HomeCards /> */}
       <HomeCards2 />

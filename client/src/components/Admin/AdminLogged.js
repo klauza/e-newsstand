@@ -34,7 +34,8 @@ const AdminLogged = ({logout}) => {
     <Wrapper>
       <LogoutButton onClick={logout}>Log out</LogoutButton>
 
-      <Header>Admin dashboard</Header>
+      <Header>Admin dashboard, version 1.0 <button>See updates changelog</button></Header>
+      
 
       <Link to="/admin/settings"><DashboardButton>Shop Settings</DashboardButton></Link>
 
