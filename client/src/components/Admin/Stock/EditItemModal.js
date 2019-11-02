@@ -4,7 +4,7 @@ import posed from 'react-pose';
 import SvgGearLampEdit from '../../../Icons/SvgGearLampEdit';
 
 const MainPosed = posed.div({
-  initialPose: 'closed',
+  initialPose: 'editclosed',
   editopen: {
     opacity: 1,
     transition: { duration: 500 }
@@ -36,7 +36,7 @@ const Content = styled.div`
 `;
 
 const DataPosed = posed.div({
-  initialPose: 'closed',
+  initialPose: 'editclosed',
   editopen: {
     x: '0',
     opacity: 1,
@@ -101,7 +101,7 @@ const Data = styled(DataPosed)`
   }
 `;
 
-const EditItemModal = ({editModalContent, setEditModalOpen}) => {
+const EditItemModal = ({editModalContent, closeEditModal}) => {
 
   const [inputs, setInputs] = React.useState({
     name: editModalContent.name,
@@ -116,12 +116,12 @@ const EditItemModal = ({editModalContent, setEditModalOpen}) => {
     setIsOpen(true);
   }, [])
 
-  const closeEditModal = () => {
+  const closeModal = () => {
 
     setIsOpen(false);
 
     setTimeout(()=>{
-      setEditModalOpen(false)
+      closeEditModal();
     }, 500)
   }
 
@@ -168,8 +168,8 @@ const EditItemModal = ({editModalContent, setEditModalOpen}) => {
             </div>
 
             <div className="buttons">
-              <button onClick={closeEditModal}>Confirm changes</button>
-              <button onClick={closeEditModal}>Cancel changes</button>
+              <button onClick={closeModal}>Confirm changes</button>
+              <button onClick={closeModal}>Cancel changes</button>
             </div>
           </Data>
 

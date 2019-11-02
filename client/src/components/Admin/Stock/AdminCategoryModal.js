@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {createRef} from 'react';
 import styled from 'styled-components';
 import posed from 'react-pose';
 import EditItemModal from './EditItemModal';
+import CreateItemModal from './CreateItemModal';
 
 const MainPosed = posed.div({
   initialPose: 'closed',
@@ -131,6 +132,10 @@ const AdminCategoryModal = ({modal, setModalOpen}) => {
   const [editModalOpen, setEditModalOpen] = React.useState(false);
   const [editModalContent, setEditModalContent] = React.useState(null);
 
+  const [createItemModalOpen, setCreateItemModalOpen] = React.useState(false);
+
+  const [targetButton, setTargetButton] = React.useState(null);
+
   React.useEffect(()=>{
     setIsOpen(true);
   }, [])
@@ -171,22 +176,34 @@ const AdminCategoryModal = ({modal, setModalOpen}) => {
     }, 500)
   }
 
-  const openEditModal = (item) => {
+  const closeEditModal = () => {
+    targetButton.style.zIndex=1;
+    targetButton.querySelector('i').classList.remove('fa', 'fa-chevron-left');
+    targetButton.querySelector('i').classList.add('fa', 'fa-cog');
+    setEditModalOpen(false);
+    setEditModalContent(null);
+  }
+
+  const openEditModal = (e, item) => {
     setEditModalContent(item);
     setEditModalOpen(true);
 
-
+    let targetBtn = e.target.closest('button');
+    targetBtn.style.zIndex=111;
+    targetBtn.querySelector('i').classList.remove('fa', 'fa-cog');
+    targetBtn.querySelector('i').classList.add('fa', 'fa-chevron-left');
+    setTargetButton(targetBtn);
     
-
-    // animate gear-icon
-
   }
 
   return (
 
 
     <Main pose={isOpen ? "open" : "closed"}>
-      {editModalOpen && <EditItemModal editModalContent={editModalContent} setEditModalOpen={setEditModalOpen} />}
+
+      {editModalOpen && <EditItemModal editModalContent={editModalContent} closeEditModal={closeEditModal} />}
+      {createItemModalOpen && <CreateItemModal setCreateItemModalOpen={setCreateItemModalOpen} /> }
+
       <Content pose={isOpen ? "open" : "closed"}>
 
         <Header>Category: {modal.name}</Header>
@@ -207,14 +224,16 @@ const AdminCategoryModal = ({modal, setModalOpen}) => {
 
           {tempDB.map((item,id) =>
             <Item key={id} >
-              <button onClick={(e)=>openEditModal(item)}><i className="fa fa-cog"></i></button>
+              <button id={`btn-${id}`} onClick={(e)=>openEditModal(e, item)}><i className="fa fa-cog"></i></button>
               <div>{item.name}</div>
               <div>{item.price}</div>
               <div>{item.inStock}</div>
               <button>Delete</button>
             </Item>
           )}
-        <AddItem>Add new item</AddItem>
+
+        <AddItem onClick={()=>setCreateItemModalOpen(true)}>Add new item</AddItem>
+
         </ItemList>
 
         
