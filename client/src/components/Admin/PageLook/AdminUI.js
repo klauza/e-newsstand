@@ -47,13 +47,46 @@ const Container = styled.div`
   }
 `;
 
-
 const Header = styled.h1`
   font-family: sans-serif;
   margin-bottom: 25px;
   opacity: 0.55;
 `;
 
+
+const Colors = styled.div`
+  width: 60em;
+  height: auto;
+  margin: 0 auto;
+  border: 1px solid grey;
+
+  div{
+    padding: 10px;
+  }
+
+  .settings-global-colors-header{
+    background: black;
+    color: white;
+  }
+
+  .settings-global-colors-pick_color{
+    background: white;
+    display: flex; flex-direction: row;
+    width: 100%;
+    div{
+      width: 100%;
+    }
+  }
+`;
+
+
+
+const AdminUI = () => {
+
+
+  const [showModal, setShowModal] = useState(null);
+
+  
 const linkDatabase = [
   {
     id: 0, 
@@ -111,12 +144,6 @@ const linkDatabase = [
 ];
 
 
-const AdminUI = () => {
-
-
-  const [showModal, setShowModal] = useState(null);
-
-
   
   return (
     <React.Fragment>
@@ -135,8 +162,31 @@ const AdminUI = () => {
           </section>
           )}
 
+
           <Header style={{marginTop: "25px"}}>Change color scheme</Header>
-          <div>Some list of colors</div>
+          <Colors>
+            <div className="settings-global-colors-header">Pick your color palette</div>
+
+            <div className="settings-global-colors-pick_color">
+              <div>color_name_1</div>
+              <div className="global-color-main-1">Main</div>
+              <div className="global-color-secondary-1">Secondary</div>
+            </div>
+
+            <div className="settings-global-colors-pick_color">
+              <div>color_name_2</div>
+              <div className="global-color-main-2">Main</div>
+              <div className="global-color-secondary-2">Secondary</div>
+            </div>
+
+            <div className="settings-global-colors-pick_color">
+              <div>color_name_3</div>
+              <div className="global-color-main-3">Main</div>
+              <div className="global-color-secondary-3">Secondary</div>
+            </div>
+            
+          </Colors>
+
 
         </Container>
       </Wrapper>
