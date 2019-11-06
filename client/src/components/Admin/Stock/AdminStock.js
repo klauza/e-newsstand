@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import styled from 'styled-components';
 import { Wrapper } from '../../../layout/StyledComponents';
 import AdminCategoryModal from './AdminCategoryModal';
+import CategoryCreator from './CategoryCreator';
 
 const Header = styled.h2`
   text-align: center;
@@ -39,6 +40,7 @@ const AdminStock = () => {
 
   const [modalOpen, setModalOpen] = useState(false);
   const [modal, setModal] = useState(null);
+  const [categoryModal, setCategoryModal] = useState(false);
 
   const [addNewItem, setAddNewItem] = useState({
     category: null,
@@ -49,6 +51,10 @@ const AdminStock = () => {
 
     setModal(category);
     setModalOpen(true);
+  }
+
+  const openCategoryCreator = () => {
+    setCategoryModal(true);
   }
 
   const temporaryArray = [
@@ -85,9 +91,11 @@ const AdminStock = () => {
 
       </ul>
 
-      {modalOpen && (<AdminCategoryModal setModalOpen={setModalOpen} modal={modal} />) }
+      { modalOpen && (<AdminCategoryModal setModalOpen={setModalOpen} modal={modal} />) }
 
-      <StockButton>Add new category</StockButton>
+      { categoryModal && ( <CategoryCreator setCategoryModal={setCategoryModal}/>) }
+
+      <StockButton onClick={openCategoryCreator} >Add new category</StockButton>
     </Wrapper>
   )
 }
