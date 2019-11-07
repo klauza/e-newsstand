@@ -1,8 +1,9 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import { Router, Route, Switch } from 'react-router-dom';
 import history from './history';
 import './App.scss';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import ColorsContext from './context/colorsContext';
 
 // redux
 import { Provider } from 'react-redux';
@@ -30,12 +31,46 @@ import AdminUI from './components/Admin/PageLook/AdminUI';
 
 function App() {
 
+  // get context
+  const colorContext = React.useContext(ColorsContext);
+
+
+  // Global Colors
+  const [main, setMain] = useState(null);
+  const [secondaryColor1, setSecondaryColor1] = useState(null);
+
+  React.useEffect(()=>{
+    // on APP load, set all colors as are saved in DB
+    setMain(colorContext.main);
+    setSecondaryColor1(colorContext.secondary1);
+  }, [])
+
+  const setGlobalColors = (mainColor, secondary1) => {
+   
+    // set locally
+    setMain(mainColor);
+    setSecondaryColor1(secondary1);
+    
+    // set in DB
+    // ...
+    // on page refresh, it will fetch from context, so from db
+  }
+  // 
+
 
   return (
     <Provider store={store}>
       <Router history={history}>
       <Fragment>
-        
+
+        <ColorsContext.Provider 
+          value={{ 
+            main: main, 
+            secondaryColor1: secondaryColor1, 
+            setGlobalColors: setGlobalColors 
+          }}>
+
+
         <Navigation/>
         <Alert />
         
@@ -77,7 +112,7 @@ function App() {
 
         )} />
 
-        
+        </ColorsContext.Provider>
       </Fragment>
       
       </Router>
