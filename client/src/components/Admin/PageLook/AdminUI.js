@@ -5,6 +5,7 @@ import { Wrapper } from '../../../layout/StyledComponents';
 import ModalUI from './ModalUI';
 import { homeImage0, homeImage1, homeImage2, homeImage3, homeImage4, homeImage5 } from '../../../media/index';
 
+import ColorsContext from '../../../context/colorsContext';
 
 const Container = styled.div`
   width: 100%;
@@ -76,6 +77,25 @@ const Colors = styled.div`
     div{
       width: 100%;
     }
+    .global-color-main{
+        font-family: sans-serif;
+      &-1{
+        background: red;
+        color: white;
+      }
+      &-2{
+        background: black;
+        color: white;
+      }
+    }
+    .global-color-secondary{
+      &-1{
+        background: orange;
+      }
+      &-2{
+        background: white;
+      }
+    }
   }
 `;
 
@@ -83,6 +103,7 @@ const Colors = styled.div`
 
 const AdminUI = () => {
 
+  const colorContext = React.useContext(ColorsContext);
 
   const [showModal, setShowModal] = useState(null);
 
@@ -168,9 +189,9 @@ const linkDatabase = [
             <div className="settings-global-colors-header">Pick your color palette</div>
 
             <div className="settings-global-colors-pick_color">
-              <div>color_name_1</div>
-              <div className="global-color-main-1">Main</div>
-              <div className="global-color-secondary-1">Secondary</div>
+              <button onClick={()=>colorContext.setGlobalColors("red", "orange")}>make changes</button>
+              <div className="global-color-main-1">Main: red</div>
+              <div className="global-color-secondary-1">Secondary: orange</div>
             </div>
 
             <div className="settings-global-colors-pick_color">
@@ -184,7 +205,7 @@ const linkDatabase = [
               <div className="global-color-main-3">Main</div>
               <div className="global-color-secondary-3">Secondary</div>
             </div>
-            
+
           </Colors>
 
 

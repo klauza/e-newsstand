@@ -8,6 +8,8 @@ import HomeCards from './HomeCards';
 import HomeCards2 from './HomeCards2';
 import styled from 'styled-components';
 
+import ColorsContext from '../../context/colorsContext';
+
 const Button = styled.button`
   position: absolute;
   left: 50%; transform: translateX(-50%);
@@ -25,14 +27,19 @@ const Button = styled.button`
 `;
 
 const Home = () => {
-
-  useEffect(()=>{
+  const colorContext = React.useContext(ColorsContext);
+  let color = colorContext.main;
+  
+  {/* <ColorsContext.Consumer>
+  {(context) => { */}
+ 
+  {/* useEffect(()=>{
     window.scrollTo({  
       top: 0,
       left: 0,
       behavior: 'smooth'
     })
-  }, [])
+  }, []) */}
 
   // for scrolling on button click
   const anchors = [
@@ -64,7 +71,7 @@ const Home = () => {
   
   return (
     <div style={{position: "absolute", left: "0", right: "0"}}>
-      <Link to="/admin"><Button style={{}}> <i className="fa fa-cog"></i> Admin panel</Button></Link>
+      <Link to="/admin"><Button> <i className="fa fa-cog"></i> <span style={{color:`${colorContext.main}`}}>Admin</span> <span style={{color:`${colorContext.secondaryColor1}`}} >panel</span></Button></Link>
       <HomeHero refs={refs} handleClick={handleClick} anchor={anchors[0]} />
       {/* <HomeCards /> */}
       <HomeCards2 />
@@ -73,6 +80,10 @@ const Home = () => {
       <LatestProducts refs={refs} handleClick={handleClick} anchor={anchors[2]} />
     </div>
   )
-}
+  // }
+  }
+  {/* </ColorsContext.Consumer> */}
+  // )
+
 
 export default Home
