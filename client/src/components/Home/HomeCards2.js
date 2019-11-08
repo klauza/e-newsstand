@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Solidity from '../../media/Home/checklist.svg';
 import Reliability from '../../media/Home/hourglass.svg'
 import Trust from '../../media/Home/shield.svg';
-import TestImage from '../../media/Home/373.jpg'
+// import TestImage from '../../media/Home/373.jpg'
 
 const Grid = styled.div`
   width: 100%;

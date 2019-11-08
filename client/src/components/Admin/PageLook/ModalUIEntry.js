@@ -51,6 +51,7 @@ const ModalUIEntry = ({sections, sectionHandleClick, setIsOpen, isOpen}) => {
 
   React.useEffect(()=>{
     setIsOpen(true);
+  //eslint-disable-next-line
   }, [])
 
   return (

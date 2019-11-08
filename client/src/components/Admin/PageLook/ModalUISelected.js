@@ -59,6 +59,7 @@ const ModalUISelected = ({selectSection, returnToAllSections, setIsOpen, isOpen}
 
   React.useEffect(()=>{
     setIsOpen(true);
+  // eslint-disable-next-line
   }, [])
   return (
     <React.Fragment>

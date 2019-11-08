@@ -1,4 +1,4 @@
-import React, {createRef} from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import posed from 'react-pose';
 import EditItemModal from './EditItemModal';
@@ -80,10 +80,17 @@ const Content = styled(ContentPosed)`
       padding: 5px;
       border-right: 1px solid lightgrey;
     }
+    button{cursor: pointer;}
     button:nth-of-type(1){
-      font-size: 1.5em;
+      font-size: 1.25em;
       grid-area: btn1;
-      border: 0;
+      border: 0; outline: 0;
+      transform-origin: 50% 50%;
+      @keyframes start-spin{
+        100%{
+          transform: rotate(180deg);
+        }
+      }
     }
       
     button:nth-of-type(2){
@@ -178,20 +185,23 @@ const AdminCategoryModal = ({modal, setModalOpen}) => {
 
   const closeEditModal = () => {
     targetButton.style.zIndex=1;
-    targetButton.querySelector('i').classList.remove('fa', 'fa-chevron-left');
-    targetButton.querySelector('i').classList.add('fa', 'fa-cog');
+    targetButton.querySelector('i').style.animation="none";
+    // targetButton.querySelector('i').classList.remove('fa', 'fa-chevron-left');
+    // targetButton.querySelector('i').classList.add('fa', 'fa-cog');
     setEditModalOpen(false);
     setEditModalContent(null);
   }
 
   const openEditModal = (e, item) => {
+
     setEditModalContent(item);
     setEditModalOpen(true);
 
     let targetBtn = e.target.closest('button');
     targetBtn.style.zIndex=111;
-    targetBtn.querySelector('i').classList.remove('fa', 'fa-cog');
-    targetBtn.querySelector('i').classList.add('fa', 'fa-chevron-left');
+    targetBtn.querySelector('i').style.animation="start-spin 2000ms infinite linear";
+    // targetBtn.querySelector('i').classList.remove('fa', 'fa-cog');
+    // targetBtn.querySelector('i').classList.add('fa', 'fa-chevron-left');
     setTargetButton(targetBtn);
     
   }

@@ -139,6 +139,7 @@ const ColorPickerContent = styled.div`
 const UiColors = styled.span`
   margin: 2.5px;
   width: 60px; height: 35px;
+  cursor: pointer;
   background: ${props => props.color};
 `;
 
@@ -213,7 +214,10 @@ const CreateItemContent = ({closeModal, modalNumero, nextModal, prevModal}) => {
       setNewItem(prevState => ({...prevState, colors: []}));
       setUiColors([]);
     }
-    setShowPicker(prevState => !prevState);
+    setTimeout(()=>{
+      setShowPicker(prevState => !prevState);
+    }, 400);
+
   }
 
   const handleAddColor = (color) => {
@@ -294,7 +298,7 @@ const CreateItemContent = ({closeModal, modalNumero, nextModal, prevModal}) => {
         <ColorPickerContainerCSS>
           
           <label htmlFor="colors"> Include Colors</label> <input id="colors" type="checkbox" defaultChecked={uiColors.length > 0 || showPicker} onClick={showColorPicker}/>
-
+          {uiColors.length > 0 && <span>Click on box to remove color</span>}
           {showPicker &&
           <Fragment>
             <ColorPickerContent>{uiColors.map((hexColor, id) => <UiColors key={id} color={hexColor} onClick={()=>deleteColorFromArray(hexColor)} />)}</ColorPickerContent>

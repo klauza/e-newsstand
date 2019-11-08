@@ -16,7 +16,9 @@ const Basket = ({setAlert, updateBasket, deleteItem, basket: {items}}) => {
   const updtItem = (item) => updateBasket(item);
 
   // ITEM DELETE
-  const delItem = (id) => deleteItem(id);
+  const delItem = (id) => {
+    deleteItem(id);
+  }
 
   // DISPLAY ITEM'S SUM PRICE
   const calculatePrice = (price, qty) =>  Math.round(qty * price * 100)/100
@@ -43,7 +45,7 @@ const Basket = ({setAlert, updateBasket, deleteItem, basket: {items}}) => {
             {items.length > 0 ? (
               items.map((item, id)=>{
                 return (
-                  <Item key={id}>
+                  <Item key={id} className={`item-${item.id}`}>
 
                     <ItemImage><img src={item.img} alt=""/></ItemImage>
 

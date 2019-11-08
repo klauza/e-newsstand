@@ -15,6 +15,7 @@ export const Container = styled.div`
 `;
 
 export const ItemsWrapper = styled.div`
+  position: relative;
   display: grid;
   grid-auto-rows: 200px;
   grid-row-gap: 35px;

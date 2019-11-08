@@ -123,7 +123,7 @@ const LatestProducts = ({refs, handleClick, anchor}) => {
     },
     {
       id: 3,
-      img: "https://www.historic-newspapers.co.uk/images/newspapers/lrg-newspaper.jpg",
+      img: "https://www.sltrib.com/resizer/HdQr40IwMB3Iw9q7TRaMPCZnkRE=/0x600/smart/filters:quality(86)/arc-anglerfish-arc2-prod-sltrib.s3.amazonaws.com/public/6NTJ7KLJEFCC7PI3OCEKL2Q3E4.jpg",
       name: "Piano",
       desc: "Product desc3",
       color: "red",

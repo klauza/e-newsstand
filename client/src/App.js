@@ -43,6 +43,7 @@ function App() {
     // on APP load, set all colors as are saved in DB
     set_state_nain_color(colorContext.mainGlobalColor);
     set_state_secondary_colors(colorContext.secondaryGlobalColors);
+    // eslint-disable-next-line
   }, [])
 
   const setGlobalColors = (mainColor, secColors) => {

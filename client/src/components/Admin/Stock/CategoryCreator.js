@@ -125,8 +125,7 @@ const CategoryCreator = ({setCategoryModal}) => {
   }
 
   const submitForm = () => {
-    console.log(catName);
-    console.log(catType);
+    console.log('Form submitted: ',catName, catType);
   }
 
 

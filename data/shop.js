@@ -45,7 +45,7 @@ const shopItems = [
         price: 3.99,
         shortDesc: "A newspaper made of unusual paper",
         longDesc: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Distinctio, at.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in tortor quis tellus molestie sodales. Mauris tristique auctor orci, et ultrices turpis placerat ut. Praesent.",
-        imgs: ["https://www.historic-newspapers.co.uk/images/newspapers/lrg-newspaper.jpg"],
+        imgs: ["https://www.sltrib.com/resizer/HdQr40IwMB3Iw9q7TRaMPCZnkRE=/0x600/smart/filters:quality(86)/arc-anglerfish-arc2-prod-sltrib.s3.amazonaws.com/public/6NTJ7KLJEFCC7PI3OCEKL2Q3E4.jpg"],
         inStock: 100
       },
       {

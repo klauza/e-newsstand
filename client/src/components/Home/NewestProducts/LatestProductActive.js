@@ -105,14 +105,13 @@ const LatestProductActive = ({activeProduct, showBackdrop, setShowBackdrop}) => 
   const [isZoomed, setIsZoomed] = useState(false);
 
   React.useEffect(()=>{
-    console.log('fire');
     window.addEventListener('scroll', ()=>{
       if(isZoomed){
         setIsZoomed(false);
         setShowBackdrop(false);
       }
     })
-
+  //eslint-disable-next-line
   }, [isZoomed])
 
   return (

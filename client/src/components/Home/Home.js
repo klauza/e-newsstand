@@ -4,7 +4,7 @@ import HomeHero from './HomeHero';
 import HomeFeaturedProducts from './HomeFeaturedProducts/HomeFeaturedProducts';
 import LatestProducts from './NewestProducts/LatestProducts';
 import AboutUs from './AboutUs';
-import HomeCards from './HomeCards';
+// import HomeCards from './HomeCards';
 import HomeCards2 from './HomeCards2';
 import styled from 'styled-components';
 
@@ -28,18 +28,14 @@ const Button = styled.button`
 
 const Home = () => {
   const colorContext = React.useContext(ColorsContext);
-  let color = colorContext.main;
   
-  {/* <ColorsContext.Consumer>
-  {(context) => { */}
- 
-  {/* useEffect(()=>{
+  useEffect(()=>{
     window.scrollTo({  
       top: 0,
       left: 0,
       behavior: 'smooth'
     })
-  }, []) */}
+  }, []) 
 
   // for scrolling on button click
   const anchors = [
@@ -80,10 +76,8 @@ const Home = () => {
       <LatestProducts refs={refs} handleClick={handleClick} anchor={anchors[2]} />
     </div>
   )
-  // }
-  }
-  {/* </ColorsContext.Consumer> */}
-  // )
+}
+
 
 
 export default Home

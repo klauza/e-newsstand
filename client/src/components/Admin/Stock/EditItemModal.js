@@ -52,7 +52,8 @@ const DataPosed = posed.div({
   }
 });
 const Data = styled(DataPosed)`
-  border: 2px solid red;
+  border: 1px solid #000;
+  box-shadow: 0 3px 3px -1px rgba(0,0,0,0.5);
   background: lightblue;
   color: #000;
   svg{
@@ -129,7 +130,9 @@ const EditItemModal = ({editModalContent, closeEditModal}) => {
     setInputs( { ...inputs, [e.target.id]: e.target.value} );
   }
 
+  // temp display of current editting item
   console.log(inputs);
+
   return (
     <Main pose={isOpen ? "editopen" : "editclosed"}>
       <Container>

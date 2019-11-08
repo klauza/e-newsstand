@@ -44,6 +44,7 @@ const AboutWebsite = () => {
         <div>trust Icon<a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
         <div><a href="https://www.freepik.com/free-photos-vectors/background">Background vector created by visnezh - www.freepik.com</a></div>
         <div>gear-lamp icon<a href="https://www.flaticon.com/authors/phatplus" title="phatplus">phatplus</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+        <a href="https://www.freepik.com/free-photos-vectors/icon">gear admin-vectors created by freepik - www.freepik.com</a>
       </ul>
 
       <AboutWebsiteWireframes />

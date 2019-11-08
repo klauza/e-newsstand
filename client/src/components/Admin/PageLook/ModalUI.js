@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
-import posed from 'react-pose';
 import ModalUIEntry from './ModalUIEntry';
 import ModalUISelected from './ModalUISelected';
 
@@ -72,7 +71,6 @@ const ModalUI = (props) => {
 
   const sectionHandleClick = (section) => {
 
-    console.log(section);
     setIsOpen(false);
     setTimeout(()=>{
       setSelectSection(section);
@@ -86,7 +84,6 @@ const ModalUI = (props) => {
     }, 500)
   }
 
-  console.log(isOpen);
   return (
     <ModalContainer closeModal={closeModal}>
       <button onClick={exitModal}>Close</button>

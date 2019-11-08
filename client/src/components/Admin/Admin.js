@@ -37,12 +37,14 @@ const Admin = ({adminLogin, adminLogOut, admin: {isAuthenticated}}) => {
               ref={loginRef} 
               type="text" 
               placeholder="login"
+              onChange={()=>console.log('')}
             />
             <input 
               value="password"
               ref={pwdRef} 
               type="password"
               placeholder="password"
+              onChange={()=>console.log('')}
             />
             <input type="submit" value="SUBMIT" />
           </form>

@@ -14,17 +14,22 @@ const StockButton = styled.button`
 const Category = styled.li`
   height: 50px;
   display: grid; 
-  grid-template-columns: auto 50px 50px;
+  grid-template-columns: 1fr 1fr 50px 50px;
   border: 1px solid black;
   div{
     line-height: 50px;
   }
   .category-name{
+    padding-left: 5px;
     background: orange;
     &:hover{
       cursor: pointer;
       background: whitesmoke;
     }
+  }
+  .category-type{
+    padding-left: 5px;
+    background: lightyellow;
   }
   .category-edit{
     background: greenyellow;
@@ -42,10 +47,6 @@ const AdminStock = () => {
   const [modal, setModal] = useState(null);
   const [categoryModal, setCategoryModal] = useState(false);
 
-  const [addNewItem, setAddNewItem] = useState({
-    category: null,
-    item: null
-  })
 
   const openModal = (category) => {
 
@@ -60,14 +61,17 @@ const AdminStock = () => {
   const temporaryArray = [
     {
       name: "Gadgets",
+      type: "category type",
       id: 0
     },
     {
       name: "Newspapers",
+      type: "category type",
       id: 1
     },
     {
       name: "Letters",
+      type: "category type",
       id: 2
     }
   ]
@@ -83,6 +87,7 @@ const AdminStock = () => {
         {temporaryArray.map( (cat,id) =>
           <Category key={id}>
             <div className="category-name" onClick={()=>openModal(cat)}>{cat.name}</div>
+            <div className="category-type">{cat.type}</div>
             <div className="category-edit"><i className="fa fa-pencil-square"></i></div>
             <div className="category-delete"><i className="fa fa-times"></i></div>
           </Category>
