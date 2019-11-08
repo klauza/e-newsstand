@@ -62,7 +62,13 @@ export const ItemDesc = styled.div`
     }
   }
 `;
-
+export const ColorBox = styled.span`
+  width: 15px; height: 15px;
+  margin: 0 2.5px;
+  background-color: ${props => props.color};
+  display: inline-block;
+  line-height: 15px;
+`;
 // DELETE ITEM
 export const DeleteItem = styled.button`
   position: absolute;

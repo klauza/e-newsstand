@@ -41,6 +41,7 @@ const ContactDelivery = styled.a`
 const Item = ({addToBasket, setAlert, props, basket: {items}}) => {
 
   const [quantity, setQuantity] = useState(1);
+  const [chosenColor, setChosenColor] = useState(null);
   const [theItem, setTheItem] = useState(null);
 
   useEffect(()=> {
@@ -50,9 +51,10 @@ const Item = ({addToBasket, setAlert, props, basket: {items}}) => {
     
     fetch(`/api/shop/item/${props.match.params.item}`)
       .then(res => res.json())
-      .then(data => setTheItem(data.result[0]) )
-      
- 
+      .then(data => setTheItem(data.result[0]) 
+    )
+
+
 
   //eslint-disable-next-line
   }, [])
@@ -62,14 +64,23 @@ const Item = ({addToBasket, setAlert, props, basket: {items}}) => {
   const handleQuantity = (qty) => {
     setQuantity(qty);
   }
+  const handleColor = (color) => {
+    setChosenColor(color);
+  }
 
   const throwToBasket = () => {
+
     if(theItem.inStock > 0){
       
       if(items.length > 0){
+        // see if not already in basket
         let inBasket = items.some((item) => item.id === theItem.id )
 
         if(inBasket === true) return setAlert("Item already in basket", "info", 2000);
+      }
+
+      if(theItem.colors !== undefined && chosenColor === null){
+        return setAlert("Please choose the color of this item", "info", 2000);
       }
 
       if(theItem.inStock < quantity) return setAlert("Not enough items in stock", "info", 2000);
@@ -80,6 +91,7 @@ const Item = ({addToBasket, setAlert, props, basket: {items}}) => {
         price: theItem.price,
         quantity,
         inStock: theItem.inStock,
+        color: `${chosenColor !== null && chosenColor}`,
         img: theItem.imgs[0]
       });
       setAlert("Item added to basket", "success", 2000);
@@ -98,7 +110,7 @@ const Item = ({addToBasket, setAlert, props, basket: {items}}) => {
 
           <ItemImageGallery images={theItem.imgs} />
 
-          <ItemBuySection inStock={theItem.inStock} price={theItem.price} throwToBasket={throwToBasket} handleQuantity={handleQuantity} />
+          <ItemBuySection colors={theItem.colors} inStock={theItem.inStock} price={theItem.price} throwToBasket={throwToBasket} handleColor={handleColor} handleQuantity={handleQuantity} />
 
           <ItemDescription longDesc={theItem.longDesc} />
           

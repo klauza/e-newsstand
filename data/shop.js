@@ -115,6 +115,7 @@ const shopItems = [
         shortDesc: "Anti-all weather umbrella made of solid paper",
         longDesc: "This is a great chance for you to acquire this amazing umbrella. It's antimalware external shell will protect you from anything. It's an opportunity for you to be protected for unlimited time.",
         imgs: ["https://ae01.alicdn.com/kf/HTB1cTJUPVXXXXbuXVXXq6xXFXXXB/Originality-Newspaper-Three-Folding-style-Umbrellas-Rain-Women-Men-High-Quality-Cheap-Fashion-Bumbershoot.jpg", "https://ae01.alicdn.com/kf/HTB1HTBPPVXXXXaeaXXXq6xXFXXXO/Originality-Newspaper-Three-Folding-style-Umbrellas-Rain-Women-Men-High-Quality-Cheap-Fashion-Bumbershoot.jpg", "https://ae01.alicdn.com/kf/HTB1GzyfPVXXXXbLXpXXq6xXFXXXq/Originality-Newspaper-Three-Folding-style-Umbrellas-Rain-Women-Men-High-Quality-Cheap-Fashion-Bumbershoot.jpg"],
+        colors: ["#0000ff", "#00ff00", "#000"],
         inStock: 5
       },
       {

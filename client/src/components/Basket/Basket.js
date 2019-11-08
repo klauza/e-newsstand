@@ -5,7 +5,7 @@ import { updateBasket, deleteItem } from '../../actions/basketActions';
 import { setAlert } from '../../actions/alertActions';
 
 import { Wrapper } from '../../layout/StyledComponents';
-import {Container, ItemsWrapper, Item, ItemImage, ItemDesc, DeleteItem, PayButton} from './BasketCSS';
+import {Container, ItemsWrapper, Item, ItemImage, ItemDesc, DeleteItem, PayButton, ColorBox} from './BasketCSS';
 
 
 
@@ -48,7 +48,7 @@ const Basket = ({setAlert, updateBasket, deleteItem, basket: {items}}) => {
                     <ItemImage><img src={item.img} alt=""/></ItemImage>
 
                     <ItemDesc>
-                      <div>{item.name}</div>
+                      <div>{item.name}{item.color !== false && <ColorBox color={item.color}></ColorBox>}</div>
                       <div>quantity {item.quantity} 
                         <button disabled={item.inStock <= item.quantity} onClick={()=>{ updtItem({...item, quantity: item.quantity+1})  }}><i className="fa fa-plus"></i></button>
                         <button disabled={item.quantity === 1} onClick={()=>{ updtItem({...item, quantity: item.quantity-1})  }}><i className="fa fa-minus"></i></button> 

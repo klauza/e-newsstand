@@ -46,8 +46,44 @@ const BuyButton = styled.button`
     border: 1px solid white;
   }
 `;
+const ColorBox = styled.div`
+  width: 20px; height: 20px;
+  margin: 0 2.5px;
+  background-color: ${props => props.color};
+  display: inline-block;
+  line-height: 20px;
+  cursor: pointer;
+  &:hover{
+    outline-offset: 1px;
+    outline: 1px solid black;
+  }
+  position: relative;
+  /* Tick above box */
+  &.picked_color{
+    pointer-events: none;
+    &::before{
+      content: '';
+      position: absolute;
+      top: -7.5px; left: 32.5%; transform: translateX(-50%) rotate(45deg);
+      display: block;
+      width: 5px; height: 2px; 
+      background: #000;
+    }
+    &::after{
+      content: '';
+      position: absolute;
+      top: -9px; left: 52%; transform: translateX(-50%) rotate(-45deg);
+      display: block;
+      width: 10px; height: 2px; 
+      background: #000;
+    }
 
-const ItemBuySection = ({inStock, price, throwToBasket, handleQuantity}) => {
+
+  }
+`;
+
+
+const ItemBuySection = ({inStock, price, colors, throwToBasket, handleQuantity, handleColor}) => {
 
  
   const qtyOptions = [];
@@ -57,11 +93,18 @@ const ItemBuySection = ({inStock, price, throwToBasket, handleQuantity}) => {
     
   }
 
+  const addColorClass = (e) => {
+    // del previous color class
+    Array.from(e.target.parentNode.children).forEach(colorBox => colorBox.classList.remove('picked_color'));
+    // add new color class
+    e.target.classList.add('picked_color');
+  }
 
   return (
     <Container>
 
       <Price>
+        {colors !== undefined && <div>Available colors: {colors.map((color,id) => <ColorBox key={id} color={color} onClick={(e)=>{handleColor(color); addColorClass(e)}}></ColorBox>)}</div>}
         <p>Price: £{price}</p>
         <p>Availability: {inStock > 0 ? (<InStock>In stock <i className="fa fa-check"></i></InStock>) : (<OutOfStock>Out of stock <i className="fa fa-times"></i></OutOfStock>)}</p>
       </Price>
