@@ -37,9 +37,15 @@ const Content = styled(ContentPosed)`
     margin: 10px 0;
   }
 `;
-
-const ColorsContainer = styled.div`
+const ColorPickerContainerCSS = styled.div`
+  border: 1px solid red;
+`;
+const ColorPickerContent = styled.div`
+  height: auto;
+  margin: 10px auto;
   display: flex; flex-direction: row;
+  flex-wrap: wrap;
+  min-height: 35px;
 `;
 const UiColors = styled.span`
   margin: 2.5px;
@@ -52,7 +58,7 @@ const CreateItemContent = ({closeModal, modalNumero, nextModal, prevModal}) => {
   const [isOpen, setIsOpen] = React.useState(false);
 
   const [uiColors, setUiColors] = React.useState([]);
-  const [newColor, setNewColor] = React.useState(false);
+  const [showPicker, setShowPicker] = React.useState(false);
   const [newItem, setNewItem] = React.useState({
     name: null,
     longName: null,
@@ -93,19 +99,41 @@ const CreateItemContent = ({closeModal, modalNumero, nextModal, prevModal}) => {
     }
   }
 
-  const addNewColorBox = () => {
-    setNewColor(true);
+  const showColorPicker = () => {
+    //delete data if was open
+    if(showPicker){
+      setNewItem(prevState => ({...prevState, colors: []}));
+      setUiColors([]);
+    }
+    setShowPicker(prevState => !prevState);
   }
 
   const handleAddColor = (color) => {
-    // add new color
-    // items: [action.payload, ...state.items]
-    setUiColors([...uiColors, color.hex]);
-    // close color picker
+    // check if not applied already, return if true
+    let alreadyPicked;
+    newItem.colors.forEach(col => {
+      if(col === color.hex){
+        console.log(color.hex, 'already picked');
+        alreadyPicked = true;
+      }
+    })
+    if(alreadyPicked){ return }    // if already picked, end, do not add this color
+
+    
+    // add new color to item-creator
+    setNewItem(prevState => ({...prevState, colors: [...newItem.colors, color.hex]}));
     // set "setNewColor" to false
-    // display color on UI (add to array)
+
+    // display colors onto UI
+    setUiColors([...uiColors, color.hex]);
+    
+    // close color picker
   }
   const deleteColorFromArray = (color) => {
+    // delete color from item-creator
+    setNewItem(prevState => ({...prevState, colors: newItem.colors.filter(col => col !== color)}));
+
+    // delete color from UI
     setUiColors(uiColors.filter(col => col !== color));
   }
 
@@ -146,20 +174,26 @@ const CreateItemContent = ({closeModal, modalNumero, nextModal, prevModal}) => {
         </Fragment>
       }
       {modalNumero === 3 &&
-        <Fragment>
+      <Fragment>
+        <ColorPickerContainerCSS>
           
-          <label htmlFor="colors">Colors</label>
-          {/* <input type="text" id="colors" onChange={(e)=>updateNewItem(e)} value={ (newItem.colors.length !== 0) ? newItem.colors : ""} /> */}
-          <ColorsContainer>{uiColors.map((hexColor, id) => <UiColors key={id} color={hexColor} onClick={()=>deleteColorFromArray(hexColor)} />)}</ColorsContainer>
-          <button onClick={addNewColorBox}>Add</button>
-          {newColor && <SwatchesPicker onChange={handleAddColor} />}
-          
-          <button onClick={submitNewItem}>Submit</button>
-          <button onClick={prevModal}>Previous</button>
-        </Fragment>
+          <label htmlFor="colors">Add Colors<input type="checkbox" defaultChecked={uiColors.length > 0 || showPicker} onClick={showColorPicker}/></label>
+          {/* {uiColors.length/} */}
+          {showPicker &&
+          <Fragment>
+            <ColorPickerContent>{uiColors.map((hexColor, id) => <UiColors key={id} color={hexColor} onClick={()=>deleteColorFromArray(hexColor)} />)}</ColorPickerContent>
+
+            <SwatchesPicker onChange={handleAddColor} />
+          </Fragment>
+          }
+
+        </ColorPickerContainerCSS>
+
+        <button onClick={submitNewItem}>Submit</button>
+        <button onClick={prevModal}>Previous</button>
+      </Fragment>
       }
 
-      
     </Content>
   )
 }
