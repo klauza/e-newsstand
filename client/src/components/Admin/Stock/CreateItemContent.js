@@ -1,4 +1,5 @@
 import React, {Fragment} from 'react';
+import { SwatchesPicker } from 'react-color';
 import styled from 'styled-components';
 import posed from 'react-pose';
 
@@ -37,12 +38,21 @@ const Content = styled(ContentPosed)`
   }
 `;
 
-
+const ColorsContainer = styled.div`
+  display: flex; flex-direction: row;
+`;
+const UiColors = styled.span`
+  margin: 2.5px;
+  width: 60px; height: 35px;
+  background: ${props => props.color};
+`;
 
 const CreateItemContent = ({closeModal, modalNumero, nextModal, prevModal}) => {
 
   const [isOpen, setIsOpen] = React.useState(false);
 
+  const [uiColors, setUiColors] = React.useState([]);
+  const [newColor, setNewColor] = React.useState(false);
   const [newItem, setNewItem] = React.useState({
     name: null,
     longName: null,
@@ -50,7 +60,8 @@ const CreateItemContent = ({closeModal, modalNumero, nextModal, prevModal}) => {
     longDesc: null,
     slugs: [],
     price: null,
-    inStock: null
+    inStock: null,
+    colors: []
   })
   React.useEffect(()=>{
     setIsOpen(true);
@@ -74,7 +85,7 @@ const CreateItemContent = ({closeModal, modalNumero, nextModal, prevModal}) => {
       let slugArr = string    // Spaces can be used to make 2-word slug.
         .split(",")   // coma is a separator of two slugs
         .map(itm => itm.trim())  // Spaces can be used at the beginning(will be trimmed) 
-        .filter(itm =>  itm !== "" ); // delete empty slugs made with coma
+        .filter(itm =>  itm !== "" ); // delete empty slugs made with coma, return only those who are correctly written
       
       setNewItem(prevState => ({...prevState, slugs: slugArr})); 
     }else{
@@ -82,10 +93,27 @@ const CreateItemContent = ({closeModal, modalNumero, nextModal, prevModal}) => {
     }
   }
 
+  const addNewColorBox = () => {
+    setNewColor(true);
+  }
+
+  const handleAddColor = (color) => {
+    // add new color
+    // items: [action.payload, ...state.items]
+    setUiColors([...uiColors, color.hex]);
+    // close color picker
+    // set "setNewColor" to false
+    // display color on UI (add to array)
+  }
+  const deleteColorFromArray = (color) => {
+    setUiColors(uiColors.filter(col => col !== color));
+  }
+
   const submitNewItem = () => {
     console.log(newItem);
   }
   console.log(newItem);
+  console.log('uicolors: ', uiColors);
 
   return (
     <Content pose={isOpen ? "isopen" : "isclosed"} >
@@ -96,22 +124,22 @@ const CreateItemContent = ({closeModal, modalNumero, nextModal, prevModal}) => {
         <Fragment>
           <label htmlFor="name">Name</label>
           <input type="text" id="name" onChange={(e)=>updateNewItem(e)} value={ (newItem.name !== null) ? newItem.name : ""} />
-          <label htmlFor="longName">longName</label>
+          <label htmlFor="longName">Long name</label>
           <input type="text" id="longName" onChange={(e)=>updateNewItem(e)} value={ (newItem.longName !== null) ? newItem.longName : ""} />
-          <label htmlFor="shortDesc">shortDesc</label>
+          <label htmlFor="shortDesc">Short description</label>
           <input type="text" id="shortDesc" onChange={(e)=>updateNewItem(e)} value={ (newItem.shortDesc !== null) ? newItem.shortDesc : ""} />
-          <label htmlFor="longDesc">longDesc</label>
+          <label htmlFor="longDesc">Long description</label>
           <input type="text" id="longDesc" onChange={(e)=>updateNewItem(e)} value={ (newItem.longDesc !== null) ? newItem.longDesc : ""} />
-          <label htmlFor="slugs">Tags</label>
+          <label htmlFor="slugs">Tags ',' will split tags</label>
           <input type="text" id="slugs" onChange={(e)=>updateNewItem(e)} value={ (newItem.slugs.length !== 0) ? newItem.slugs : ""} />
           <button onClick={()=>{ nextModal(); splitSlugsIntoArray(newItem.slugs)}}>Next</button>
         </Fragment>
       }
       {modalNumero === 2 &&
         <Fragment>
-          <label htmlFor="price">price</label>
+          <label htmlFor="price">Price</label>
           <input type="number" id="price" onChange={(e)=>updateNewItem(e)} value={ (newItem.price !== null) ? newItem.price : ""} />
-          <label htmlFor="inStock">stock qty</label>
+          <label htmlFor="inStock">Stock quantity</label>
           <input type="number" id="inStock" onChange={(e)=>updateNewItem(e)} value={ (newItem.inStock !== null) ? newItem.inStock : ""} />
           <button onClick={nextModal}>Next</button>
           <button onClick={prevModal}>Previous</button>
@@ -119,7 +147,13 @@ const CreateItemContent = ({closeModal, modalNumero, nextModal, prevModal}) => {
       }
       {modalNumero === 3 &&
         <Fragment>
-          <div>Three</div>
+          
+          <label htmlFor="colors">Colors</label>
+          {/* <input type="text" id="colors" onChange={(e)=>updateNewItem(e)} value={ (newItem.colors.length !== 0) ? newItem.colors : ""} /> */}
+          <ColorsContainer>{uiColors.map((hexColor, id) => <UiColors key={id} color={hexColor} onClick={()=>deleteColorFromArray(hexColor)} />)}</ColorsContainer>
+          <button onClick={addNewColorBox}>Add</button>
+          {newColor && <SwatchesPicker onChange={handleAddColor} />}
+          
           <button onClick={submitNewItem}>Submit</button>
           <button onClick={prevModal}>Previous</button>
         </Fragment>
