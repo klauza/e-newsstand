@@ -56,47 +56,94 @@ const Header = styled.h1`
 
 
 const Colors = styled.div`
-  width: 60em;
+  width: 100%;
   height: auto;
   margin: 0 auto;
-  border: 1px solid grey;
+  /* border: 1px solid grey; */
 
-  div{
-    padding: 10px;
-  }
 
-  .settings-global-colors-header{
+  .global-colors-header{
     background: black;
     color: white;
+    padding: 15px;
   }
 
-  .settings-global-colors-pick_color{
-    background: white;
-    display: flex; flex-direction: row;
+  .color-div-items-header{
+    display: grid;
+    grid-template-columns: 50px 30px 1fr 5fr;
+    padding: 10px 5px;
+    justify-items: left;
+    &>*{
+      margin-left: 10px;
+    }
+  }
+`;
+
+const ColorItem = styled.div`
+  display: grid;
+  grid-template-columns: 50px 30px auto;
+  grid-auto-rows: 50px;
+  align-items: center;
+  justify-items: center;
+  width: 100%;
+  padding: 10px 5px;
+  
+
+  button{
+    width: 100%;height: 100%;
+    border: 1px solid white; 
+    border-radius: 3px;
+    background: #00ff00;
+    box-shadow: 0 1px 6px 0 rgba(0,0,0,.75);
+    cursor: pointer;
+  }
+
+  span{
     width: 100%;
-    div{
-      width: 100%;
+    height: 10px;
+    background: #000;
+  }
+  
+  .global-colors-container{
+    width: 100%; height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    align-items: center;
+    justify-items: center;
+    background: #ECEFFF;
+    box-shadow: 0 1px 6px 0 rgba(0,0,0,.75);
+  }
+  .global-color{
+    
+    &__main{
+      width: 80%; height: 80%;
+      background: black;
+      border: 1px solid grey;
     }
-    .global-color-main{
-        font-family: sans-serif;
-      &-1{
-        background: red;
-        color: white;
+
+    &__secondary-colors{
+      width: 100%; height: 100%;
+      display: grid; 
+      grid-template-columns: repeat(2, 1fr);
+      align-items: center;
+      justify-items: center;
+
+      .secondary-col-1{
+        display: block;
+        width: 80%; height: 80%;
+        background: #6CC5C2;
+        border: 1px solid grey;
       }
-      &-2{
-        background: black;
-        color: white;
-      }
-    }
-    .global-color-secondary{
-      &-1{
-        background: orange;
-      }
-      &-2{
-        background: white;
+      .secondary-col-2{
+        display: block;
+        width: 80%; height: 80%;
+        background: #DC8227;
+        border: 1px solid grey;
       }
     }
   }
+
+
 `;
 
 
@@ -186,25 +233,26 @@ const linkDatabase = [
 
           <Header style={{marginTop: "25px"}}>Change color scheme</Header>
           <Colors>
-            <div className="settings-global-colors-header">Pick your color palette</div>
+            <div className="global-colors-header">Pick your color palette</div>
 
-            <div className="settings-global-colors-pick_color">
-              <button onClick={()=>colorContext.setGlobalColors("red", "orange")}>make changes</button>
-              <div className="global-color-main-1">Main: red</div>
-              <div className="global-color-secondary-1">Secondary: orange</div>
+            <div className="color-div-items-header">
+              <div />
+              <div />
+              <div>Main color</div>
+              <div>Secondary colors</div>
             </div>
 
-            <div className="settings-global-colors-pick_color">
-              <div>color_name_2</div>
-              <div className="global-color-main-2">Main</div>
-              <div className="global-color-secondary-2">Secondary</div>
-            </div>
-
-            <div className="settings-global-colors-pick_color">
-              <div>color_name_3</div>
-              <div className="global-color-main-3">Main</div>
-              <div className="global-color-secondary-3">Secondary</div>
-            </div>
+            <ColorItem>
+              <button onClick={()=>colorContext.setGlobalColors("red", "orange")}><i className="fa fa-check"></i></button>
+              <span />
+              <div className="global-color global-colors-container">
+                <div className="global-color__main"></div>
+                <div className="global-color__secondary-colors">
+                  <div className="secondary-col-1"></div>
+                  <div className="secondary-col-2"></div>
+                </div>
+              </div>
+            </ColorItem>
 
           </Colors>
 
