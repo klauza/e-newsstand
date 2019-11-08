@@ -2,6 +2,7 @@ import React, { Fragment, useState } from 'react';
 import { Router, Route, Switch } from 'react-router-dom';
 import history from './history';
 import './App.scss';
+
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import ColorsContext from './context/colorsContext';
 
@@ -10,23 +11,23 @@ import { Provider } from 'react-redux';
 import store from './store';
 
 // pages
-import Navigation from './layout/Navigation/Navigation';
-import Alert from './layout/Alert';
-import NotFound from './layout/NotFound';
+import Navigation from './components/layout/Navigation/Navigation';
+import Alert from './components/layout/ReusableComponents/UIAlert';
+import NotFound from './components/layout/NotFound';
 //Home
-import Home from './components/Home/Home';
+import Home from './components/pages/Home/Home';
 //Shop
-import ShopCategories from './components/Shop/ShopCategories';
-import Search from './components/Shop/Search';
-import Item from './components/Item/Item';
-import Basket from './components/Basket/Basket';
+import ShopCategories from './components/pages/Shop/ShopCategories';
+import Search from './components/pages/Shop/Search';
+import Item from './components/pages/Item/Item';
+import Basket from './components/pages/Basket/Basket';
 //Contact
-import Contact from './components/Contact/Contact';
+import Contact from './components/pages/Contact/Contact';
 //Admin
-import AdminLogin from './components/Admin/AdminLogin';
-import AdminSettings from './components/Admin/Settings/AdminSettings';
-import HomeStock from './components/Admin/Stock/HomeStock';
-import HomeChangeUI from './components/Admin/ChangeUI/HomeChangeUI';
+import AdminLogin from './components/pages/Admin/AdminLogin';
+import AdminSettings from './components/pages/Admin/Settings/AdminSettings';
+import HomeStock from './components/pages/Admin/Stock/HomeStock';
+import HomeChangeUI from './components/pages/Admin/ChangeUI/HomeChangeUI';
 
 
 function App() {
@@ -62,7 +63,7 @@ function App() {
     <Provider store={store}>
       <Router history={history}>
       <Fragment>
-
+        
         <ColorsContext.Provider 
           value={{ 
             mainColor: state_main_color, 
@@ -70,43 +71,38 @@ function App() {
             setGlobalColors: setGlobalColors 
           }}>
 
-
         <Navigation/>
         <Alert />
         
-
-
         <Route render={({ location }) => (
 
+          <TransitionGroup>
 
-        <TransitionGroup>
+            <CSSTransition
+              in={true}
+              appear={true}
+              key={location.key}
+              timeout={450}
+              classNames="fade" 
+            >
+              <Switch location={location}>
+                <Route exact path="/" component={Home} />
+                <Route exact path="/shop" component={ShopCategories} />
+                <Route exact path="/shop/item/:item" component={Item} />
+                <Route exact path="/shop/search" component={Search} />
+                <Route exact path="/contact" component={Contact} />
+                <Route exact path="/basket" component={Basket} />
 
+                <Route exact path="/admin" component={AdminLogin} />
+                <Route exact path="/admin/settings" component={AdminSettings} />
+                <Route exact path="/admin/stock" component={HomeStock} />
+                <Route exact path="/admin/change-ui" component={HomeChangeUI} />
 
-          <CSSTransition
-            in={true}
-            appear={true}
-            key={location.key}
-            timeout={450}
-            classNames="fade" 
-          >
-            <Switch location={location}>
-              <Route exact path="/" component={Home} />
-              <Route exact path="/shop" component={ShopCategories} />
-              <Route exact path="/shop/item/:item" component={Item} />
-              <Route exact path="/shop/search" component={Search} />
-              <Route exact path="/contact" component={Contact} />
-              <Route exact path="/basket" component={Basket} />
+                <Route component={NotFound} />
+              </Switch>
+            </CSSTransition>
 
-              <Route exact path="/admin" component={AdminLogin} />
-              <Route exact path="/admin/settings" component={AdminSettings} />
-              <Route exact path="/admin/stock" component={HomeStock} />
-              <Route exact path="/admin/change-ui" component={HomeChangeUI} />
-
-              <Route component={NotFound} />
-            </Switch>
-          </CSSTransition>
-
-        </TransitionGroup>
+          </TransitionGroup>
 
 
 
