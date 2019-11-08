@@ -30,16 +30,27 @@ const Content = styled(ContentPosed)`
   color: black;
   display: flex; flex-direction: column;
   position: relative;
+  font-family: sans-serif;
   @media(max-width: 768px){
     width: 97.5%;
     height: 70vh;
   }
-  h1{
+  h2{
+    text-align: center;
     color: black;
   }
   .exit-button{
-    width: 120px; height: 30px;
     margin: 10px 0;
+    font-family: sans-serif;
+    width: 120px; height: 40px;
+    border: 0;
+    background: red;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 3px 4px -2px rgba(0,0,0,0.7);
+    &:hover{
+      background: #d00000;
+    }
   }
   .bottom-buttons{
     width: 100%;
@@ -67,6 +78,48 @@ const Content = styled(ContentPosed)`
 /* COLOR PICKER */
 const ColorPickerContainerCSS = styled.div`
   border: 1px solid red;
+  label{
+    border: 2px solid yellow;
+    padding: 10px;
+  }
+  input[type="checkbox"]{
+    position: relative;
+    width: 80px;
+    height: 40px;
+    appearance: none;
+    background: #c6c6c6;
+    outline: none;
+    border-radius: 20px;
+    transition: all .5s;
+    box-shadow: 0 0 5px rgba(0,0,0,.2);
+    cursor: pointer;
+    &::after{
+      content: '';
+      position: absolute; top: 0; left: 0;
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background-color: #fff;
+      transform: scale(1.1) translateX(0);
+      box-shadow: 0 2px 5px rgba(0,0,0,.2);
+      transition: all .5s;
+    }
+    &::before{
+      content: 'no';
+      position: absolute; top: 0; left: 100px;
+      line-height: 40px;
+      pointer-events: none;
+    }
+    &:checked{
+      background: #03a9f4;
+      &::after{
+        transform: scale(1.1) translateX(40px);
+      }
+      &::before{
+        content: 'yes';
+      }
+    }
+
+  }
   .color-picker{
     width: 80%!IMPORTANT; 
     margin: 0 auto; display: block;
@@ -89,7 +142,24 @@ const UiColors = styled.span`
   background: ${props => props.color};
 `;
 
+/* IMAGES */
+const ImageContainer = styled.div`
 
+  button{
+    width: 120px; height: 40px;
+    border: 0;
+    background: blue;
+    color: white;
+    font-family: sans-serif;
+    margin-top: 25px;
+    cursor: pointer;
+    box-shadow: 0 3px 4px -2px rgba(0,0,0,0.7);
+    &:hover{
+      background: green;
+    }
+
+  }
+`;
 
 const CreateItemContent = ({closeModal, modalNumero, nextModal, prevModal}) => {
 
@@ -172,6 +242,11 @@ const CreateItemContent = ({closeModal, modalNumero, nextModal, prevModal}) => {
     setUiColors(uiColors.filter(col => col !== color));
   }
 
+  const addImages = () => {
+    console.log('feature coming soon');
+  }
+
+
   const submitNewItem = () => {
     console.log(newItem);
   }
@@ -179,8 +254,8 @@ const CreateItemContent = ({closeModal, modalNumero, nextModal, prevModal}) => {
 
   return (
     <Content pose={isOpen ? "isopen" : "isclosed"} >
-      <h1>page {modalNumero} </h1>
-      <button className="exit-button" onClick={closeModal}>Cancel & Exit</button>
+      <h2>Item creator: page {modalNumero} / 3 </h2>
+      <button className="exit-button" onClick={closeModal}>Cancel & Exit <i className="fa fa-times"></i></button>
 
       {modalNumero === 1 && 
         <Fragment>
@@ -218,8 +293,8 @@ const CreateItemContent = ({closeModal, modalNumero, nextModal, prevModal}) => {
       <Fragment>
         <ColorPickerContainerCSS>
           
-          <label htmlFor="colors"> Add Colors<input id="colors" type="checkbox" defaultChecked={uiColors.length > 0 || showPicker} onClick={showColorPicker}/></label>
-          {/* {uiColors.length/} */}
+          <label htmlFor="colors"> Include Colors</label> <input id="colors" type="checkbox" defaultChecked={uiColors.length > 0 || showPicker} onClick={showColorPicker}/>
+
           {showPicker &&
           <Fragment>
             <ColorPickerContent>{uiColors.map((hexColor, id) => <UiColors key={id} color={hexColor} onClick={()=>deleteColorFromArray(hexColor)} />)}</ColorPickerContent>
@@ -230,7 +305,9 @@ const CreateItemContent = ({closeModal, modalNumero, nextModal, prevModal}) => {
 
         </ColorPickerContainerCSS>
 
-
+        <ImageContainer>
+          <button onClick={addImages}>Add Images <i className="fa fa-file-image-o"></i></button>
+        </ImageContainer>
 
         <div className="bottom-buttons">
           <button onClick={prevModal}>Previous</button>
