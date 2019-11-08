@@ -29,6 +29,11 @@ const Content = styled(ContentPosed)`
   height: 50vh;
   color: black;
   display: flex; flex-direction: column;
+  position: relative;
+  @media(max-width: 768px){
+    width: 97.5%;
+    height: 70vh;
+  }
   h1{
     color: black;
   }
@@ -36,22 +41,55 @@ const Content = styled(ContentPosed)`
     width: 120px; height: 30px;
     margin: 10px 0;
   }
+  .bottom-buttons{
+    width: 100%;
+    position: absolute;
+    bottom: 0; left: 0;
+    display: flex; flex-direction: row;
+    justify-content: space-between;
+    button{
+      width: 120px; height: 40px;
+      border: 0;
+      background: lightseagreen;
+      cursor: pointer;
+      font-family: sans-serif;
+      &:hover{
+        background: green;
+      }
+
+    }
+    .submit-btn{
+      background: yellowgreen;
+    }
+  }
 `;
+
+/* COLOR PICKER */
 const ColorPickerContainerCSS = styled.div`
   border: 1px solid red;
+  .color-picker{
+    width: 80%!IMPORTANT; 
+    margin: 0 auto; display: block;
+    padding: 0 20px;
+    @media(max-width: 768px){
+      width: 100%!IMPORTANT; 
+    }
+  }
 `;
 const ColorPickerContent = styled.div`
   height: auto;
   margin: 10px auto;
   display: flex; flex-direction: row;
   flex-wrap: wrap;
-  min-height: 35px;
+  min-height: 40px;
 `;
 const UiColors = styled.span`
   margin: 2.5px;
   width: 60px; height: 35px;
   background: ${props => props.color};
 `;
+
+
 
 const CreateItemContent = ({closeModal, modalNumero, nextModal, prevModal}) => {
 
@@ -119,15 +157,12 @@ const CreateItemContent = ({closeModal, modalNumero, nextModal, prevModal}) => {
     })
     if(alreadyPicked){ return }    // if already picked, end, do not add this color
 
-    
     // add new color to item-creator
     setNewItem(prevState => ({...prevState, colors: [...newItem.colors, color.hex]}));
-    // set "setNewColor" to false
 
     // display colors onto UI
     setUiColors([...uiColors, color.hex]);
     
-    // close color picker
   }
   const deleteColorFromArray = (color) => {
     // delete color from item-creator
@@ -141,7 +176,6 @@ const CreateItemContent = ({closeModal, modalNumero, nextModal, prevModal}) => {
     console.log(newItem);
   }
   console.log(newItem);
-  console.log('uicolors: ', uiColors);
 
   return (
     <Content pose={isOpen ? "isopen" : "isclosed"} >
@@ -160,7 +194,11 @@ const CreateItemContent = ({closeModal, modalNumero, nextModal, prevModal}) => {
           <input type="text" id="longDesc" onChange={(e)=>updateNewItem(e)} value={ (newItem.longDesc !== null) ? newItem.longDesc : ""} />
           <label htmlFor="slugs">Tags ',' will split tags</label>
           <input type="text" id="slugs" onChange={(e)=>updateNewItem(e)} value={ (newItem.slugs.length !== 0) ? newItem.slugs : ""} />
-          <button onClick={()=>{ nextModal(); splitSlugsIntoArray(newItem.slugs)}}>Next</button>
+
+          <div className="bottom-buttons">
+            <button style={{visibility: "hidden"}}>hidden btn</button>
+            <button onClick={()=>{ nextModal(); splitSlugsIntoArray(newItem.slugs)}}>Next</button>
+          </div>
         </Fragment>
       }
       {modalNumero === 2 &&
@@ -169,28 +207,35 @@ const CreateItemContent = ({closeModal, modalNumero, nextModal, prevModal}) => {
           <input type="number" id="price" onChange={(e)=>updateNewItem(e)} value={ (newItem.price !== null) ? newItem.price : ""} />
           <label htmlFor="inStock">Stock quantity</label>
           <input type="number" id="inStock" onChange={(e)=>updateNewItem(e)} value={ (newItem.inStock !== null) ? newItem.inStock : ""} />
-          <button onClick={nextModal}>Next</button>
-          <button onClick={prevModal}>Previous</button>
+
+          <div className="bottom-buttons">
+            <button onClick={prevModal}>Previous</button>
+            <button onClick={nextModal}>Next</button>
+          </div>
         </Fragment>
       }
       {modalNumero === 3 &&
       <Fragment>
         <ColorPickerContainerCSS>
           
-          <label htmlFor="colors">Add Colors<input type="checkbox" defaultChecked={uiColors.length > 0 || showPicker} onClick={showColorPicker}/></label>
+          <label htmlFor="colors"> Add Colors<input id="colors" type="checkbox" defaultChecked={uiColors.length > 0 || showPicker} onClick={showColorPicker}/></label>
           {/* {uiColors.length/} */}
           {showPicker &&
           <Fragment>
             <ColorPickerContent>{uiColors.map((hexColor, id) => <UiColors key={id} color={hexColor} onClick={()=>deleteColorFromArray(hexColor)} />)}</ColorPickerContent>
 
-            <SwatchesPicker onChange={handleAddColor} />
+            <SwatchesPicker height="160px" className="color-picker" onChange={handleAddColor} />
           </Fragment>
           }
 
         </ColorPickerContainerCSS>
 
-        <button onClick={submitNewItem}>Submit</button>
-        <button onClick={prevModal}>Previous</button>
+
+
+        <div className="bottom-buttons">
+          <button onClick={prevModal}>Previous</button>
+          <button onClick={submitNewItem} className="submit-btn">Submit</button>
+        </div>
       </Fragment>
       }
 
