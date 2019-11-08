@@ -117,35 +117,26 @@ const ColorItem = styled.div`
     
     &__main{
       width: 80%; height: 80%;
-      background: black;
+      background: ${props => props.mainColor};
       border: 1px solid grey;
     }
 
     &__secondary-colors{
+      border-left: 1px solid grey;
       width: 100%; height: 100%;
       display: grid; 
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(${props => props.secondaryQty}, 1fr);
       align-items: center;
       justify-items: center;
-
-      .secondary-col-1{
-        display: block;
-        width: 80%; height: 80%;
-        background: #6CC5C2;
-        border: 1px solid grey;
-      }
-      .secondary-col-2{
-        display: block;
-        width: 80%; height: 80%;
-        background: #DC8227;
-        border: 1px solid grey;
-      }
     }
   }
-
-
 `;
-
+const SecondaryColor = styled.div`
+  display: block;
+  width: 80%; height: 80%;
+  border: 1px solid grey;
+  background: ${props => props.secondaryColor};
+`;
 
 
 const AdminUI = () => {
@@ -211,6 +202,18 @@ const linkDatabase = [
   }
 ];
 
+const globalColors = [
+  {
+    id: 1,
+    main: "#000",
+    secondary: ["#6CC5C2", "#DC8227"]
+  },
+  {
+    id: 2,
+    main: "#fff",
+    secondary: ["#e84e43", "#4395de", "#c93a52"]
+  }
+]
 
   
   return (
@@ -242,18 +245,18 @@ const linkDatabase = [
               <div>Secondary colors</div>
             </div>
 
-            <ColorItem>
-              <button onClick={()=>colorContext.setGlobalColors("red", "orange")}><i className="fa fa-check"></i></button>
-              <span />
-              <div className="global-color global-colors-container">
-                <div className="global-color__main"></div>
-                <div className="global-color__secondary-colors">
-                  <div className="secondary-col-1"></div>
-                  <div className="secondary-col-2"></div>
+            {globalColors.map((col, id) =>
+              <ColorItem key={id} mainColor={col.main} secondaryQty={col.secondary.length}>
+                <button onClick={()=>colorContext.setGlobalColors(col.main, col.secondary[0])}><i className="fa fa-check"></i></button>
+                <span />
+                <div className="global-color global-colors-container">
+                  <div className="global-color__main"></div>
+                  <div className="global-color__secondary-colors">
+                    {col.secondary.map((sec, ids)=> <SecondaryColor key={ids} secondaryColor={sec}></SecondaryColor> )}
+                  </div>
                 </div>
-              </div>
-            </ColorItem>
-
+              </ColorItem>
+            )}
           </Colors>
 
 
