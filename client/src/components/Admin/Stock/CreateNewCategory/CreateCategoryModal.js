@@ -104,7 +104,7 @@ const Content = styled(ContentPosed)`
   }
 `;
 
-const CategoryCreator = ({setCategoryModal}) => {
+const CreateCategoryModal = ({setCategoryModal}) => {
 
   const name = React.useRef();
   const type = React.useRef();
@@ -164,4 +164,4 @@ const CategoryCreator = ({setCategoryModal}) => {
   )
 }
 
-export default CategoryCreator
+export default CreateCategoryModal

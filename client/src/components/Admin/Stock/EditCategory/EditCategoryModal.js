@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import posed from 'react-pose';
-import EditItemModal from './EditItemModal';
-import CreateItemModal from './CreateItemModal';
+import EditItemModal from '../EditItem/EditItemModal';
+import CreateItemModal from '../CreateNewItem/CreateItemModal';
 
 const MainPosed = posed.div({
   initialPose: 'closed',
@@ -133,7 +133,7 @@ const AddItem = styled.button`
 
 `;
 
-const AdminCategoryModal = ({modal, setModalOpen}) => {
+const EditCategoryModal = ({modal, setModalOpen}) => {
 
   const [isOpen, setIsOpen] = React.useState(false);
   const [editModalOpen, setEditModalOpen] = React.useState(false);
@@ -252,4 +252,4 @@ const AdminCategoryModal = ({modal, setModalOpen}) => {
   )
 }
 
-export default AdminCategoryModal
+export default EditCategoryModal

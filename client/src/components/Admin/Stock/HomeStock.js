@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
 import { Wrapper } from '../../../layout/StyledComponents';
-import AdminCategoryModal from './AdminCategoryModal';
-import CategoryCreator from './CategoryCreator';
+import CreateCategoryModal from './CreateNewCategory/CreateCategoryModal';  // create new category
+import EditCategoryModal from './EditCategory/EditCategoryModal';   // edit category
 
 const Header = styled.h2`
   text-align: center;
@@ -41,7 +41,7 @@ const Category = styled.li`
   }
 `;
 
-const AdminStock = () => {
+const HomeStock = () => {
 
   const [modalOpen, setModalOpen] = useState(false);
   const [modal, setModal] = useState(null);
@@ -95,14 +95,15 @@ const AdminStock = () => {
 
 
       </ul>
+      {/* create new category */}
+      { categoryModal && ( <CreateCategoryModal setCategoryModal={setCategoryModal}/>) }
 
-      { modalOpen && (<AdminCategoryModal setModalOpen={setModalOpen} modal={modal} />) }
-
-      { categoryModal && ( <CategoryCreator setCategoryModal={setCategoryModal}/>) }
+      {/* edit category */}
+      { modalOpen && (<EditCategoryModal setModalOpen={setModalOpen} modal={modal} />) }
 
       <StockButton onClick={openCategoryCreator} >Add new category</StockButton>
     </Wrapper>
   )
 }
 
-export default AdminStock
+export default HomeStock

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import posed from 'react-pose';
-import SvgGearLampEdit from '../../../Icons/SvgGearLampEdit';
+import SvgGearLampEdit from '../../../../Icons/SvgGearLampEdit';
 
 const MainPosed = posed.div({
   initialPose: 'editclosed',

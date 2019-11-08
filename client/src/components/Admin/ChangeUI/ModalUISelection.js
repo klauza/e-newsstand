@@ -47,7 +47,7 @@ const Section = styled(SectionPose)`
   }
 `;
 
-const ModalUIEntry = ({sections, sectionHandleClick, setIsOpen, isOpen}) => {
+const ModalUISelection = ({sections, sectionHandleClick, setIsOpen, isOpen}) => {
 
   React.useEffect(()=>{
     setIsOpen(true);
@@ -66,4 +66,4 @@ const ModalUIEntry = ({sections, sectionHandleClick, setIsOpen, isOpen}) => {
   )
 }
 
-export default ModalUIEntry
+export default ModalUISelection

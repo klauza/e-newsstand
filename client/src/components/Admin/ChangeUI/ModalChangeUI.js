@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
-import ModalUIEntry from './ModalUIEntry';
+import ModalUISelection from './ModalUISelection';
 import ModalUISelected from './ModalUISelected';
 
 const ModalContainer = styled.div`
@@ -53,7 +53,7 @@ display: inline-block;
 
 
 
-const ModalUI = (props) => {
+const ModalChangeUI = (props) => {
   const [closeModal, setCloseModal] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [selectSection, setSelectSection] = useState(null);
@@ -90,11 +90,13 @@ const ModalUI = (props) => {
       <button onClick={exitModal}>Confirm changes</button>
       <Header>Choose section for {props.modal.name} </Header>
 
+      {/* First modal, opens up which page you'd like to change */}
       {selectSection === null &&
-        <ModalUIEntry setIsOpen={setIsOpen} isOpen={isOpen} sectionHandleClick={sectionHandleClick} sections={props.modal.sections} />
+        <ModalUISelection setIsOpen={setIsOpen} isOpen={isOpen} sectionHandleClick={sectionHandleClick} sections={props.modal.sections} />
       }
 
 
+      {/* Second modal, opens up set of available changes */}
       {(selectSection !== null) && (
         <ModalUISelected setIsOpen={setIsOpen} isOpen={isOpen} selectSection={selectSection} returnToAllSections={returnToAllSections} />
       )}
@@ -104,4 +106,4 @@ const ModalUI = (props) => {
   )
 }
 
-export default ModalUI
+export default ModalChangeUI

@@ -23,10 +23,10 @@ import Basket from './components/Basket/Basket';
 //Contact
 import Contact from './components/Contact/Contact';
 //Admin
-import Admin from './components/Admin/Admin';
+import AdminLogin from './components/Admin/AdminLogin';
 import AdminSettings from './components/Admin/Settings/AdminSettings';
-import AdminStock from './components/Admin/Stock/AdminStock';
-import AdminUI from './components/Admin/PageLook/AdminUI';
+import HomeStock from './components/Admin/Stock/HomeStock';
+import HomeChangeUI from './components/Admin/ChangeUI/HomeChangeUI';
 
 
 function App() {
@@ -97,10 +97,10 @@ function App() {
               <Route exact path="/contact" component={Contact} />
               <Route exact path="/basket" component={Basket} />
 
-              <Route exact path="/admin" component={Admin} />
+              <Route exact path="/admin" component={AdminLogin} />
               <Route exact path="/admin/settings" component={AdminSettings} />
-              <Route exact path="/admin/stock" component={AdminStock} />
-              <Route exact path="/admin/change-ui" component={AdminUI} />
+              <Route exact path="/admin/stock" component={HomeStock} />
+              <Route exact path="/admin/change-ui" component={HomeChangeUI} />
 
               <Route component={NotFound} />
             </Switch>

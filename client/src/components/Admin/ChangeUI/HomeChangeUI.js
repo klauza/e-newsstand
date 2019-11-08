@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import styled from 'styled-components';
 // import posed from 'react-pose';
 import { Wrapper } from '../../../layout/StyledComponents';
-import ModalUI from './ModalUI';
+import ModalChangeUI from './ModalChangeUI';
 import { homeImage0, homeImage1, homeImage2, homeImage3, homeImage4 } from '../../../media/index';
 
 import ColorsContext from '../../../context/colorsContext';
@@ -139,7 +139,7 @@ const SecondaryColor = styled.div`
 `;
 
 
-const AdminUI = () => {
+const HomeChangeUI = () => {
 
   const colorContext = React.useContext(ColorsContext);
 
@@ -219,7 +219,7 @@ const globalColors = [
   return (
     <React.Fragment>
       
-      {(showModal !== null) && <ModalUI setShowModal={setShowModal} modal={showModal} />}
+      {(showModal !== null) && <ModalChangeUI setShowModal={setShowModal} modal={showModal} />}
 
       <Wrapper>
         <Container disableClick={showModal !== null}>
@@ -266,5 +266,5 @@ const globalColors = [
   )
 }
 
-export default AdminUI
+export default HomeChangeUI
 

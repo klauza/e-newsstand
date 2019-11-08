@@ -2,9 +2,9 @@ import React, {useRef} from 'react';
 import { connect } from 'react-redux';
 import { adminLogin, adminLogOut } from '../../actions/adminActions';
 import AdminLogged from './AdminLogged';
-import { Container, Header, LoginContainer } from './AdminCSS';
+import { Container, Header, LoginContainer } from './AdminLoginCSS';
 
-const Admin = ({adminLogin, adminLogOut, admin: {isAuthenticated}}) => {
+const AdminLogin = ({adminLogin, adminLogOut, admin: {isAuthenticated}}) => {
 
   const loginRef = useRef();
   const pwdRef = useRef();
@@ -62,4 +62,4 @@ const Admin = ({adminLogin, adminLogOut, admin: {isAuthenticated}}) => {
 const mapStateToProps = (state) => ({
   admin: state.admin
 })
-export default connect(mapStateToProps, {adminLogin, adminLogOut})(Admin)
+export default connect(mapStateToProps, {adminLogin, adminLogOut})(AdminLogin)
