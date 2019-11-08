@@ -71,7 +71,7 @@ const Home = () => {
   
   return (
     <div style={{position: "absolute", left: "0", right: "0"}}>
-      <Link to="/admin"><Button> <i className="fa fa-cog"></i> <span style={{color:`${colorContext.main}`}}>Admin</span> <span style={{color:`${colorContext.secondaryColor1}`}} >panel</span></Button></Link>
+      <Link to="/admin"><Button> <i className="fa fa-cog"></i> <span style={{color:`${colorContext.mainColor}`}}>Admin</span> <span style={{color:`${colorContext.secondaryColors[0]}`}} >panel</span></Button></Link>
       <HomeHero refs={refs} handleClick={handleClick} anchor={anchors[0]} />
       {/* <HomeCards /> */}
       <HomeCards2 />

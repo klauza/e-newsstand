@@ -36,28 +36,27 @@ function App() {
 
 
   // Global Colors
-  const [main, setMain] = useState(null);
-  const [secondaryColor1, setSecondaryColor1] = useState(null);
+  const [state_main_color, set_state_nain_color] = useState(null);
+  const [state_secondary_colors, set_state_secondary_colors] = useState([]);
 
   React.useEffect(()=>{
     // on APP load, set all colors as are saved in DB
-    setMain(colorContext.main);
-    setSecondaryColor1(colorContext.secondary1);
+    set_state_nain_color(colorContext.mainGlobalColor);
+    set_state_secondary_colors(colorContext.secondaryGlobalColors);
   }, [])
 
-  const setGlobalColors = (mainColor, secondary1) => {
-   
-    // set locally
-    setMain(mainColor);
-    setSecondaryColor1(secondary1);
+  const setGlobalColors = (mainColor, secColors) => {
+    // save to local app state
+    set_state_nain_color(mainColor);
+    set_state_secondary_colors(secColors);
     
-    // set in DB
+    // save to DB
     // ...
     // on page refresh, it will fetch from context, so from db
   }
-  // 
 
 
+  
   return (
     <Provider store={store}>
       <Router history={history}>
@@ -65,8 +64,8 @@ function App() {
 
         <ColorsContext.Provider 
           value={{ 
-            main: main, 
-            secondaryColor1: secondaryColor1, 
+            mainColor: state_main_color, 
+            secondaryColors: state_secondary_colors, 
             setGlobalColors: setGlobalColors 
           }}>
 

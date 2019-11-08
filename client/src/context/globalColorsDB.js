@@ -1,7 +1,8 @@
 // fetch colors from DB
+// THIS FILE IMITATES DATABASE
 const globalCol = {
-  mainGlobalColor: "white",
-  secondary1GlobalColor: "white"
+  mainDBColor: "white",
+  secondaryDBColors: ["#fff", "#d4d4d4"]
 };
 
 export default globalCol

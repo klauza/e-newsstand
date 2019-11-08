@@ -247,7 +247,7 @@ const globalColors = [
 
             {globalColors.map((col, id) =>
               <ColorItem key={id} mainColor={col.main} secondaryQty={col.secondary.length}>
-                <button onClick={()=>colorContext.setGlobalColors(col.main, col.secondary[0])}><i className="fa fa-check"></i></button>
+                <button onClick={()=>colorContext.setGlobalColors(col.main, col.secondary)}><i className="fa fa-check"></i></button>
                 <span />
                 <div className="global-color global-colors-container">
                   <div className="global-color__main"></div>
