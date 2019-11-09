@@ -31,10 +31,15 @@ const Category = styled.li`
   margin: 5px 0;
   
   .category-manage-items{
-    border: 0; outline: 0;
+    border: 1px solid #000; 
+    outline: 0;
     height: 100%; width: 100%;
     background: lightblue; color: white;
     cursor: pointer;
+    i{
+      color: #000;
+      font-size: 1.5em;
+    }
   }
 
   .category-name {
@@ -130,7 +135,7 @@ const HomeStock = () => {
 
         {temporaryArray.map( (cat,id) =>
           <Category key={id}>
-            <button className="category-manage-items" onClick={()=>openModal(cat)}><i className="fa fa-pencil-square"></i></button>
+            <button className="category-manage-items" onClick={()=>openModal(cat)}><i className="fa fa-wrench"></i></button>
             <div className="category-name">{cat.name} <i className="fa fa-pencil-square" onClick={()=>editCategoryName(cat)}></i></div>
             
             <button className="category-delete" onClick={()=>deleteCat(cat)}><i className="fa fa-times"></i></button>

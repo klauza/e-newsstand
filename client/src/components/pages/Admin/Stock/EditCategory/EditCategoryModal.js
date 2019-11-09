@@ -237,8 +237,7 @@ const EditCategoryModal = ({storedCategory, setOpenCatEditor}) => {
 
         <Header>Category: {storedCategory.name}</Header>
         <div style={{width: "auto", margin: "0 auto 20px"}}>
-          <UIBtnPosed exit innerText="Cancel" fontIcon="fa fa-times" onClick={closeModal} />
-          <UIBtnPosed success innerText="Apply changes" fontIcon="fa fa-check" onClick={closeModal} />
+          <UIBtnPosed info innerText="Back" fontIcon="fa fa-arrow-up" onClick={closeModal} />
         </div>
 
         <ItemList>

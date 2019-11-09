@@ -25,6 +25,10 @@ const AdminDashboardButtons = styled.div`
     font-family: 'Oswald', sans-serif;
     color: white;
     background: #000;
+    &:hover{
+      color: grey;
+      background: #000;
+    }
   }
 `;
 
@@ -34,11 +38,11 @@ const AdminLogged = ({logout}) => {
     <Wrapper>
 
       <AdminTopBar>
-        <UIBtn exit onClick={logout} innerText="Log out" fontIcon="fa fa-power-off" />
-        <UIBtn info innerText="See updates changelog" />
+        <UIBtn exit innerText="Log out" fontIcon="fa fa-power-off" onClick={logout} />
+        <Link to="/admin/changelog"> <UIBtn info innerText="See updates changelog" /> </Link>
       </AdminTopBar>
      
-      <Header>Admin dashboard, version 1.0 </Header>
+      <Header>Admin dashboard</Header>
       
       <AdminDashboardButtons>
         <Link to="/admin/settings"> <UIBtn innerText="Shop Settings" /> </Link>

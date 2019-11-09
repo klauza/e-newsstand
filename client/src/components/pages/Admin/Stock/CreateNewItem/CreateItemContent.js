@@ -2,6 +2,8 @@ import React, {Fragment} from 'react';
 import { SwatchesPicker } from 'react-color';
 import styled from 'styled-components';
 import posed from 'react-pose';
+import { UIBtn } from '../../../../layout/ReusableComponents/UIButtons';
+
 
 const ContentPosed = posed.div({
   initialPose: 'closed',
@@ -39,19 +41,7 @@ const Content = styled(ContentPosed)`
     text-align: center;
     color: black;
   }
-  .exit-button{
-    margin: 10px 0;
-    font-family: sans-serif;
-    width: 120px; height: 40px;
-    border: 0;
-    background: red;
-    color: white;
-    cursor: pointer;
-    box-shadow: 0 3px 4px -2px rgba(0,0,0,0.7);
-    &:hover{
-      background: #d00000;
-    }
-  }
+
   .bottom-buttons{
     width: 100%;
     position: absolute;
@@ -259,7 +249,8 @@ const CreateItemContent = ({closeModal, modalNumero, nextModal, prevModal}) => {
   return (
     <Content pose={isOpen ? "isopen" : "isclosed"} >
       <h2>Item creator: page {modalNumero} / 3 </h2>
-      <button className="exit-button" onClick={closeModal}>Cancel & Exit <i className="fa fa-times"></i></button>
+
+      <UIBtn exit innerText="Cancel & Exit" fontIcon="fa fa-times" onClick={closeModal} style={{margin: "10px 0", width: "145px"}} />
 
       {modalNumero === 1 && 
         <Fragment>
