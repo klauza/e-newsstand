@@ -26,14 +26,12 @@ const MainPosed = posed.div({
   }
 })
 const Main = styled(MainPosed)`
-  position: fixed;
-  top: 0px; left: 0px;
-  right: 0px;
-  bottom: 0px;
-  background: lightgrey;
-  color: white;
   z-index: 100;
   height: 100%;
+  position: fixed; 
+  top: 0px; left: 0px; right: 0px; bottom: 0px;
+  background: rgba(219, 219, 219, 0.75);
+  color: white;
 `;
 
 const ContentPosed = posed.div({
@@ -53,54 +51,12 @@ const Content = styled(ContentPosed)`
   width: 90%; height: 100%;
   margin: auto;
   background: grey;
-
-  .top-buttons{
-    width: auto;
-    margin: 0 auto 20px;
-  }
-
-  ul{
-    width: 90%;
-    margin: 0 auto;
-  }
-  li{
-    display: grid; 
-    grid-template-columns: 50px 100px 100px 100px auto 150px; 
-    grid-template-areas: "btn1 div1 div2 div3 . btn2";
-    border: 1px solid white;
-    div:nth-of-type(1){
-      grid-area: div1;
-    }
-    div:nth-of-type(2){
-      grid-area: div2;
-    }
-    div:nth-of-type(3){
-      grid-area: div3;
-    }
-    
-    div{
-      padding: 5px;
-      border-right: 1px solid lightgrey;
-    }
-    button{cursor: pointer;}
-    button:nth-of-type(1){
-      font-size: 1.25em;
-      grid-area: btn1;
-      border: 0; outline: 0;
-      transform-origin: 50% 50%;
-      @keyframes start-spin{
-        100%{
-          transform: rotate(180deg);
-        }
-      }
-    }
-      
-    button:nth-of-type(2){
-      grid-area: btn2;
-      border: 0;
-    }
+  @media(max-width: 768px){
+    width: 100%;
   }
 `;
+
+// HEADER
 const HeaderPosed = posed.h2({
   open: { y: 0, opacity: 1 },
   closed: { y: 20, opacity: 0 }
@@ -109,30 +65,117 @@ const Header = styled(HeaderPosed)`
   line-height: 30px;
   text-align: center;
   margin: 20px 0;
+  font-family: sans-serif;
 `;
 
 
 
-
-
-
-
-const ItemList = posed.ul({
+// ITEM LIST
+const ItemListPosed = posed.ul({
   initialPose: 'closed',
   open: {
     opacity: 1,
-    delayChildren: 750, 
+    delayChildren: 800, 
     staggerChildren: 50
   },
   closed: {     
     opacity: 0
   }
-});
-const Item = posed.li({
+})
+const ItemList = styled(ItemListPosed)`
+  width: 90%;
+  margin: 0 auto;
+  @media(max-width:768px){
+    width: 97.5%;
+  }
+`;
+
+
+// ITEM-POSE
+const ItemPosed = posed.li({
   open: { y: 0, opacity: 1 },
   closed: { y: 20, opacity: 0 }
 })
+// HEAD-ITEM - HIDDEN ON MOBILE
+const HeaderItem = styled(ItemPosed)`
+  display: grid; 
+  grid-template-columns: 50px 100px 100px 100px 1fr 150px; 
+  grid-template-areas: "a b c d . e";
+  @media(max-width: 768px){ display: none; }
+  
+  div{
+    text-align: center;
+    background: #000; color: #fff;
+  }
+  div:nth-child(1){ grid-area: a; }
+  div:nth-child(2){ grid-area: b; }
+  div:nth-child(3){ grid-area: c; }
+  div:nth-child(4){ grid-area: d; }
+  div:nth-child(5){ grid-area: e; }
+`;
+// ITEM
+const Item = styled(ItemPosed)`
+  margin: 2.5px 0;
+  border: 1px solid white;  
+  display: grid; 
+  grid-template-columns: 50px 100px 100px 100px auto 150px; 
+  grid-auto-rows: 50px;
+  grid-template-areas: "btn1 divName divPrice divStock . btn2";
+  &>*{
+    text-align: center;
+  }
+  div{
+    padding: 5px;
+    border-right: 1px solid lightgrey;
+    span{
+      @media(min-width: 769px){
+        display: none;
+      }
+    }
+  }
+  .edit-item-name{
+    grid-area: divName;
+  }
+  .edit-item-price{
+    grid-area: divPrice;
+  }
+  .edit-item-inStock{
+    grid-area: divStock;
+  }
 
+  button{
+    cursor: pointer;
+  }
+  .edit-item-openBtn{
+    font-size: 1.25em;
+    grid-area: btn1;
+    border: 0; outline: 0;
+    transform-origin: 50% 50%;
+    background: white;
+    @keyframes start-spin{
+      100%{
+        transform: rotate(180deg);
+      }
+    }
+  }
+  .edit-item-delete{
+    grid-area: btn2;
+    border: 0;
+  }
+  /* MOBILE ITEM */
+  @media(max-width: 768px){
+    grid-template-columns: repeat(8, 1fr); 
+    grid-template-rows: 40px 40px;
+    grid-template-areas: 
+    "btn1 btn1 divName divName divName divName btn2 btn2"
+    "btn1 btn1 divPrice divPrice divStock divStock btn2 btn2" ;
+    .edit-item-name,
+    .edit-item-price,
+    .edit-item-inStock{
+      padding: 0;
+    }
+  }
+`;
 
 const EditCategoryModal = ({storedCategory, setOpenCatEditor}) => {
 
@@ -190,40 +233,38 @@ const EditCategoryModal = ({storedCategory, setOpenCatEditor}) => {
       {editItemModal && <EditItemModal editItemData={editItemData} closeEditModal={closeEditModal} />}
       {createItemModalOpen && <CreateItemModal setCreateItemModalOpen={setCreateItemModalOpen} /> }
 
-      <Content pose={isOpen ? "open" : "closed"}>
+      <Content>
 
         <Header>Category: {storedCategory.name}</Header>
-
-        <div className="top-buttons">
+        <div style={{width: "auto", margin: "0 auto 20px"}}>
           <UIBtnPosed exit innerText="Cancel" fontIcon="fa fa-times" onClick={closeModal} />
           <UIBtnPosed success innerText="Apply changes" fontIcon="fa fa-check" onClick={closeModal} />
         </div>
 
-        <ItemList pose={isOpen ? "open" : "closed"}>
+        <ItemList>
 
-          <Item>
-            <button></button>
-            <div>name</div>
-            <div>price</div>
+          <HeaderItem>
+            <div>Edit</div>
+            <div>Name</div>
+            <div>Price</div>
             <div>inStock</div>
-            <button></button>
-          </Item>
+            <div>Delete item</div>
+          </HeaderItem>
 
           {tempDB.map((item,id) =>
             <Item key={id} >
-              <button id={`btn-${id}`} onClick={(e)=>openEditModal(e, item)}><i className="fa fa-cog"></i></button>
-              <div>{item.name}</div>
-              <div>{item.price}</div>
-              <div>{item.inStock}</div>
-              <button>Delete</button>
+              <button className="edit-item-openBtn" id={`btn-${id}`} onClick={(e)=>openEditModal(e, item)}><i className="fa fa-cog"></i></button>
+              <div className="edit-item-name">{item.name}</div>
+              <div className="edit-item-price"><span>price:</span>{item.price}</div>
+              <div className="edit-item-inStock"><span>in stock:</span>{item.inStock}</div>
+              <button className="edit-item-delete">Delete</button>
             </Item>
           )}
 
-        <UIBtnPosed blue innerText="Add new item" fontIcon="fa fa-plus-circle" onClick={openCreateItemModal} style={{marginTop: "15px"}} />
+          <UIBtnPosed blue innerText="Add new item" fontIcon="fa fa-plus-circle" onClick={openCreateItemModal} style={{margin: "15px 0 0 0"}} />
 
         </ItemList>
 
-        
       </Content>
     </Main>
   )

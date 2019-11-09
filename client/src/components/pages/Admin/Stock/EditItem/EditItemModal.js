@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import posed from 'react-pose';
+import { UIBtn } from '../../../../layout/ReusableComponents/UIButtons';
 import SvgGearLampEdit from '../../../../../Icons/SvgGearLampEdit';
 
 const MainPosed = posed.div({
@@ -22,16 +23,31 @@ const Main = styled(MainPosed)`
   right: 0px;
   bottom: 0px;
   background: rgba(0,0,0,0.25);
+  @media(max-width: 768px){
+    z-index: 120;
+    overflow-y: scroll;
+  }
 `;
 const Container = styled.div`
   width: 90%;
   margin: 120px auto 0;
+  @media(max-width: 768px){ 
+    width: 100%;
+    margin-top: 60px;
+    padding-bottom: 60px;
+  }
 `;
 const Content = styled.div`
   /* h2 height + buttons height */
   width: 90%;
   margin: 0 auto;
   display: grid; grid-template-columns: 50px auto;
+  @media(max-width: 768px){  
+    grid-template-columns: auto;
+    .hide-on-mobile{
+      display: none;
+    }
+  }
 
 `;
 
@@ -77,9 +93,18 @@ const Data = styled(DataPosed)`
     margin: 10px auto;
     display: flex; flex-direction: row;
     justify-content: center;
-    button{
+    @media(max-width: 768px){
+      margin: 0;
+      position: sticky; bottom: 0;
+    }
+    button{ 
       width: auto;
       margin: 5px;
+      padding: 10px;
+      @media(max-width: 768px){
+        margin: 0; padding: 0;
+        width: 100%; height: 40px;
+      }
     }
   }
 
@@ -87,8 +112,7 @@ const Data = styled(DataPosed)`
     div{
       padding: 5px 0;
       margin: 5px;
-      display: grid; grid-template-columns: minmax(auto, 200px) auto;
-        
+      display: grid; grid-template-columns: 1fr 1fr;
       label, input{
         line-height: 20px;
       }
@@ -137,7 +161,7 @@ const EditItemModal = ({editItemData, closeEditModal}) => {
     <Main pose={isOpen ? "editopen" : "editclosed"}>
       <Container>
         <Content>
-          <div></div>
+          <div className="hide-on-mobile"></div>
 
           <Data pose={isOpen ? "editopen" : "editclosed"}>
             <SvgGearLampEdit />
@@ -168,11 +192,17 @@ const EditItemModal = ({editItemData, closeEditModal}) => {
                 <label htmlFor="image">Image:</label>
                 
               </div>
+              <div>
+                <label htmlFor="colors">Change colors:</label>
+                <div>#ex 1</div>
+                <div>#ex 2</div>
+                <div>#ex 3</div>
+              </div>
             </div>
 
             <div className="buttons">
-              <button onClick={closeModal}>Confirm changes</button>
-              <button onClick={closeModal}>Cancel changes</button>
+              <UIBtn exit innerText="Cancel changes" onClick={closeModal} />
+              <UIBtn success innerText="Confirm changes" onClick={closeModal} />
             </div>
           </Data>
 
