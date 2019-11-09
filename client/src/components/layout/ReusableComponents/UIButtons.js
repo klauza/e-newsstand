@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {forwardRef} from 'react';
 import styled from 'styled-components';
 
 const UIBtn1 = styled.button`
@@ -21,7 +21,7 @@ const UIBtn1 = styled.button`
   };
   background-color: ${props =>
     props.exit ? "#f12e45" :
-    props.success ? "green" :
+    props.success ? "#32b34a" :
     props.blue ? "#14A0E8" :
     props.info ? "#ccd221" : "white"
   };
@@ -35,7 +35,7 @@ const UIBtn1 = styled.button`
   &:hover{
     background-color: ${props =>
       props.exit ? "#ff6363" :
-      props.success ? "green" :
+      props.success ? "#1f9935" :
       props.blue ? "#128bc9" :
       props.info ? "#dde32b" : "white"
     };
@@ -48,11 +48,11 @@ const UIBtn1 = styled.button`
 `;
 
 /* +++++ UIBtn1 +++++ */
-export const UIBtn = (props) => {
+export const UIBtn = forwardRef((props, ref) => {
   return(
-    <UIBtn1 {...props} >
+    <UIBtn1 ref={ref} {...props} >
       {props.innerText} 
       {props.fontIcon && <i className={props.fontIcon}></i>}
     </UIBtn1>
   )
-}
+})

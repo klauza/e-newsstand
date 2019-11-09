@@ -1,8 +1,20 @@
 import React from 'react';
 import styled from 'styled-components';
 import posed from 'react-pose';
+import tempDB from './itemsTempDB';
 import EditItemModal from '../EditItem/EditItemModal';
 import CreateItemModal from '../CreateNewItem/CreateItemModal';
+
+import { UIBtn } from '../../../../layout/ReusableComponents/UIButtons';
+
+const UIBtnPosed = styled(posed(UIBtn)({
+  open: { y: 0, opacity: 1 },
+  closed: { y: 20, opacity: 0 }
+}))`
+  display: inline-block;
+  margin: 0 2.5px;
+`;
+
 
 const MainPosed = posed.div({
   initialPose: 'closed',
@@ -45,16 +57,6 @@ const Content = styled(ContentPosed)`
   .top-buttons{
     width: auto;
     margin: 0 auto 20px;
-
-    &>button{
-      border: 1px solid black; border-radius: 3px;
-      padding: 5px;
-      display: inline-block;
-      width: 120px; height: 30px;
-      background: lightskyblue;
-      cursor: pointer;
-
-    }
   }
 
   ul{
@@ -109,10 +111,11 @@ const Header = styled(HeaderPosed)`
   margin: 20px 0;
 `;
 
-const CloseButton = posed.button({
-  open: { y: 0, opacity: 1 },
-  closed: { y: 20, opacity: 0 }
-})
+
+
+
+
+
 
 const ItemList = posed.ul({
   initialPose: 'closed',
@@ -129,53 +132,24 @@ const Item = posed.li({
   open: { y: 0, opacity: 1 },
   closed: { y: 20, opacity: 0 }
 })
-const AddItem = styled.button`
 
-`;
 
 const EditCategoryModal = ({storedCategory, setOpenCatEditor}) => {
 
-  const [isOpen, setIsOpen] = React.useState(false);
-  const [editModalOpen, setEditModalOpen] = React.useState(false);
-  const [editModalContent, setEditModalContent] = React.useState(null);
+  const [isOpen, setIsOpen] = React.useState(false); // modal open ? "animationStart" :"null"
 
-  const [createItemModalOpen, setCreateItemModalOpen] = React.useState(false);
+  const [editItemModal, setEditItemModal] = React.useState(false);  // open EDIT-item modal
+  const [editItemData, setEditItemData] = React.useState(null);  // store item's data for EDIT-item modal
 
-  const [targetButton, setTargetButton] = React.useState(null);
+  const [createItemModalOpen, setCreateItemModalOpen] = React.useState(false);  // open CREATE-Item modal
+
+  const [targetButton, setTargetButton] = React.useState(null);   // for animating gear icon of edit-btn
 
   React.useEffect(()=>{
     setIsOpen(true);
   }, [])
 
-  // fetch all items from this category
-
-  const tempDB = [
-    {
-      id: 0,
-      name: 'item-1',
-      shortDsc: "this is a short description",
-      longDsc: "This is long description about this item, describing what is this item about. It may have more than just one sentence",
-      price: 2.99,
-      inStock: 10
-    },
-    {
-      id: 1,
-      name: 'item-2',
-      shortDsc: "this is a short description",
-      longDsc: "This is long description about this item, describing what is this item about. It may have more than just one sentence",
-      price: 4.99,
-      inStock: 5
-    },
-    {
-      id: 2,
-      name: 'item-3',
-      shortDsc: "this is a short description",
-      longDsc: "This is long description about this item, describing what is this item about. It may have more than just one sentence",
-      price: 7.99,
-      inStock: 25
-    }
-  ]
-
+  // close EditCategoryModal (this modal)
   const closeModal = () => {
     setIsOpen(false);
     setTimeout(()=>{
@@ -188,14 +162,14 @@ const EditCategoryModal = ({storedCategory, setOpenCatEditor}) => {
     targetButton.querySelector('i').style.animation="none";
     // targetButton.querySelector('i').classList.remove('fa', 'fa-chevron-left');
     // targetButton.querySelector('i').classList.add('fa', 'fa-cog');
-    setEditModalOpen(false);
-    setEditModalContent(null);
+    setEditItemModal(false); // close edit-item-modal
+    setEditItemData(null);  
   }
 
   const openEditModal = (e, item) => {
 
-    setEditModalContent(item);
-    setEditModalOpen(true);
+    setEditItemData(item);
+    setEditItemModal(true);
 
     let targetBtn = e.target.closest('button');
     targetBtn.style.zIndex=111;
@@ -203,23 +177,26 @@ const EditCategoryModal = ({storedCategory, setOpenCatEditor}) => {
     // targetBtn.querySelector('i').classList.remove('fa', 'fa-cog');
     // targetBtn.querySelector('i').classList.add('fa', 'fa-chevron-left');
     setTargetButton(targetBtn);
-    
+  }
+
+  const openCreateItemModal = () => {
+    setCreateItemModalOpen(true);
   }
 
   return (
 
-
     <Main pose={isOpen ? "open" : "closed"}>
 
-      {editModalOpen && <EditItemModal editModalContent={editModalContent} closeEditModal={closeEditModal} />}
+      {editItemModal && <EditItemModal editItemData={editItemData} closeEditModal={closeEditModal} />}
       {createItemModalOpen && <CreateItemModal setCreateItemModalOpen={setCreateItemModalOpen} /> }
 
       <Content pose={isOpen ? "open" : "closed"}>
 
         <Header>Category: {storedCategory.name}</Header>
+
         <div className="top-buttons">
-          <CloseButton onClick={closeModal}>Cancel<i className="fa fa-times"></i></CloseButton>
-          <CloseButton onClick={closeModal}>Apply changes<i className="fa fa-check"></i></CloseButton>
+          <UIBtnPosed exit innerText="Cancel" fontIcon="fa fa-times" onClick={closeModal} />
+          <UIBtnPosed success innerText="Apply changes" fontIcon="fa fa-check" onClick={closeModal} />
         </div>
 
         <ItemList pose={isOpen ? "open" : "closed"}>
@@ -242,7 +219,7 @@ const EditCategoryModal = ({storedCategory, setOpenCatEditor}) => {
             </Item>
           )}
 
-        <AddItem onClick={()=>setCreateItemModalOpen(true)}>Add new item</AddItem>
+        <UIBtnPosed blue innerText="Add new item" fontIcon="fa fa-plus-circle" onClick={openCreateItemModal} style={{marginTop: "15px"}} />
 
         </ItemList>
 

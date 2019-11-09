@@ -102,14 +102,14 @@ const Data = styled(DataPosed)`
   }
 `;
 
-const EditItemModal = ({editModalContent, closeEditModal}) => {
+const EditItemModal = ({editItemData, closeEditModal}) => {
 
   const [inputs, setInputs] = React.useState({
-    name: editModalContent.name,
-    shortDescription: editModalContent.shortDsc,
-    longDescription: editModalContent.longDsc,
-    price: editModalContent.price,
-    inStock: editModalContent.inStock
+    name: editItemData.name,
+    shortDescription: editItemData.shortDsc,
+    longDescription: editItemData.longDsc,
+    price: editItemData.price,
+    inStock: editItemData.inStock
   });
 
   const [isOpen, setIsOpen] = React.useState(false);
