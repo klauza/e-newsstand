@@ -1,7 +1,7 @@
 import React, {Fragment} from 'react';
 import { SwatchesPicker } from 'react-color';
 import { UIBtn } from '../../../../layout/ReusableComponents/UIButtons';
-import { Content, ColorPickerContainerCSS, ColorPickerContent, DimensionsContainer, UiColors, ImageContainer } from './CreateItemCSS';
+import { Content, ColorPickerContainerCSS, ColorPickerContent, DimensionsContainer, UiColors, ImageContainer, MeasurementsInfo } from './CreateItemCSS';
 
 
 
@@ -126,14 +126,17 @@ const CreateItemContent = ({closeModal, modalNumero, nextModal, prevModal}) => {
 
   // console.log(newItem);
 
-
-
+  
+  
   return (
     <Content pose={isOpen ? "isopen" : "isclosed"} >
+{modalNumero !== null ? (
+  <>
       <h2>Item creator: page {modalNumero} / 3 </h2>
 
       <UIBtn exit innerText="Cancel & Exit" fontIcon="fa fa-times" onClick={closeModal} style={{margin: "10px 0", width: "145px"}} />
 
+      {/* PAGE.1 */}
       {modalNumero === 1 && 
         <Fragment>
           <label htmlFor="name">Name</label>
@@ -143,7 +146,7 @@ const CreateItemContent = ({closeModal, modalNumero, nextModal, prevModal}) => {
           <label htmlFor="shortDesc">Short description</label>
           <input type="text" id="shortDesc" onChange={(e)=>updateNewItem(e)} value={ (newItem.shortDesc !== null) ? newItem.shortDesc : ""} />
           <label htmlFor="longDesc">Long description</label>
-          <input type="text" id="longDesc" onChange={(e)=>updateNewItem(e)} value={ (newItem.longDesc !== null) ? newItem.longDesc : ""} />
+          <textarea type="text" id="longDesc" onChange={(e)=>updateNewItem(e)} value={ (newItem.longDesc !== null) ? newItem.longDesc : ""} />
           <label htmlFor="slugs">Tags ',' will split tags</label>
           <input type="text" id="slugs" onChange={(e)=>updateNewItem(e)} value={ (newItem.slugs.length !== 0) ? newItem.slugs : ""} />
 
@@ -153,6 +156,8 @@ const CreateItemContent = ({closeModal, modalNumero, nextModal, prevModal}) => {
           </div>
         </Fragment>
       }
+
+      {/* PAGE.2 */}
       {modalNumero === 2 &&
         <Fragment>
           <label htmlFor="price">Price</label>
@@ -160,24 +165,67 @@ const CreateItemContent = ({closeModal, modalNumero, nextModal, prevModal}) => {
           <label htmlFor="inStock">Stock quantity</label>
           <input type="number" id="inStock" onChange={(e)=>updateNewItem(e)} value={ (newItem.inStock !== null) ? newItem.inStock : ""} />
 
+          {/* DIMENSIONS */}
+          <DimensionsContainer>
+            <div className="center-checkbox">
+              <label htmlFor="dimensions"> Include Dimensions</label> 
+              <input 
+                id="dimensions" 
+                type="checkbox" 
+                defaultChecked={showDimensions} 
+                onClick={showDimensionsBlock}
+              />
+            </div>
+
+          {showDimensions && 
+          <div className="dims-picker">
+            <div>
+              <label htmlFor="width">Width</label>
+              <input type="number" id="width" onChange={(e)=>updateNewItemDim(e)} value={ (newItem.dims.width !== null) ? newItem.dims.width : ""} />
+            </div>
+            <div>
+              <label htmlFor="height">Height</label>
+              <input type="number" id="height" onChange={(e)=>updateNewItemDim(e)} value={ (newItem.dims.height !== null) ? newItem.dims.height : ""} />
+            </div>
+            <div>
+              <label htmlFor="length">Length</label>
+              <input type="number" id="length" onChange={(e)=>updateNewItemDim(e)} value={ (newItem.dims.length !== null) ? newItem.dims.length : ""} />
+            </div>
+            <div>
+              <label htmlFor="weight">Weight</label>
+              <input type="number" id="weight" onChange={(e)=>updateNewItemDim(e)} value={ (newItem.dims.weight !== null) ? newItem.dims.weight : ""} />
+            </div>
+          </div>
+          }
+          </DimensionsContainer>
+
+          <MeasurementsInfo>Please make sure you put the measurements in centimeters and weight in kilograms</MeasurementsInfo>
+
           <div className="bottom-buttons">
             <button onClick={prevModal}>Previous</button>
             <button onClick={nextModal}>Next</button>
           </div>
         </Fragment>
       }
+
+      {/* PAGE.3 */}
       {modalNumero === 3 &&
       <Fragment>
 
         {/* COLORS */}
         <ColorPickerContainerCSS>
-          <label htmlFor="colors"> Include Colors</label> 
-          <input 
-            id="colors" 
-            type="checkbox" 
-            defaultChecked={uiColors.length > 0 || showPicker} 
-            onClick={showColorPicker}
-          />
+
+          <div className="center-checkbox">
+            <label htmlFor="colors"> Include Colors</label> 
+            <input 
+              id="colors" 
+              type="checkbox" 
+              defaultChecked={uiColors.length > 0 || showPicker} 
+              onClick={showColorPicker}
+            />
+          </div>
+
+
           {uiColors.length > 0 && <span>Click on box to remove color</span>}
           {showPicker && 
           <Fragment>
@@ -189,33 +237,7 @@ const CreateItemContent = ({closeModal, modalNumero, nextModal, prevModal}) => {
           }
         </ColorPickerContainerCSS>
         
-        {/* DIMENSIONS */}
-        <DimensionsContainer>
-          <label htmlFor="dimensions"> Include Dimensions</label> 
-          <input 
-            id="dimensions" 
-            type="checkbox" 
-            defaultChecked={showDimensions} 
-            onClick={showDimensionsBlock}
-          />
-          {showDimensions && 
-          <Fragment>
 
-            <label htmlFor="width">Width</label>
-            <input type="number" id="width" onChange={(e)=>updateNewItemDim(e)} value={ (newItem.dims.width !== null) ? newItem.dims.width : ""} />
-            
-            <label htmlFor="height">Height</label>
-            <input type="number" id="height" onChange={(e)=>updateNewItemDim(e)} value={ (newItem.dims.height !== null) ? newItem.dims.height : ""} />
-            
-            <label htmlFor="length">Length</label>
-            <input type="number" id="length" onChange={(e)=>updateNewItemDim(e)} value={ (newItem.dims.length !== null) ? newItem.dims.length : ""} />
-            
-            <label htmlFor="weight">Weight</label>
-            <input type="number" id="weight" onChange={(e)=>updateNewItemDim(e)} value={ (newItem.dims.weight !== null) ? newItem.dims.weight : ""} />
-
-          </Fragment>
-          }
-        </DimensionsContainer>
 
         {/* IMAGES */}
         <ImageContainer>
@@ -230,8 +252,11 @@ const CreateItemContent = ({closeModal, modalNumero, nextModal, prevModal}) => {
       </Fragment>
       }
 
+      </>
+      ) : (null)}
     </Content>
   )
+
 }
 
 export default CreateItemContent

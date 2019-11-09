@@ -25,7 +25,7 @@ transform-origin: center top;
 border: 1px solid black;
 background: whitesmoke;
 width: 60%;
-height: 50vh;
+height: 65vh;
 color: black;
 display: flex; flex-direction: column;
 position: relative;
@@ -37,6 +37,8 @@ font-family: sans-serif;
 h2{
   text-align: center;
   color: black;
+  padding-bottom: 5px;
+  border-bottom: 1px solid lightgrey;
 }
 
 .bottom-buttons{
@@ -64,9 +66,17 @@ h2{
 
 // CHECKBOX COMPONENT - FOR REUSE PURPOSES => LABEL + INPUT[CHECKBOX]
 const CheckboxReuseBtn = styled.div`
-  label{
-    border: 2px solid yellow;
+  .center-checkbox{
+    background: lightgrey;
     padding: 10px;
+    margin-top: 10px;
+    display: flex; flex-direction: row;
+    align-items: center;
+    justify-content: space-around;    
+  }
+
+  label{
+    color: black;
   }
   input[type="checkbox"]{
     position: relative;
@@ -106,10 +116,11 @@ const CheckboxReuseBtn = styled.div`
     }
 
   }
+  
 `;
 /* COLOR PICKER */
 export const ColorPickerContainerCSS = styled(CheckboxReuseBtn)`
-  border: 1px solid red;
+  /* border: 1px solid red; */
   .color-picker{
     width: 80%!IMPORTANT; 
     margin: 0 auto; display: block;
@@ -138,7 +149,32 @@ export const UiColors = styled.span`
 /* DIMENSIONS PICKER */
 export const DimensionsContainer = styled(CheckboxReuseBtn)`
   .dims-picker{
-    border: 1px solid red;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 30px;
+    justify-items: center;
+    align-items: center;
+    border: 1px solid lightgrey;
+    padding-top: 10px;
+    div{
+      display: grid; grid-template-columns: 60px 1fr;
+    }
+    div > label{
+      margin-right: 5px;
+    }
+    div > input{
+      border: 1px solid lightgrey;
+      padding: 5px;
+      width: 100%;
+    }
+
+    @media(max-width: 768px){
+    margin-top: 15px;
+    grid-auto-rows: auto;
+      div{
+        grid-template-columns: 1fr;
+      }
+    }
   }
 `;
 
@@ -151,7 +187,8 @@ export const ImageContainer = styled.div`
     background: blue;
     color: white;
     font-family: sans-serif;
-    margin-top: 25px;
+    margin: 25px auto;
+    display: block;
     cursor: pointer;
     box-shadow: 0 3px 4px -2px rgba(0,0,0,0.7);
     &:hover{
@@ -159,4 +196,10 @@ export const ImageContainer = styled.div`
     }
 
   }
+`;
+
+export const MeasurementsInfo = styled.p`
+  text-align: center;
+  font-family: sans-serif;
+  margin-top: 40px;
 `;
