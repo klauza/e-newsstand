@@ -104,7 +104,7 @@ const Content = styled(ContentPosed)`
   }
 `;
 
-const CreateCategoryModal = ({setCategoryModal}) => {
+const CreateCategoryModal = ({setOpenCatCreator}) => {
 
   const name = React.useRef();
   const type = React.useRef();
@@ -120,7 +120,7 @@ const CreateCategoryModal = ({setCategoryModal}) => {
   const closeModal = () => {
     setIsOpen(false);
     setTimeout(()=>{
-      setCategoryModal(false);
+      setOpenCatCreator(false);
     }, 500)
   }
 

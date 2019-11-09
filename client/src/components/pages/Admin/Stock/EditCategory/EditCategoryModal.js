@@ -133,7 +133,7 @@ const AddItem = styled.button`
 
 `;
 
-const EditCategoryModal = ({modal, setModalOpen}) => {
+const EditCategoryModal = ({storedCategory, setOpenCatEditor}) => {
 
   const [isOpen, setIsOpen] = React.useState(false);
   const [editModalOpen, setEditModalOpen] = React.useState(false);
@@ -179,7 +179,7 @@ const EditCategoryModal = ({modal, setModalOpen}) => {
   const closeModal = () => {
     setIsOpen(false);
     setTimeout(()=>{
-      setModalOpen(false);
+      setOpenCatEditor(false);
     }, 500)
   }
 
@@ -216,7 +216,7 @@ const EditCategoryModal = ({modal, setModalOpen}) => {
 
       <Content pose={isOpen ? "open" : "closed"}>
 
-        <Header>Category: {modal.name}</Header>
+        <Header>Category: {storedCategory.name}</Header>
         <div className="top-buttons">
           <CloseButton onClick={closeModal}>Cancel<i className="fa fa-times"></i></CloseButton>
           <CloseButton onClick={closeModal}>Apply changes<i className="fa fa-check"></i></CloseButton>
