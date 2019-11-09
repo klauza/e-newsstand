@@ -62,9 +62,8 @@ h2{
 }
 `;
 
-/* COLOR PICKER */
-export const ColorPickerContainerCSS = styled.div`
-  border: 1px solid red;
+// CHECKBOX COMPONENT - FOR REUSE PURPOSES => LABEL + INPUT[CHECKBOX]
+const CheckboxReuseBtn = styled.div`
   label{
     border: 2px solid yellow;
     padding: 10px;
@@ -107,6 +106,10 @@ export const ColorPickerContainerCSS = styled.div`
     }
 
   }
+`;
+/* COLOR PICKER */
+export const ColorPickerContainerCSS = styled(CheckboxReuseBtn)`
+  border: 1px solid red;
   .color-picker{
     width: 80%!IMPORTANT; 
     margin: 0 auto; display: block;
@@ -129,6 +132,14 @@ export const UiColors = styled.span`
   width: 60px; height: 35px;
   cursor: pointer;
   background: ${props => props.color};
+`;
+
+
+/* DIMENSIONS PICKER */
+export const DimensionsContainer = styled(CheckboxReuseBtn)`
+  .dims-picker{
+    border: 1px solid red;
+  }
 `;
 
 /* IMAGES */

@@ -1,13 +1,7 @@
 import React, {Fragment} from 'react';
 import { SwatchesPicker } from 'react-color';
 import { UIBtn } from '../../../../layout/ReusableComponents/UIButtons';
-import { Content, ColorPickerContainerCSS, ColorPickerContent, UiColors, ImageContainer } from './CreateItemCSS';
-
-
-
-
-
-
+import { Content, ColorPickerContainerCSS, ColorPickerContent, DimensionsContainer, UiColors, ImageContainer } from './CreateItemCSS';
 
 
 
@@ -15,8 +9,14 @@ const CreateItemContent = ({closeModal, modalNumero, nextModal, prevModal}) => {
 
   const [isOpen, setIsOpen] = React.useState(false);
 
-  const [uiColors, setUiColors] = React.useState([]);
+  // COLORS
   const [showPicker, setShowPicker] = React.useState(false);
+  const [uiColors, setUiColors] = React.useState([]);
+
+  // DIMENSIONS
+  const [showDimensions, setShowDimensions] = React.useState(false);
+
+
   const [newItem, setNewItem] = React.useState({
     name: null,
     longName: null,
@@ -25,12 +25,14 @@ const CreateItemContent = ({closeModal, modalNumero, nextModal, prevModal}) => {
     slugs: [],
     price: null,
     inStock: null,
-    colors: []
+    colors: [],
+    dims: { width: null, height: null, length: null, weight: null }
   })
   React.useEffect(()=>{
     setIsOpen(true);
   }, [])
 
+  // 1. UPDATE ITEM
   const updateNewItem = (e) => {
     let current = e.target.id;
     let value = e.target.value;
@@ -39,8 +41,20 @@ const CreateItemContent = ({closeModal, modalNumero, nextModal, prevModal}) => {
     if(current === "price" || current === "inStock"){
       value = Number(value);
     }
-
     setNewItem(prevState => ({...prevState, [current]: value}));
+  }
+  // 2. UPDATE ITEM'S DIMENSIONS
+  const updateNewItemDim = (e) => {
+    let current = e.target.id;
+    let value = Number(e.target.value); 
+
+    setNewItem(prevState => ({
+      ...prevState,
+      dims: {
+        ...prevState.dims,
+        [current]: value
+      }
+    }))
   }
 
   const splitSlugsIntoArray = (string) => {
@@ -57,6 +71,7 @@ const CreateItemContent = ({closeModal, modalNumero, nextModal, prevModal}) => {
     }
   }
 
+  // SHOW COLOR PICKER
   const showColorPicker = () => {
     //delete data if was open
     if(showPicker){
@@ -66,7 +81,12 @@ const CreateItemContent = ({closeModal, modalNumero, nextModal, prevModal}) => {
     setTimeout(()=>{
       setShowPicker(prevState => !prevState);
     }, 400);
+  }
 
+  const showDimensionsBlock = () => {
+    setTimeout(()=>{
+      setShowDimensions(prevState => !prevState);
+    }, 400);
   }
 
   const handleAddColor = (color) => {
@@ -99,11 +119,14 @@ const CreateItemContent = ({closeModal, modalNumero, nextModal, prevModal}) => {
     console.log('feature coming soon');
   }
 
-
   const submitNewItem = () => {
     console.log(newItem);
+    
   }
-  console.log(newItem);
+
+  // console.log(newItem);
+
+
 
   return (
     <Content pose={isOpen ? "isopen" : "isclosed"} >
@@ -145,20 +168,56 @@ const CreateItemContent = ({closeModal, modalNumero, nextModal, prevModal}) => {
       }
       {modalNumero === 3 &&
       <Fragment>
+
+        {/* COLORS */}
         <ColorPickerContainerCSS>
-          
-          <label htmlFor="colors"> Include Colors</label> <input id="colors" type="checkbox" defaultChecked={uiColors.length > 0 || showPicker} onClick={showColorPicker}/>
+          <label htmlFor="colors"> Include Colors</label> 
+          <input 
+            id="colors" 
+            type="checkbox" 
+            defaultChecked={uiColors.length > 0 || showPicker} 
+            onClick={showColorPicker}
+          />
           {uiColors.length > 0 && <span>Click on box to remove color</span>}
-          {showPicker &&
+          {showPicker && 
           <Fragment>
+            {/* Display chosen colors as inline flex */}
             <ColorPickerContent>{uiColors.map((hexColor, id) => <UiColors key={id} color={hexColor} onClick={()=>deleteColorFromArray(hexColor)} />)}</ColorPickerContent>
 
             <SwatchesPicker height="160px" className="color-picker" onChange={handleAddColor} />
           </Fragment>
           }
-
         </ColorPickerContainerCSS>
+        
+        {/* DIMENSIONS */}
+        <DimensionsContainer>
+          <label htmlFor="dimensions"> Include Dimensions</label> 
+          <input 
+            id="dimensions" 
+            type="checkbox" 
+            defaultChecked={showDimensions} 
+            onClick={showDimensionsBlock}
+          />
+          {showDimensions && 
+          <Fragment>
 
+            <label htmlFor="width">Width</label>
+            <input type="number" id="width" onChange={(e)=>updateNewItemDim(e)} value={ (newItem.dims.width !== null) ? newItem.dims.width : ""} />
+            
+            <label htmlFor="height">Height</label>
+            <input type="number" id="height" onChange={(e)=>updateNewItemDim(e)} value={ (newItem.dims.height !== null) ? newItem.dims.height : ""} />
+            
+            <label htmlFor="length">Length</label>
+            <input type="number" id="length" onChange={(e)=>updateNewItemDim(e)} value={ (newItem.dims.length !== null) ? newItem.dims.length : ""} />
+            
+            <label htmlFor="weight">Weight</label>
+            <input type="number" id="weight" onChange={(e)=>updateNewItemDim(e)} value={ (newItem.dims.weight !== null) ? newItem.dims.weight : ""} />
+
+          </Fragment>
+          }
+        </DimensionsContainer>
+
+        {/* IMAGES */}
         <ImageContainer>
           <button onClick={addImages}>Add Images <i className="fa fa-file-image-o"></i></button>
         </ImageContainer>
@@ -166,6 +225,7 @@ const CreateItemContent = ({closeModal, modalNumero, nextModal, prevModal}) => {
         <div className="bottom-buttons">
           <button onClick={prevModal}>Previous</button>
           <button onClick={submitNewItem} className="submit-btn">Submit</button>
+          <button onClick={submitNewItem} className="submit-btn">Submit & save for future</button>
         </div>
       </Fragment>
       }
