@@ -26,6 +26,7 @@ import Contact from './components/pages/Contact/Contact';
 //Admin
 import AdminLogin from './components/pages/Admin/AdminLogin';
 import AdminSettings from './components/pages/Admin/Settings/AdminSettings';
+import AdminChangelog from './components/pages/Admin/AdminChangelog';
 import HomeStock from './components/pages/Admin/Stock/HomeStock';
 import HomeChangeUI from './components/pages/Admin/ChangeUI/HomeChangeUI';
 
@@ -95,6 +96,7 @@ function App() {
 
                 <Route exact path="/admin" component={AdminLogin} />
                 <Route exact path="/admin/settings" component={AdminSettings} />
+                <Route exact path="/admin/changelog" component={AdminChangelog} />
                 <Route exact path="/admin/stock" component={HomeStock} />
                 <Route exact path="/admin/change-ui" component={HomeChangeUI} />
 
