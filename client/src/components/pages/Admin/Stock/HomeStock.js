@@ -53,6 +53,30 @@ const Category = styled.li`
       margin-left: 10px;
       font-size: 1.25em;
       cursor: pointer;
+      position: relative;
+      &::after{
+        content: 'Edit name';
+        text-transform: capitalize;
+        font-family: sans-serif;
+        font-size: 0.85em;
+        position: absolute; top: 0; right: -125px;
+        color: #000; background: #fff; 
+        border: 1px solid lightgrey; border-radius: 3px;
+        width: 120px; height: 25px; line-height: 25px;
+        pointer-events: none;
+        transform: translateY(15px);
+        opacity: 0;
+        transition: transform 200ms ease, opacity 200ms ease;
+      }
+      &:hover{
+        &::after{
+          transform: translateY(0); opacity: 1;
+          transition: all 200ms ease;
+          @media(max-width: 768px){
+            display: none;
+          }
+        }
+      }
     }
   }
   .category-delete{
