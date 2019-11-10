@@ -8,6 +8,8 @@ const helmet = require('helmet');
 var indexRouter = require('./routes/index');
 // /shop/item
 var shopRouter = require('./routes/shop');
+// /admin/login
+var loginRouter = require('./routes/login');
 
 var app = express();
 app.use(helmet());
@@ -24,6 +26,7 @@ app.use(cookieParser());
 app.use('/api', indexRouter);
 app.use('/api/shop', shopRouter);
 // app.use('/api/admin/auth', require('./routes/auth'));
+app.use('/api/admin/login', loginRouter);
 
 
 if(process.env.NODE_ENV === 'production'){
