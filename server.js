@@ -1,4 +1,5 @@
 var express = require('express');
+const connectDB = require('./config/db');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 const helmet = require('helmet');
@@ -8,12 +9,10 @@ var indexRouter = require('./routes/index');
 // /shop/item
 var shopRouter = require('./routes/shop');
 
-
-
 var app = express();
 app.use(helmet());
 
-
+connectDB();  // connect to database
 
 
 // app.use(logger('dev'));
@@ -21,8 +20,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
+// routes
 app.use('/api', indexRouter);
 app.use('/api/shop', shopRouter);
+// app.use('/api/admin/auth', require('./routes/auth'));
 
 
 if(process.env.NODE_ENV === 'production'){

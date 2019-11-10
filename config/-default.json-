@@ -1,0 +1,5 @@
+// for development.
+{
+  "mongoURI": "mongodb+srv:// ... ",
+  "jwtSecret": "secret ..."
+}
