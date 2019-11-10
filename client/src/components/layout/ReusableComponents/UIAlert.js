@@ -4,7 +4,7 @@ import styled from 'styled-components';
 // STYLES
 const AlertBox = styled.div`
   opacity: 0;
-  z-index: 99;
+  z-index: 999;
   position: fixed;
   top: 50px; right: -250px;
   display: flex; flex-direction: row;
