@@ -1,4 +1,8 @@
 import React, {useEffect} from 'react';
+import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { loadAdmin } from '../../../actions/adminActions';
+
 import styled from 'styled-components';
 import { Wrapper } from '../../layout/ReusableComponents/StyledComponents';
 
@@ -26,20 +30,34 @@ const UList = styled.ul`
 
 `;
 
-const AdminChangelog = () => {
-
+const AdminChangelog = ({loadAdmin, admin: {loading, token, isAuthenticated}}) => {
   const [time, setTime] = React.useState(new Date().toLocaleTimeString());
+
   useEffect(()=>{
-    setTimeout(()=>{
+    if(token && !isAuthenticated) loadAdmin(); 
+
+    var handle = setInterval(() => {
       setTime(new Date().toLocaleTimeString())
-    }, 1000)
-  }, [time])
+    }, 1000);
+
+    return () => {
+      clearInterval(handle);
+    };
+  // eslint-disable-next-line
+  },[time])
+
+  
+  
+
   const exampleVersioning = [
     {
       version: "1.0",
       desc: ["Added new way to list items in /shop", "Optimized loading images, now it takes less time to load them", "Created an address tab in /contact"]
     }
   ]
+
+
+  if(!loading && isAuthenticated){
   return (
     <Wrapper>
       <Header> Changelog </Header>
@@ -65,6 +83,16 @@ const AdminChangelog = () => {
       </UList>
     </Wrapper>
   )
+} else {
+  if(token){
+    return(<div>Authenticating...</div>) 
+  } else{
+    return <Redirect to="/" exact /> // redirect if authentication failed
+  }
+}
 }
 
-export default AdminChangelog
+const mapStateToProps = (state) => ({
+  admin: state.admin
+})
+export default connect(mapStateToProps, {loadAdmin})(AdminChangelog)

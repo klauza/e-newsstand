@@ -33,7 +33,13 @@ const AdminDashboardButtons = styled.div`
 `;
 
 
-const AdminLogged = ({logout}) => {
+const AdminLogged = ({logout, loadAdmin}) => {
+
+  React.useEffect(()=>{
+    loadAdmin();
+  // eslint-disable-next-line
+  }, [])
+
   return (
     <Wrapper>
 

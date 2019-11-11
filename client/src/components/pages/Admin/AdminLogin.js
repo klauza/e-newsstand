@@ -1,16 +1,26 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import history from '../../../history';
 import { connect } from 'react-redux';
-import { adminLogin, adminLogOut } from '../../../actions/adminActions';
+import { loadAdmin, adminLogin, adminLogOut } from '../../../actions/adminActions';
+
 import AdminLogged from './AdminLogged';
 import { Container, Header, LoginContainer } from './AdminLoginCSS';
 
-const AdminLogin = ({adminLogin, adminLogOut, admin: {isAuthenticated}}) => {
+const AdminLogin = ({loadAdmin, adminLogin, adminLogOut, admin: {loading, token, admin, isAuthenticated}}) => {
 
 
   const [user, setUser] = useState({
     email: '',
     password: ''
   });
+
+  useEffect(()=>{
+    if(token && !isAuthenticated) loadAdmin();
+
+    
+
+  // eslint-disable-next-line
+  }, [isAuthenticated])
 
   const onChange = (e) => {
     setUser({
@@ -21,18 +31,25 @@ const AdminLogin = ({adminLogin, adminLogOut, admin: {isAuthenticated}}) => {
 
   const submitLogin = (e) => {
     e.preventDefault();
-    console.log(user);
+
     adminLogin({
       email: user.email,
       password: user.password
     });
+    // show overlay loading loggin screen for one second!
+
+
+
+    
   }
 
   const logout = () => {
     adminLogOut();
+    history.push('/');
+    window.location.reload();
   }
 
-  if(!isAuthenticated){
+  if(loading){
     return (
       <Container>
         <Header>Admin panel</Header>
@@ -64,7 +81,7 @@ const AdminLogin = ({adminLogin, adminLogOut, admin: {isAuthenticated}}) => {
     ) 
   } else{
     return(
-      <AdminLogged logout={logout} />
+      <AdminLogged logout={logout} loadAdmin={loadAdmin} />
     )
   }
 }
@@ -72,4 +89,4 @@ const AdminLogin = ({adminLogin, adminLogOut, admin: {isAuthenticated}}) => {
 const mapStateToProps = (state) => ({
   admin: state.admin
 })
-export default connect(mapStateToProps, {adminLogin, adminLogOut})(AdminLogin)
+export default connect(mapStateToProps, {loadAdmin, adminLogin, adminLogOut})(AdminLogin)

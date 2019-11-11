@@ -3,6 +3,9 @@ import { Router, Route, Switch } from 'react-router-dom';
 import history from './history';
 import './App.scss';
 
+// get token setter
+import setAuthToken from './utils/setAuthToken';
+
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import ColorsContext from './context/colorsContext';
 
@@ -30,6 +33,9 @@ import AdminChangelog from './components/pages/Admin/AdminChangelog';
 import HomeStock from './components/pages/Admin/Stock/HomeStock';
 import HomeChangeUI from './components/pages/Admin/ChangeUI/HomeChangeUI';
 
+if(localStorage.token){
+  setAuthToken(localStorage.token);
+}
 
 function App() {
 
@@ -38,15 +44,18 @@ function App() {
 
 
   // Global Colors
-  const [state_main_color, set_state_nain_color] = useState(null);
-  const [state_secondary_colors, set_state_secondary_colors] = useState([]);
+  const [state_main_color, set_state_nain_color] = useState(colorContext.mainGlobalColor);
+  const [state_secondary_colors, set_state_secondary_colors] = useState(colorContext.secondaryGlobalColors);
+
 
   React.useEffect(()=>{
-    // on APP load, set all colors as are saved in DB
+    // on APP load, set all colors as are saved in DB [done as initial vals]
     set_state_nain_color(colorContext.mainGlobalColor);
     set_state_secondary_colors(colorContext.secondaryGlobalColors);
+
     // eslint-disable-next-line
-  }, [])
+  }, []);
+
 
   const setGlobalColors = (mainColor, secColors) => {
     // save to local app state
@@ -95,6 +104,7 @@ function App() {
                 <Route exact path="/basket" component={Basket} />
 
                 <Route exact path="/admin" component={AdminLogin} />
+
                 <Route exact path="/admin/settings" component={AdminSettings} />
                 <Route exact path="/admin/changelog" component={AdminChangelog} />
                 <Route exact path="/admin/stock" component={HomeStock} />

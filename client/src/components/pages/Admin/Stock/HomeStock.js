@@ -1,4 +1,8 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
+import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { loadAdmin } from '../../../../actions/adminActions';
+
 import styled from 'styled-components';
 import { Wrapper } from '../../../layout/ReusableComponents/StyledComponents';
 import { UIBtn } from '../../../layout/ReusableComponents/UIButtons';
@@ -109,11 +113,16 @@ const Category = styled.li`
 `;
 
 
-const HomeStock = () => {
+const HomeStock = ({loadAdmin, admin: { token, loading, isAuthenticated}}) => {
 
   const [storedCategory, setStoredCategory] = useState(null);  // store certain category
   const [openCatEditor, setOpenCatEditor] = useState(false);   // cat EDITOR
   const [openCatCreator, setOpenCatCreator] = useState(false); // cat CREATOR
+
+  useEffect(()=>{
+    if(token && !isAuthenticated) loadAdmin();
+  // eslint-disable-next-line
+  }, []);
 
   // open editor
   const openModal = (category) => {
@@ -156,7 +165,7 @@ const HomeStock = () => {
       console.log('deleted');
     } 
   }
-
+  if(!loading && isAuthenticated){
   return (
     <Wrapper>
       <Header>Your list of shop categories</Header>
@@ -189,6 +198,16 @@ const HomeStock = () => {
       <UIBtn blue innerText="Add new category" fontIcon="fa fa-plus-circle" onClick={openCategoryCreator} style={{margin: "25px auto"}} />
     </Wrapper>
   )
+} else {
+  if(token){
+    return(<div>Authenticating...</div>) 
+  } else{
+    return <Redirect to="/" exact /> // redirect if authentication failed
+  }
+}
 }
 
-export default HomeStock
+const mapStateToProps = (state) => ({
+  admin: state.admin
+})
+export default connect(mapStateToProps, {loadAdmin})(HomeStock)
