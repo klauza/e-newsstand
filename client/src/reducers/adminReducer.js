@@ -5,6 +5,7 @@ const initialState = {
   isAuthenticated: false,
   error: null,
   admin: null,
+  loading: true
 }
 
 export default (state = initialState, action) => {
@@ -13,7 +14,8 @@ export default (state = initialState, action) => {
       return{
         ...state,
         isAuthenticated: true,
-        admin: action.payload
+        admin: action.payload,
+        loading: false
       }
     case ADMIN_LOGIN:
       localStorage.setItem('token', action.payload.token);
@@ -22,6 +24,7 @@ export default (state = initialState, action) => {
         ...action.payload,
         isAuthenticated: true,
         error: null,
+        loading: false
       }
 
     case ADMIN_LOGIN_ERROR:
@@ -29,14 +32,16 @@ export default (state = initialState, action) => {
       localStorage.removeItem('token');
       return{
         ...state,
-        error: action.payload
+        error: action.payload,
+        loading: true
       }
 
     case ADMIN_LOGOUT:
       localStorage.removeItem('token');
       return{
         ...state,
-        isAuthenticated: false
+        isAuthenticated: false,
+        loading: true
       }
 
     default:
