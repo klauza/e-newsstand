@@ -1,11 +1,10 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styled from 'styled-components';
 import { Wrapper } from '../../layout/ReusableComponents/StyledComponents';
 
 const Header = styled.h2`
   text-align: center;
   font-family: sans-serif;
-  margin-bottom: 15px;
 `;
 const UList = styled.ul`
  
@@ -29,6 +28,12 @@ const UList = styled.ul`
 
 const AdminChangelog = () => {
 
+  const [time, setTime] = React.useState(new Date().toLocaleTimeString());
+  useEffect(()=>{
+    setTimeout(()=>{
+      setTime(new Date().toLocaleTimeString())
+    }, 1000)
+  }, [time])
   const exampleVersioning = [
     {
       version: "1.0",
@@ -38,6 +43,12 @@ const AdminChangelog = () => {
   return (
     <Wrapper>
       <Header> Changelog </Header>
+      <div style={{textAlign: "center", margin: "15px 0", fontFamily: "sans-serif"}}>
+        <p>{time}</p>
+        <p>While this time is running, I'm building new features for this application</p>
+        <p>If you'd like to see what's going on under the hood, please visit: <a style={{fontWeight: "900"}} rel="noopener noreferrer" target="_blank" href="https://github.com/klauza/e-newsstand">this page</a></p>
+      </div>
+
       <UList>
         <li className="list-head">
           <div>Version</div>
