@@ -34,11 +34,22 @@ const Category = styled.li`
     border: 1px solid #000; 
     outline: 0;
     height: 100%; width: 100%;
-    background: lightblue; color: white;
+    background: #14A0E8; color: white;
+    transition: background-color 200ms ease;
     cursor: pointer;
     i{
       color: #000;
       font-size: 1.5em;
+      transition: transform 150ms ease, color 200ms ease;
+    }
+    &:hover{
+      background: #128bc9;
+      transition: background-color 200ms ease;
+      i{
+        color: white;
+        transform: rotate(60deg);
+        transition: transform 150ms ease, color 200ms ease;
+      }
     }
   }
 
@@ -90,6 +101,7 @@ const Category = styled.li`
     outline: 0;
     cursor: pointer;
     box-shadow: 0 0px 6px -1px rgba(0,0,0,.75);
+
     &:hover{
       box-shadow: 0 0px 10px 0px rgba(0,0,0,.75);
     }
