@@ -1,7 +1,9 @@
 import { ADMIN_LOGIN, ADMIN_LOGIN_ERROR, ADMIN_LOGOUT } from '../actions/types';
 
 const initialState = {
-  isAuthenticated: false
+  isAuthenticated: false,
+  error: null,
+  admin: null,
 }
 
 export default (state = initialState, action) => {
@@ -9,12 +11,15 @@ export default (state = initialState, action) => {
     case ADMIN_LOGIN:
       return{
         ...state,
-        isAuthenticated: true
+        ...action.payload,
+        isAuthenticated: true,
+        error: null,
       }
 
     case ADMIN_LOGIN_ERROR:
       return{
-        ...state
+        ...state,
+        error: action.payload
       }
 
     case ADMIN_LOGOUT:
