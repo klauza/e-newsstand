@@ -1,6 +1,6 @@
 ## About
 
-E-newsstand is an e-commerce platform and is being created for small to medium sized businesses.
+E-newsstand is an e-commerce platform app with built-in Admin dashboard. 
 
 Project features
 - mobile friendly
@@ -12,10 +12,10 @@ Project features
   - payment system
 - Shop
   - query string search
-- admin dashboard
-  - can change UI layout
-  - can add items to the shop
-  - can change featured items
+- Admin dashboard
+  - ability to change UI - colors and layout 
+  - can manage [create, update, delete] shop categories & items
+  - can change featured items ( still in dev )
 
 Project is still in development mode, so some features might not work yet
 <br/>
@@ -25,6 +25,7 @@ Project is still in development mode, so some features might not work yet
 |   BACKEND |  |
 | ------------- | ------------- |
 | **express.js** | 4.16.1  |
+| **mongoose** | 5.7.9  |
 
 <br/>
 
@@ -32,11 +33,13 @@ Project is still in development mode, so some features might not work yet
 | ------------- | ------------- |
 | **Redux** | 4.0.4  |
 | **prop-types** | 15.7.2  |
-| **styled-components** | 4.3.2  |
 | **react-transition-group** | 4.3.0  |
+| **styled-components** | 4.3.2  |
+| **react-pose** | 4.0.9 |
+| **react-flip-move** | 3.0.4 |
 | **history** | 4.10.1  |
 | **@svgr/cli** | 4.3.3 |
-| **react-pose** | 4.0.9 |
+| **axios** | 0.19.0 |
 
 
 <br/>
