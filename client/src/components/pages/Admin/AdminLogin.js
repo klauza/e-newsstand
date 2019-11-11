@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { adminLogin, adminLogOut } from '../../../actions/adminActions';
 import AdminLogged from './AdminLogged';
@@ -6,17 +6,25 @@ import { Container, Header, LoginContainer } from './AdminLoginCSS';
 
 const AdminLogin = ({adminLogin, adminLogOut, admin: {isAuthenticated}}) => {
 
-  const loginRef = useRef();
-  const pwdRef = useRef();
 
-  const login = (e) => {
+  const [user, setUser] = useState({
+    email: '',
+    password: ''
+  });
+
+  const onChange = (e) => {
+    setUser({
+      ...user,
+      [e.target.name]: e.target.value
+    })
+  }
+
+  const submitLogin = (e) => {
     e.preventDefault();
-    let loginVal = loginRef.current.value;
-    let pwdVal = pwdRef.current.value;
-
+    console.log(user);
     adminLogin({
-      login: loginVal,
-      password: pwdVal
+      email: user.email,
+      password: user.password
     });
   }
 
@@ -31,20 +39,22 @@ const AdminLogin = ({adminLogin, adminLogOut, admin: {isAuthenticated}}) => {
 
         <LoginContainer>
           <h3>Login</h3>
-          <form onSubmit={login}>
+          <form onSubmit={submitLogin}>
             <input 
-              value="login"
-              ref={loginRef} 
-              type="text" 
-              placeholder="login"
-              onChange={()=>console.log('')}
+              value={user.email}
+              name="email"
+              type="email" 
+              placeholder="email"
+              onChange={onChange}
+              
             />
             <input 
-              value="password"
-              ref={pwdRef} 
+              value={user.password}
+              name="password"
               type="password"
               placeholder="password"
-              onChange={()=>console.log('')}
+              onChange={onChange}
+              
             />
             <input type="submit" value="SUBMIT" />
           </form>
