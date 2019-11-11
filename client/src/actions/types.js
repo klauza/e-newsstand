@@ -16,3 +16,5 @@ export const REMOVE_ALERT = "REMOVE_ALERT";
 export const ADMIN_LOGIN = "ADMIN_LOGIN";
 export const ADMIN_LOGIN_ERROR = "ADMIN_LOGIN_ERROR";
 export const ADMIN_LOGOUT = "ADMIN_LOGOUT";
+export const ADMIN_LOADED = "ADMIN_LOADED";
+export const AUTH_ERROR = "AUTH_ERROR";

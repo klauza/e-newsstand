@@ -1,6 +1,25 @@
-import { ADMIN_LOGIN, ADMIN_LOGIN_ERROR, ADMIN_LOGOUT } from './types';
-import axios from 'axios';
 
+import { ADMIN_LOGIN, ADMIN_LOGIN_ERROR, ADMIN_LOGOUT, ADMIN_LOADED, AUTH_ERROR } from './types';
+import axios from 'axios';
+import setAuthToken from '../utils/setAuthToken';
+
+// LOAD ADMIN IF TOKEN EXISTS
+export const loadAdmin = () => async dispatch => {
+  // load token
+  // setLoading();
+
+  if(localStorage.token){
+    setAuthToken(localStorage.token);
+  }
+
+  try{
+    const res = await axios.get('/api/admin/auth');
+    dispatch({ type: ADMIN_LOADED, payload: res.data });
+
+  } catch(err){
+    dispatch({ type: AUTH_ERROR})
+  }
+}
 
 export const adminLogin = (credentials) => async dispatch => {
   // setLoading();
@@ -13,7 +32,7 @@ export const adminLogin = (credentials) => async dispatch => {
     const res = await axios.post('/api/admin/auth', credentials, config);
 
     dispatch({ type: ADMIN_LOGIN, payload: res.data });
-    // loadUser();
+    loadAdmin();
 
   } catch(err){
     
@@ -31,19 +50,6 @@ export const adminLogin = (credentials) => async dispatch => {
     
   }
 }
-
-// export const adminLogin = (data) => async dispatch => {
-//   if(data.login==="login" && data.password==="password"){
-//     dispatch({
-//       type: ADMIN_LOGIN
-//     })
-//   } else{
-//     dispatch({
-//       type: ADMIN_LOGIN_ERROR
-//     })
-//   }
-// }
-
 
 export const adminLogOut = () => async dispatch => {
   dispatch({
