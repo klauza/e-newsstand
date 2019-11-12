@@ -1,4 +1,5 @@
 import React, {Fragment} from 'react';
+import axios from 'axios';
 import { SwatchesPicker } from 'react-color';
 import { UIBtn } from '../../../../layout/ReusableComponents/UIButtons';
 import { Content, ColorPickerContainerCSS, ColorPickerContent, DimensionsContainer, UiColors, ImageContainer, MeasurementsInfo } from './CreateItemCSS';
@@ -8,6 +9,7 @@ import { Content, ColorPickerContainerCSS, ColorPickerContent, DimensionsContain
 const CreateItemContent = ({closeModal, modalNumero, nextModal, prevModal}) => {
 
   const [isOpen, setIsOpen] = React.useState(false);
+  const fileImageInput = React.useRef();
 
   // COLORS
   const [showPicker, setShowPicker] = React.useState(false);
@@ -16,7 +18,8 @@ const CreateItemContent = ({closeModal, modalNumero, nextModal, prevModal}) => {
   // DIMENSIONS
   const [showDimensions, setShowDimensions] = React.useState(false);
 
-
+  //temp
+  const [uploadImage, setUploadImage] = React.useState(null);
   const [newItem, setNewItem] = React.useState({
     name: null,
     longName: null,
@@ -115,8 +118,20 @@ const CreateItemContent = ({closeModal, modalNumero, nextModal, prevModal}) => {
     setUiColors(uiColors.filter(col => col !== color));
   }
 
-  const addImages = () => {
-    console.log('feature coming soon');
+  const addImages = (e) => {
+    console.log(e.target.files[0])
+    setUploadImage(e.target.files[0]);
+    // console.log('feature coming soon');
+  }
+  const sendImage = () => {
+    const fd = new FormData(); // create a formData object
+    fd.append('someImageName', uploadImage, uploadImage.name)
+    axios.post('url', fd, {
+      onUploadProgress: progressEvent => {
+        console.log('Upload progress: ' + Math.round(progressEvent.loaded / progressEvent.total * 100) + '%') // it comes from html object
+      }
+    })
+      .then(res => console.log(res));
   }
 
   const submitNewItem = () => {
@@ -241,7 +256,9 @@ const CreateItemContent = ({closeModal, modalNumero, nextModal, prevModal}) => {
 
         {/* IMAGES */}
         <ImageContainer>
-          <button onClick={addImages}>Add Images <i className="fa fa-file-image-o"></i></button>
+          <input ref={fileImageInput} type="file" onChange={addImages} style={{display: "none"}} />
+          <button onClick={()=>fileImageInput.current.click()}>Pick file</button>
+          {(uploadImage !== null) && <button onClick={sendImage}>Send Images <i className="fa fa-file-image-o"></i></button> }
         </ImageContainer>
 
         <div className="bottom-buttons">
