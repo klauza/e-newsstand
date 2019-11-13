@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import history from '../../../history';
 import { connect } from 'react-redux';
 import { setAlert } from '../../../actions/alertActions';
+import { setPageLocation } from '../../../actions/miscActions';
 
 // icons
 import { logo } from '../../../media/index';
@@ -13,7 +14,7 @@ import SvgContact from '../../../Icons/Contact';
 import SvgCancel from '../../../Icons/Cancel';
 
 
-const Navlinks = ({ isDesktop, mobileToggled, mobileNotToggled, hideMobileNav, setAlert }) => {
+const Navlinks = ({ isDesktop, mobileToggled, mobileNotToggled, hideMobileNav, setAlert, setPageLocation }) => {
 
   const [navQuery, setNavQuery] = useState("");
   const textInput = useRef();
@@ -24,6 +25,7 @@ const Navlinks = ({ isDesktop, mobileToggled, mobileNotToggled, hideMobileNav, s
     if(navQuery === ""){
       setAlert("Field cannot be empty!", "warning", 2000);
     } else{
+      setPageLocation(0);  // reset location in redux /shop
       history.push(`/shop/search?query=${navQuery}`);
       mobileToggled && hideMobileNav();
     }
@@ -85,4 +87,4 @@ const Navlinks = ({ isDesktop, mobileToggled, mobileNotToggled, hideMobileNav, s
 }
 
 
-export default connect(null, {setAlert})(Navlinks)
+export default connect(null, {setAlert, setPageLocation})(Navlinks)
