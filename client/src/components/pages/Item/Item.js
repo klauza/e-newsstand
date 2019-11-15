@@ -18,14 +18,24 @@ const Keywords = styled.div`
   margin: 10px 5px; padding: 10px 0;
   height: auto;
   border-bottom: 1px solid maroon;
-  a{
+  div{
+    border: 1px solid grey; border-radius: 5px;
+    display: inline-block;
     font-size: 0.9em;
-    color: black;
-    margin: 0 0 0 3px;
-    &:active{
-      color: purple;
+    padding: 0 4px;
+    margin: 0 2px 3px;
+    background: #edd900;
+    &:hover{
+      background: #d1c004;
+    }
+    a{
+      color: #000;
+      &:active{
+        color: purple;
+      }
     }
   }
+
 `;
 const Header = styled.h2`
   font-family: 'Oswald', sans-serif;
@@ -105,7 +115,7 @@ const Item = ({addToBasket, setAlert, props, basket: {items}}) => {
       <Wrapper style={{fontFamily: "'Oswald', sans-serif"}}>
         <div>
           <BackButton><i className="fa fa-angle-left"></i></BackButton>
-          <Keywords>keywords: {theItem.slugs.map((slug, id) => <span key={id}><Link to={`/shop/search?query=${slug}`}><span>{slug}</span></Link>,</span> )}</Keywords>
+          <Keywords>see also: {theItem.slugs.map((slug, id) => <div key={id}><Link to={`/shop/search?query=${slug}`}><span>{slug}</span></Link></div> )}</Keywords>
           <Header>{theItem.longName}</Header>
 
           <ItemImageGallery images={theItem.imgs} />
