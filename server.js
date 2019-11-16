@@ -28,6 +28,7 @@ app.use('/api/shop', shopRouter);
 
 app.use('/api/admin/login', loginRouter);
 app.use('/api/admin/auth', require('./routes/auth'));
+app.use('/api/admin/uicolors', require('./routes/uicolors'));
 
 
 if(process.env.NODE_ENV === 'production'){
