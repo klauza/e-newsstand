@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import history from '../../../history';
 import { connect } from 'react-redux';
-import { loadAdmin, adminLogin, adminLogOut } from '../../../actions/adminActions';
+import { setUpdating, loadAdmin, adminLogin, adminLogOut } from '../../../actions/adminActions';
 
 import AdminLogged from './AdminLogged';
 import { Container, Header, LoginContainer } from './AdminLoginCSS';
+import UpdatingScreen from '../../layout/ReusableComponents/UpdatingScreen';
 
-const AdminLogin = ({loadAdmin, adminLogin, adminLogOut, admin: {loading, token, admin, isAuthenticated}}) => {
+const AdminLogin = ({setUpdating, loadAdmin, adminLogin, adminLogOut, admin: {loading, token, admin, isAuthenticated, isUpdating}}) => {
 
-
+  const [firstLogin, setFirstLogin] = useState(false);
   const [user, setUser] = useState({
     email: '',
     password: ''
@@ -31,16 +32,14 @@ const AdminLogin = ({loadAdmin, adminLogin, adminLogOut, admin: {loading, token,
 
   const submitLogin = (e) => {
     e.preventDefault();
+    setUpdating(true);
+
+    setFirstLogin(true);
 
     adminLogin({
       email: user.email,
       password: user.password
     });
-    // show overlay loading loggin screen for one second!
-
-
-
-    
   }
 
   const logout = () => {
@@ -48,6 +47,8 @@ const AdminLogin = ({loadAdmin, adminLogin, adminLogOut, admin: {loading, token,
     history.push('/');
     window.location.reload();
   }
+
+  
 
   if(loading){
     return (
@@ -81,7 +82,7 @@ const AdminLogin = ({loadAdmin, adminLogin, adminLogOut, admin: {loading, token,
     ) 
   } else{
     return(
-      <AdminLogged logout={logout} loadAdmin={loadAdmin} />
+      <AdminLogged admin={admin} firstLogin={firstLogin} logout={logout} loadAdmin={loadAdmin} setUpdating={setUpdating} />
     )
   }
 }
@@ -89,4 +90,4 @@ const AdminLogin = ({loadAdmin, adminLogin, adminLogOut, admin: {loading, token,
 const mapStateToProps = (state) => ({
   admin: state.admin
 })
-export default connect(mapStateToProps, {loadAdmin, adminLogin, adminLogOut})(AdminLogin)
+export default connect(mapStateToProps, {setUpdating, loadAdmin, adminLogin, adminLogOut})(AdminLogin)
