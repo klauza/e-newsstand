@@ -1,5 +1,6 @@
 
 import { ADMIN_LOGIN, ADMIN_LOGIN_ERROR, ADMIN_LOGOUT, ADMIN_LOADED, AUTH_ERROR } from './types';
+import { ANIMATE_OUT_UPDATE_SCREEN, SET_UPDATING } from './types';
 import axios from 'axios';
 import setAuthToken from '../utils/setAuthToken';
 
@@ -22,7 +23,7 @@ export const loadAdmin = () => async dispatch => {
 }
 
 export const adminLogin = (credentials) => async dispatch => {
-  // setLoading();
+  // setUpdating(true);
   const config = {
     headers: {
       'Content-Type': 'application/json'
@@ -30,7 +31,7 @@ export const adminLogin = (credentials) => async dispatch => {
   }
   try{
     const res = await axios.post('/api/admin/auth', credentials, config);
-
+    
     dispatch({ type: ADMIN_LOGIN, payload: res.data });
     loadAdmin();
 
@@ -55,4 +56,27 @@ export const adminLogOut = () => async dispatch => {
   dispatch({
     type: ADMIN_LOGOUT
   })
+}
+
+export const setUpdating = (bool) => async dispatch => {
+
+  if(bool){
+    dispatch({
+      type: SET_UPDATING,
+      payload: bool
+    })
+  }
+
+  if(!bool){
+    dispatch({
+      type: ANIMATE_OUT_UPDATE_SCREEN
+    })
+
+    setTimeout(()=>{
+      dispatch({
+        type: SET_UPDATING,
+        payload: bool
+      })
+    }, 2000)
+  }
 }

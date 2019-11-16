@@ -1,11 +1,14 @@
 import { ADMIN_LOGIN, ADMIN_LOGIN_ERROR, ADMIN_LOGOUT, ADMIN_LOADED, AUTH_ERROR } from '../actions/types';
+import { ANIMATE_OUT_UPDATE_SCREEN, SET_UPDATING } from '../actions/types';
 
 const initialState = {
   token: localStorage.getItem('token'),
   isAuthenticated: false,
   error: null,
   admin: null,
-  loading: true
+  loading: true,
+  isUpdating: false,
+  isFadingOut: false
 }
 
 export default (state = initialState, action) => {
@@ -24,7 +27,9 @@ export default (state = initialState, action) => {
         ...action.payload,
         isAuthenticated: true,
         error: null,
-        loading: false
+        loading: false,
+        isUpdating: false,
+        isFadingOut: true
       }
 
     case ADMIN_LOGIN_ERROR:
@@ -33,7 +38,9 @@ export default (state = initialState, action) => {
       return{
         ...state,
         error: action.payload,
-        loading: true
+        loading: true,
+        isUpdating: false,
+        isFadingOut: false
       }
 
     case ADMIN_LOGOUT:
@@ -44,6 +51,17 @@ export default (state = initialState, action) => {
         loading: true
       }
 
+    case SET_UPDATING:
+      return{
+        ...state,
+        isUpdating: action.payload,
+        isFadingOut: false
+      }
+    case ANIMATE_OUT_UPDATE_SCREEN:
+      return{
+        ...state,
+        isFadingOut: true
+      }
     default:
       return state
   }
