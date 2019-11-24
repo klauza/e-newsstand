@@ -1,10 +1,23 @@
 import React, {Fragment} from 'react'
-import ColorsContext from '../../../../context/colorsContext';
+import ColorContext from '../../../../context/colorsContext';
 import { Header, Colors, ColorItem, SecondaryColor } from './ChangeUICSS';
+import axios from 'axios';
 
-const ChangeColorMain = ({globalColors}) => {
+const ChangeColorMain = ({globalColors, setUpdating}) => {
 
-  const colorContext = React.useContext(ColorsContext);
+  // const { setColors } = React.useContext(ColorContext);
+
+  const dispatchNewColors = async (data) => {  
+    setUpdating(true);
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
+    await axios.put('/api/admin/uicolors', data, config)
+    localStorage.setItem('colors', JSON.stringify(data));
+    window.location.reload(true);
+  }
 
   return (
     <Fragment>
@@ -21,7 +34,7 @@ const ChangeColorMain = ({globalColors}) => {
 
         {globalColors.map((col, id) =>
           <ColorItem key={id} mainColor={col.main} secondaryQty={col.secondary.length}>
-            <button onClick={()=>colorContext.setGlobalColors(col.main, col.secondary)}><i className="fa fa-check"></i></button>
+            <button onClick={()=>dispatchNewColors({mainColor: col.main, secondaryColors: col.secondary, title: "mr-michael"})}><i className="fa fa-check"></i></button>
             <span />
             <div className="global-color global-colors-container">
               <div className="global-color__main"></div>

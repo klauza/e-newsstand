@@ -1,7 +1,7 @@
 import React, {Fragment, useEffect, useState} from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { loadAdmin } from '../../../../actions/adminActions';
+import { setUpdating, loadAdmin } from '../../../../actions/adminActions';
 
 import { Wrapper } from '../../../layout/ReusableComponents/StyledComponents';
 import ModalChangeUI from './ModalChangeUI';
@@ -11,7 +11,7 @@ import { Container, Header } from './ChangeUICSS';
 
 
 
-const HomeChangeUI = ({loadAdmin, admin: {token, loading, isAuthenticated}}) => {
+const HomeChangeUI = ({setUpdating, loadAdmin, admin: {token, loading, isAuthenticated}}) => {
 
 
   const [showModal, setShowModal] = useState(null);
@@ -112,7 +112,7 @@ const HomeChangeUI = ({loadAdmin, admin: {token, loading, isAuthenticated}}) => 
             )}
           </Fragment>
 
-          <ChangeColorMain globalColors={globalColors} />
+          <ChangeColorMain setUpdating={setUpdating} globalColors={globalColors} />
 
 
         </Container>
@@ -131,4 +131,4 @@ const HomeChangeUI = ({loadAdmin, admin: {token, loading, isAuthenticated}}) => 
 const mapStateToProps = (state) => ({
   admin: state.admin
 })
-export default connect(mapStateToProps, {loadAdmin})(HomeChangeUI)
+export default connect(mapStateToProps, {loadAdmin, setUpdating})(HomeChangeUI)
