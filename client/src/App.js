@@ -6,8 +6,10 @@ import './App.scss';
 // get token setter
 import setAuthToken from './utils/setAuthToken';
 
+
+import { ColorContext } from './context/colorsContext';
+
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import ColorsContext from './context/colorsContext';
 
 // redux
 import { Provider } from 'react-redux';
@@ -34,53 +36,62 @@ import AdminChangelog from './components/pages/Admin/AdminChangelog';
 import HomeStock from './components/pages/Admin/Stock/HomeStock';
 import HomeChangeUI from './components/pages/Admin/ChangeUI/HomeChangeUI';
 
+// get ui-colors
+// fetchUIColors();
+
+// get token
 if(localStorage.token){
   setAuthToken(localStorage.token);
 }
 
-function App() {
 
+const App = () => {
+  const { colors } = React.useContext(ColorContext);
+  console.log(colors);
   // get context
-  const colorContext = React.useContext(ColorsContext);
+  // const colorContext = React.useContext(ColorsContext);
 
+  // const contextLoaded = useState(false);
 
   // Global Colors
-  const [state_main_color, set_state_nain_color] = useState(colorContext.mainGlobalColor);
-  const [state_secondary_colors, set_state_secondary_colors] = useState(colorContext.secondaryGlobalColors);
+  // const [state_main_color, set_state_main_color] = useState(colorContext.mainGlobalColor);
+  // const [state_secondary_colors, set_state_secondary_colors] = useState(colorContext.secondaryGlobalColors);
 
-
+/*
   React.useEffect(()=>{
     // on APP load, set all colors as are saved in DB [done as initial vals]
-    set_state_nain_color(colorContext.mainGlobalColor);
+    set_state_main_color(colorContext.mainGlobalColor);
     set_state_secondary_colors(colorContext.secondaryGlobalColors);
 
     // eslint-disable-next-line
   }, []);
+*/
 
-
+/*
   const setGlobalColors = (mainColor, secColors) => {
     // save to local app state
-    set_state_nain_color(mainColor);
+    set_state_main_color(mainColor);
     set_state_secondary_colors(secColors);
     
     // save to DB
     // ...
     // on page refresh, it will fetch from context, so from db
   }
+*/
+  // check
+  // console.log(colorContext);
 
+  // console.log('main: ', state_main_color);
+  // console.log('secondary cols: ', state_secondary_colors);
 
-  
+  if(colors.secondaryColors && colors.secondaryColors.length > 0){
+
   return (
     <Provider store={store}>
       <Router history={history}>
       <Fragment>
         
-        <ColorsContext.Provider 
-          value={{ 
-            mainColor: state_main_color, 
-            secondaryColors: state_secondary_colors, 
-            setGlobalColors: setGlobalColors 
-          }}>
+        {/* <ColorContextProvider> */}
 
         <Navigation/>
         <Alert />
@@ -122,12 +133,17 @@ function App() {
 
         )} />
 
-        </ColorsContext.Provider>
+        {/* </ColorContextProvider> */}
       </Fragment>
       
       </Router>
     </Provider>
-  );
+  )    
+} else{
+  return (<div>LOADING...</div>)
+};
+
 }
+
 
 export default App;
