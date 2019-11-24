@@ -7,7 +7,7 @@ const Colors = require('../Schema/Colors');
 
 // @route    GET api/admin/uicolors
 // @desc     Get colors
-router.get('/', auth, async (req, res) => {
+router.get('/', async (req, res) => {
   try{
     const uicolors = await Colors.find({title: "mr-michael"});  
     res.json(uicolors);
