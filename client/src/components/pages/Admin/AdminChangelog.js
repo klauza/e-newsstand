@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { loadAdmin } from '../../../actions/adminActions';
@@ -9,6 +9,19 @@ import { Wrapper } from '../../layout/ReusableComponents/StyledComponents';
 const Header = styled.h2`
   text-align: center;
   font-family: sans-serif;
+`;
+const Clock = styled.div`
+  .digitalClock{
+    display: block;
+    margin: 15px auto;
+    width: 150px;
+    background: #f3f2f2;
+    font-family: cursive;
+    padding: 0 6px;
+    box-shadow: inset 0 0 2px 2px #000001;
+    border-radius: 2px;
+    text-align: center;
+  }
 `;
 const UList = styled.ul`
  
@@ -31,13 +44,20 @@ const UList = styled.ul`
 `;
 
 const AdminChangelog = ({loadAdmin, admin: {loading, token, isAuthenticated}}) => {
-  const [time, setTime] = React.useState(new Date().toLocaleTimeString());
+  const [time, setTime] = useState(new Date());
+  const [displayTime, setDisplayTime] = useState(time.toLocaleTimeString());
+
+
+
+
 
   useEffect(()=>{
     if(token && !isAuthenticated) loadAdmin(); 
 
     var handle = setInterval(() => {
-      setTime(new Date().toLocaleTimeString())
+      setTime(new Date());
+      setDisplayTime(time.toLocaleTimeString());
+
     }, 1000);
 
     return () => {
@@ -46,8 +66,6 @@ const AdminChangelog = ({loadAdmin, admin: {loading, token, isAuthenticated}}) =
   // eslint-disable-next-line
   },[time])
 
-  
-  
 
   const exampleVersioning = [
     {
@@ -62,7 +80,12 @@ const AdminChangelog = ({loadAdmin, admin: {loading, token, isAuthenticated}}) =
     <Wrapper>
       <Header> Changelog </Header>
       <div style={{textAlign: "center", margin: "15px 0", fontFamily: "sans-serif"}}>
-        <p>{time}</p>
+        
+    
+        <Clock>
+          <div className="digitalClock">{displayTime}</div>
+        </Clock>
+
         <p>While this time is running, I'm building new features for this application</p>
         <p>If you'd like to see what's going on under the hood, please visit: <a style={{fontWeight: "900"}} rel="noopener noreferrer" target="_blank" href="https://github.com/klauza/e-newsstand">this page</a></p>
       </div>
