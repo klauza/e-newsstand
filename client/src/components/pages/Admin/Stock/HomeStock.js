@@ -95,16 +95,21 @@ const Category = styled.li`
     }
   }
   .category-delete{
-    background: red;
-    text-align: center;
-    margin-left: -20px;
-    width: 40px; height: 40px;
-    font-size: 1.5em;
-    color: white;
-    border: 1px solid white;
-    outline: 0;
-    cursor: pointer;
+    width: 100%; height: 100%;
+    display: grid; align-items: center; justify-items: center;
+    background: #000;
     box-shadow: 0 0px 6px -1px rgba(0,0,0,.75);
+
+    &__btn{
+      color: white;
+      font-size: 1.15em;
+      background: red;
+      text-align: center;
+      border: 1px solid white;
+      outline: 0;
+      cursor: pointer;
+      width: 40px; height: 40px;
+    }
 
     &:hover{
       box-shadow: 0 0px 10px 0px rgba(0,0,0,.75);
@@ -183,7 +188,9 @@ const HomeStock = ({loadAdmin, admin: { token, loading, isAuthenticated}}) => {
             <button className="category-manage-items" onClick={()=>openModal(cat)}><i className="fa fa-wrench"></i></button>
             <div className="category-name">{cat.name} <i className="fa fa-pencil-square" onClick={()=>editCategoryName(cat)}></i></div>
             
-            <button className="category-delete" onClick={()=>deleteCat(cat)}><i className="fa fa-times"></i></button>
+            <div className="category-delete">
+              <button className="category-delete__btn" onClick={()=>deleteCat(cat)}><i className="fa fa-times"></i></button>
+            </div>
           </Category>
         )}
 

@@ -67,7 +67,7 @@ const Search = ({props, misc: {pageLocation}, setAlert}) => {
             left: 0,
             behavior: 'auto'
           })
-          
+
         } 
       })
 
@@ -160,7 +160,7 @@ const Search = ({props, misc: {pageLocation}, setAlert}) => {
         <SearchPopulate shopData={shopData} />
         ) : 
         (
-          <div>No item was found</div>
+          <div style={{minHeight: "200vh"}}>No item was found</div>
         ) 
       )}
 

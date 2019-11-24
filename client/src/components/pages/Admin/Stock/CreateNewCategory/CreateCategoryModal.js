@@ -59,6 +59,9 @@ const CreateCategoryModal = ({setAlert, setOpenCatCreator}) => {
               <option value="gadgets">gadgets</option>
             </select>
           </div>
+
+          <div>Add Image</div>
+          <div>Add Icon (?)</div>
         </div>
 
         <div className="buttons">
