@@ -1,11 +1,11 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment } from 'react';
 import { Router, Route, Switch } from 'react-router-dom';
 import history from './history';
 import './App.scss';
 
 // get token setter
 import setAuthToken from './utils/setAuthToken';
-
+import Loader from './components/layout/ReusableComponents/Loader'
 
 import { ColorContext } from './context/colorsContext';
 
@@ -47,7 +47,7 @@ if(localStorage.token){
 
 const App = () => {
   const { colors } = React.useContext(ColorContext);
-  console.log(colors);
+  // console.log(colors);
   // get context
   // const colorContext = React.useContext(ColorsContext);
 
@@ -140,10 +140,16 @@ const App = () => {
     </Provider>
   )    
 } else{
-  return (<div>LOADING...</div>)
+  return (<div style={loadingStyle}><Loader/></div>)
 };
 
 }
-
+const loadingStyle = {
+  "height": "100vh",
+  "background": "#fff" ,
+  "zIndex": "999",
+  "display": "grid",
+  "place-items": "center"
+}
 
 export default App;
