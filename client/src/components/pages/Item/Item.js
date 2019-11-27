@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addToBasket } from '../../../actions/basketActions';
 import { setAlert } from '../../../actions/alertActions';
+import { setPageLocation } from '../../../actions/miscActions';
 
 import styled from 'styled-components';
 import { Wrapper, BackButton, Button } from '../../layout/ReusableComponents/StyledComponents';
@@ -48,7 +49,7 @@ const ContactDelivery = styled.a`
 
 
 
-const Item = ({addToBasket, setAlert, props, basket: {items}}) => {
+const Item = ({addToBasket, setAlert, props, basket: {items}, setPageLocation}) => {
 
   const [quantity, setQuantity] = useState(1);
   const [chosenColor, setChosenColor] = useState(null);
@@ -115,7 +116,7 @@ const Item = ({addToBasket, setAlert, props, basket: {items}}) => {
       <Wrapper style={{fontFamily: "'Oswald', sans-serif"}}>
         <div>
           <BackButton><i className="fa fa-angle-left"></i></BackButton>
-          <Keywords>see also: {theItem.slugs.map((slug, id) => <div key={id}><Link to={`/shop/search?query=${slug}`}><span>{slug}</span></Link></div> )}</Keywords>
+          <Keywords>see also: {theItem.slugs.map((slug, id) => <div key={id} onClick={()=>setPageLocation({shop: 0})}><Link to={`/shop/search?query=${slug}`}><span>{slug}</span></Link></div> )}</Keywords>
           <Header>{theItem.longName}</Header>
 
           <ItemImageGallery images={theItem.imgs} />
@@ -164,4 +165,4 @@ const mapStateToProps = (state, ownProps) => ({
   props: ownProps,
   basket: state.basket
 })
-export default connect(mapStateToProps, {addToBasket, setAlert})(Item)
+export default connect(mapStateToProps, {addToBasket, setAlert, setPageLocation})(Item)
