@@ -19,6 +19,7 @@ import store from './store';
 import Navigation from './components/layout/Navigation/Navigation';
 import Alert from './components/layout/ReusableComponents/UIAlert';
 import NotFound from './components/layout/NotFound';
+import NightMode from './components/layout/NightMode';
 import UpdatingScreen from './components/layout/ReusableComponents/UpdatingScreen';
 //Home
 import Home from './components/pages/Home/Home';
@@ -96,6 +97,7 @@ const App = () => {
         <Navigation/>
         <Alert />
         <UpdatingScreen />
+        <NightMode/>
 
         <Route render={({ location }) => (
 
