@@ -1,0 +1,21 @@
+General:
+
+- fixed bottom basket display for large screens
+
+- finalize global colors section and logic
+
+- make pagination for item listing in "/shop" [also add more items to visualize it]
+
+- customize more the item component "/shop/item/*" as shown in AdobeXd
+
+- apply "react-device-detect" library to 'featured items' component
+
+- on mobile navigation open, add possibility to leave the hamburger menu by clicking on greyed area on the left
+
+- add some global navigation to /admin
+
+- add temporary fake payment system
+
+Minor issues:
+
+- fix link to contact in 'item' component
