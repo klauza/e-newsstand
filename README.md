@@ -1,8 +1,12 @@
 ## About
 
-E-newsstand is an e-commerce platform app with built-in Admin dashboard. Made for learning purposes.
+E-newsstand is a IDEA for an e-commerce platform app with built-in Admin dashboard.
 
-Project features
+Made for learning purposes. [live page](https://e-newsstand.herokuapp.com/)
+
+<br/>
+
+## Project features
 
 - mobile friendly
 - Home

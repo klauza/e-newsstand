@@ -11,8 +11,8 @@ const AdminLogin = ({setUpdating, loadAdmin, adminLogin, adminLogOut, admin: {lo
 
   const [firstLogin, setFirstLogin] = useState(false);
   const [user, setUser] = useState({
-    email: '',
-    password: ''
+    email: 'michael@gmail.com',
+    password: '123456'
   });
 
   useEffect(()=>{

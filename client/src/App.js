@@ -151,7 +151,7 @@ const loadingStyle = {
   "background": "#fff" ,
   "zIndex": "999",
   "display": "grid",
-  "place-items": "center"
+  "placeItems": "center"
 }
 
 export default App;
